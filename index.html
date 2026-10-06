@@ -7,6 +7,7 @@
 <title>QwerZing AI Studio</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -229,6 +230,7 @@ button {
     margin-bottom: 15px;
 }
 
+
 /* ЧАТ */
 
 .chat {
@@ -304,6 +306,7 @@ button {
     font-weight: bold;
 }
 
+
 /* СОЗДАНИЕ КНИГИ */
 
 #createBook {
@@ -354,6 +357,7 @@ button {
     margin-top: 20px;
 }
 
+
 /* МОИ КНИГИ */
 
 #myBooks {
@@ -382,7 +386,8 @@ button {
     line-height: 1.5;
 }
 
-/* РАБОЧАЯ ОБЛАСТЬ КНИГИ */
+
+/* РАБОЧАЯ ОБЛАСТЬ */
 
 #bookWorkspace {
     display: none;
@@ -463,6 +468,9 @@ button {
     min-width: 0;
 }
 
+
+/* НОВАЯ СТРАНИЦА "О КНИГЕ" */
+
 .workspace-card {
     background: white;
     border: 1px solid #ece7f3;
@@ -472,7 +480,84 @@ button {
 
 .workspace-card h2 {
     margin-top: 0;
+    margin-bottom: 25px;
 }
+
+.book-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.info-box {
+    background: #faf8fd;
+    border: 1px solid #eee8f4;
+    border-radius: 16px;
+    padding: 18px;
+}
+
+.info-label {
+    font-size: 12px;
+    color: #91879d;
+    margin-bottom: 8px;
+}
+
+.info-value {
+    font-size: 17px;
+    font-weight: bold;
+    color: #443951;
+}
+
+.book-description-box {
+    background: #faf8fd;
+    border: 1px solid #eee8f4;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.book-description-box h3 {
+    margin: 0 0 10px;
+}
+
+.book-description-box p {
+    margin: 0;
+    color: #665d70;
+    line-height: 1.7;
+}
+
+.notes-box {
+    margin-top: 25px;
+}
+
+.notes-box label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.notes-box textarea {
+    width: 100%;
+    min-height: 150px;
+    resize: vertical;
+    border: 1px solid #ddd4e8;
+    border-radius: 14px;
+    padding: 15px;
+    font-size: 15px;
+    outline: none;
+}
+
+.notes-box textarea:focus {
+    border-color: #8b5bd6;
+}
+
+.save-button {
+    margin-top: 15px;
+}
+
+
+/* ОСТАЛЬНЫЕ РАЗДЕЛЫ */
 
 .workspace-card p {
     color: #817887;
@@ -489,9 +574,11 @@ button {
     color: #8b8292;
 }
 
+
 /* АДАПТАЦИЯ */
 
 @media (max-width: 900px) {
+
     .tools,
     .books {
         grid-template-columns: 1fr 1fr;
@@ -509,9 +596,11 @@ button {
         width: auto;
         display: inline-block;
     }
+
 }
 
 @media (max-width: 650px) {
+
     .app {
         display: block;
     }
@@ -527,7 +616,8 @@ button {
     }
 
     .tools,
-    .books {
+    .books,
+    .book-info-grid {
         grid-template-columns: 1fr;
     }
 
@@ -542,29 +632,40 @@ button {
     .book-header-top {
         flex-direction: column;
     }
+
 }
+
 </style>
 </head>
+
 
 <body>
 
 <div class="app">
 
+
 <aside class="sidebar">
 
-<div class="logo">QwerZing</div>
+<div class="logo">
+QwerZing
+</div>
 
-<div class="nav-title">Основное</div>
+<div class="nav-title">
+Основное
+</div>
 
-<button class="nav-button active" onclick="showPage('home', this)">
+<button class="nav-button active"
+onclick="showPage('home', this)">
 🏠 Главная
 </button>
 
-<button class="nav-button" onclick="showPage('chat', this)">
+<button class="nav-button"
+onclick="showPage('chat', this)">
 💬 Чат
 </button>
 
-<button class="nav-button" onclick="showPage('writer', this)">
+<button class="nav-button"
+onclick="showPage('writer', this)">
 ✍️ Писатель
 </button>
 
@@ -572,7 +673,9 @@ button {
 🎨 Художник
 </button>
 
-<div class="nav-title">Рабочее пространство</div>
+<div class="nav-title">
+Рабочее пространство
+</div>
 
 <button class="nav-button">
 📁 Проекты
@@ -582,7 +685,9 @@ button {
 🧠 Память
 </button>
 
-<div class="nav-title">Система</div>
+<div class="nav-title">
+Система
+</div>
 
 <button class="nav-button">
 ⚙️ Настройки
@@ -592,6 +697,7 @@ button {
 
 
 <main class="content">
+
 
 <!-- ГЛАВНАЯ -->
 
@@ -620,22 +726,46 @@ button {
 
 <div class="tools">
 
-<div class="tool" onclick="showPage('chat')">
+<div class="tool"
+onclick="showPage('chat')">
+
 <div class="icon">💬</div>
+
 <h3>Чат</h3>
-<p>Общайся с искусственным интеллектом.</p>
+
+<p>
+Общайся с искусственным интеллектом.
+</p>
+
 </div>
 
-<div class="tool" onclick="showPage('writer')">
+
+<div class="tool"
+onclick="showPage('writer')">
+
 <div class="icon">✍️</div>
+
 <h3>Писатель</h3>
-<p>Создавай книги, персонажей, миры и истории.</p>
+
+<p>
+Создавай книги, персонажей,
+миры и истории.
+</p>
+
 </div>
+
 
 <div class="tool">
+
 <div class="icon">🎨</div>
+
 <h3>Художник</h3>
-<p>Создавай изображения по своим идеям.</p>
+
+<p>
+Создавай изображения
+по своим идеям.
+</p>
+
 </div>
 
 </div>
@@ -661,23 +791,34 @@ button {
 <section id="chat" class="page">
 
 <div class="top">
+
 <h1>Чат</h1>
+
 <div class="profile">Q</div>
+
 </div>
 
 <div class="chat">
 
 <div class="chat-header">
+
 <h2>QwerZing AI</h2>
-<p>Твой универсальный AI-помощник</p>
+
+<p>
+Твой универсальный AI-помощник
+</p>
+
 </div>
 
-<div class="messages" id="messages">
+<div class="messages"
+id="messages">
 
 <div class="message ai-message">
+
 Привет! Я QwerZing AI.
 Напиши мне что-нибудь,
 и мы начнём разговор.
+
 </div>
 
 </div>
@@ -691,8 +832,12 @@ placeholder="Напиши сообщение..."
 onkeydown="handleEnter(event)"
 >
 
-<button class="send-button" onclick="sendMessage()">
+<button
+class="send-button"
+onclick="sendMessage()">
+
 Отправить
+
 </button>
 
 </div>
@@ -716,7 +861,9 @@ onkeydown="handleEnter(event)"
 
 <div class="writer-intro">
 
-<h2>Твоя писательская студия</h2>
+<h2>
+Твоя писательская студия
+</h2>
 
 <p>
 Создавай книги, продумывай персонажей,
@@ -728,12 +875,20 @@ onkeydown="handleEnter(event)"
 
 <div class="writer-actions">
 
-<button class="primary-button" onclick="openCreateBook()">
+<button
+class="primary-button"
+onclick="openCreateBook()">
+
 ＋ Создать книгу
+
 </button>
 
-<button class="secondary-button" onclick="openMyBooks()">
+<button
+class="secondary-button"
+onclick="openMyBooks()">
+
 📚 Мои книги
+
 </button>
 
 </div>
@@ -741,7 +896,9 @@ onkeydown="handleEnter(event)"
 
 <div id="createBook">
 
-<h2>Создание новой книги</h2>
+<h2>
+Создание новой книги
+</h2>
 
 <p>
 Давай создадим основу для твоей истории.
@@ -749,7 +906,9 @@ onkeydown="handleEnter(event)"
 
 <div class="form-group">
 
-<label>Название книги</label>
+<label>
+Название книги
+</label>
 
 <input
 id="bookTitle"
@@ -759,9 +918,12 @@ placeholder="Название твоей книги"
 
 </div>
 
+
 <div class="form-group">
 
-<label>Жанр</label>
+<label>
+Жанр
+</label>
 
 <select id="bookGenre">
 
@@ -778,9 +940,12 @@ placeholder="Название твоей книги"
 
 </div>
 
+
 <div class="form-group">
 
-<label>О чём книга?</label>
+<label>
+О чём книга?
+</label>
 
 <textarea
 id="bookDescription"
@@ -789,14 +954,23 @@ placeholder="Расскажи немного о своей задумке..."
 
 </div>
 
+
 <div class="form-buttons">
 
-<button class="primary-button" onclick="createBook()">
+<button
+class="primary-button"
+onclick="createBook()">
+
 Создать книгу
+
 </button>
 
-<button class="secondary-button" onclick="closeCreateBook()">
+<button
+class="secondary-button"
+onclick="closeCreateBook()">
+
 Отмена
+
 </button>
 
 </div>
@@ -813,30 +987,56 @@ placeholder="Расскажи немного о своей задумке..."
 <div class="books">
 
 <div class="book">
-<div class="book-cover">＋</div>
-<h3>Новая книга</h3>
+
+<div class="book-cover">
+＋
+</div>
+
+<h3>
+Новая книга
+</h3>
+
 <p>
 Начни новую историю и создай
 свой первый писательский проект.
 </p>
+
 </div>
 
+
 <div class="book">
-<div class="book-cover">📖</div>
-<h3>Персонажи</h3>
+
+<div class="book-cover">
+📖
+</div>
+
+<h3>
+Персонажи
+</h3>
+
 <p>
 Создавай и храни персонажей
 своих историй.
 </p>
+
 </div>
 
+
 <div class="book">
-<div class="book-cover">🌍</div>
-<h3>Мир</h3>
+
+<div class="book-cover">
+🌍
+</div>
+
+<h3>
+Мир
+</h3>
+
 <p>
 Продумывай места, эпохи,
 правила и устройство мира.
 </p>
+
 </div>
 
 </div>
@@ -885,9 +1085,10 @@ placeholder="Расскажи немного о своей задумке..."
 
 <button
 class="back-button"
-onclick="backToWriter()"
->
+onclick="backToWriter()">
+
 ← Назад к писателю
+
 </button>
 
 </div>
@@ -897,43 +1098,50 @@ onclick="backToWriter()"
 
 <div class="book-layout">
 
+
 <aside class="book-menu">
 
 <button
 class="active"
-onclick="showBookSection('about', this)"
->
+onclick="showBookSection('about', this)">
+
 📋 О книге
+
 </button>
 
 <button
-onclick="showBookSection('characters', this)"
->
+onclick="showBookSection('characters', this)">
+
 👤 Персонажи
+
 </button>
 
 <button
-onclick="showBookSection('world', this)"
->
+onclick="showBookSection('world', this)">
+
 🌍 Мир
+
 </button>
 
 <button
-onclick="showBookSection('plan', this)"
->
+onclick="showBookSection('plan', this)">
+
 📝 План
+
 </button>
 
 <button
-onclick="showBookSection('chapters', this)"
->
+onclick="showBookSection('chapters', this)">
+
 📚 Главы
+
 </button>
 
 <button
-onclick="showBookSection('assistant', this)"
->
+onclick="showBookSection('assistant', this)">
+
 🤖 AI-помощник
+
 </button>
 
 </aside>
@@ -941,51 +1149,154 @@ onclick="showBookSection('assistant', this)"
 
 <div class="book-main">
 
+
+<!-- О КНИГЕ -->
+
 <div
 id="about"
-class="workspace-card book-section"
->
+class="workspace-card book-section">
 
-<h2>О книге</h2>
+<h2>
+О книге
+</h2>
+
+
+<div class="book-info-grid">
+
+
+<div class="info-box">
+
+<div class="info-label">
+Название
+</div>
+
+<div
+class="info-value"
+id="aboutTitle">
+
+Моя книга
+
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<div class="info-label">
+Жанр
+</div>
+
+<div
+class="info-value"
+id="aboutGenre">
+
+Жанр
+
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<div class="info-label">
+Статус
+</div>
+
+<div class="info-value">
+В процессе
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<div class="info-label">
+Глав
+</div>
+
+<div class="info-value">
+0
+</div>
+
+</div>
+
+</div>
+
+
+<div class="book-description-box">
+
+<h3>
+📝 Описание
+</h3>
 
 <p id="workspaceDescription">
 Описание книги появится здесь.
 </p>
 
-<div class="workspace-placeholder">
-Здесь будет основная информация
-о твоём проекте.
 </div>
+
+
+<div class="notes-box">
+
+<label>
+Заметки автора
+</label>
+
+<textarea
+id="authorNotes"
+placeholder="Записывай здесь идеи, мысли, важные детали и всё, что не хочется потерять..."
+></textarea>
+
+<button
+class="primary-button save-button"
+onclick="saveNotes()">
+
+Сохранить изменения
+
+</button>
 
 </div>
 
+</div>
+
+
+<!-- ПЕРСОНАЖИ -->
 
 <div
 id="characters"
 class="workspace-card book-section"
-style="display:none;"
->
+style="display:none;">
 
-<h2>Персонажи</h2>
+<h2>
+Персонажи
+</h2>
 
 <p>
 Здесь будут храниться персонажи твоей книги.
 </p>
 
 <div class="workspace-placeholder">
+
 Скоро здесь появится редактор персонажей.
-</div>
 
 </div>
 
+</div>
+
+
+<!-- МИР -->
 
 <div
 id="world"
 class="workspace-card book-section"
-style="display:none;"
->
+style="display:none;">
 
-<h2>Мир</h2>
+<h2>
+Мир
+</h2>
 
 <p>
 Здесь можно будет создавать устройство мира,
@@ -993,57 +1304,73 @@ style="display:none;"
 </p>
 
 <div class="workspace-placeholder">
+
 Скоро здесь появится редактор мира.
-</div>
 
 </div>
 
+</div>
+
+
+<!-- ПЛАН -->
 
 <div
 id="plan"
 class="workspace-card book-section"
-style="display:none;"
->
+style="display:none;">
 
-<h2>План</h2>
+<h2>
+План
+</h2>
 
 <p>
-Здесь будет строиться сюжет и структура книги.
+Здесь будет строиться сюжет
+и структура книги.
 </p>
 
 <div class="workspace-placeholder">
+
 Скоро здесь появится планировщик сюжета.
-</div>
 
 </div>
 
+</div>
+
+
+<!-- ГЛАВЫ -->
 
 <div
 id="chapters"
 class="workspace-card book-section"
-style="display:none;"
->
+style="display:none;">
 
-<h2>Главы</h2>
+<h2>
+Главы
+</h2>
 
 <p>
 Здесь будут находиться все главы книги.
 </p>
 
 <div class="workspace-placeholder">
+
 Скоро здесь появится редактор глав.
-</div>
 
 </div>
 
+</div>
+
+
+<!-- AI-ПОМОЩНИК -->
 
 <div
 id="assistant"
 class="workspace-card book-section"
-style="display:none;"
->
+style="display:none;">
 
-<h2>AI-помощник</h2>
+<h2>
+AI-помощник
+</h2>
 
 <p>
 AI-помощник будет помогать развивать
@@ -1051,16 +1378,20 @@ AI-помощник будет помогать развивать
 </p>
 
 <div class="workspace-placeholder">
+
 Здесь появится настоящий AI-помощник автора.
+
 </div>
 
 </div>
+
 
 </div>
 
 </div>
 
 </section>
+
 
 </main>
 
@@ -1079,15 +1410,20 @@ let currentBook = null;
 function showPage(pageId, button) {
 
 document.querySelectorAll('.page').forEach(function(page) {
+
 page.classList.remove('active');
+
 });
 
 document.getElementById(pageId).classList.add('active');
 
+
 if (button) {
 
 document.querySelectorAll('.nav-button').forEach(function(btn) {
+
 btn.classList.remove('active');
+
 });
 
 button.classList.add('active');
@@ -1101,22 +1437,27 @@ button.classList.add('active');
 
 function openCreateBook() {
 
-document.getElementById('createBook').classList.add('active');
+document.getElementById('createBook')
+.classList.add('active');
 
-document.getElementById('myBooks').classList.remove('active');
+document.getElementById('myBooks')
+.classList.remove('active');
 
-document.getElementById('writerProjects').style.display = 'none';
+document.getElementById('writerProjects')
+.style.display = 'none';
 
 }
 
 
-/* ЗАКРЫТЬ СОЗДАНИЕ */
+/* ЗАКРЫТЬ ФОРМУ */
 
 function closeCreateBook() {
 
-document.getElementById('createBook').classList.remove('active');
+document.getElementById('createBook')
+.classList.remove('active');
 
-document.getElementById('writerProjects').style.display = 'block';
+document.getElementById('writerProjects')
+.style.display = 'block';
 
 }
 
@@ -1126,18 +1467,25 @@ document.getElementById('writerProjects').style.display = 'block';
 function createBook() {
 
 let title =
-document.getElementById('bookTitle').value.trim();
+document.getElementById('bookTitle')
+.value
+.trim();
 
 let genre =
-document.getElementById('bookGenre').value;
+document.getElementById('bookGenre')
+.value;
 
 let description =
-document.getElementById('bookDescription').value.trim();
+document.getElementById('bookDescription')
+.value
+.trim();
 
 
 if (title === '') {
 
-alert('Пожалуйста, введи название книги.');
+alert(
+'Пожалуйста, введи название книги.'
+);
 
 return;
 
@@ -1151,7 +1499,10 @@ title: title,
 genre: genre,
 
 description:
-description || 'Описание пока не добавлено.'
+description ||
+'Описание пока не добавлено.',
+
+notes: ''
 
 };
 
@@ -1159,59 +1510,79 @@ description || 'Описание пока не добавлено.'
 books.push(currentBook);
 
 
-/* Очищаем форму */
+document.getElementById('bookTitle')
+.value = '';
 
-document.getElementById('bookTitle').value = '';
+document.getElementById('bookDescription')
+.value = '';
 
-document.getElementById('bookDescription').value = '';
-
-
-/* Сразу открываем книгу */
 
 openBookWorkspace();
 
 }
 
 
-/* ОТКРЫТЬ РАБОЧУЮ ОБЛАСТЬ КНИГИ */
+/* ОТКРЫТЬ КНИГУ */
 
 function openBookWorkspace() {
 
-document.getElementById('home').classList.remove('active');
+document.getElementById('home')
+.classList.remove('active');
 
-document.getElementById('chat').classList.remove('active');
+document.getElementById('chat')
+.classList.remove('active');
 
-document.getElementById('writer').classList.remove('active');
+document.getElementById('writer')
+.classList.remove('active');
 
-document.getElementById('bookWorkspace').classList.add('active');
+document.getElementById('bookWorkspace')
+.classList.add('active');
 
 
-/* ВАЖНО: здесь исправлена ошибка */
-
-document.getElementById('workspaceTitle').textContent =
+document.getElementById('workspaceTitle')
+.textContent =
 currentBook.title;
 
-document.getElementById('workspaceGenre').textContent =
+
+document.getElementById('workspaceGenre')
+.textContent =
 currentBook.genre;
 
-document.getElementById('workspaceDescription').textContent =
+
+document.getElementById('aboutTitle')
+.textContent =
+currentBook.title;
+
+
+document.getElementById('aboutGenre')
+.textContent =
+currentBook.genre;
+
+
+document.getElementById('workspaceDescription')
+.textContent =
 currentBook.description;
 
 
-/* Открываем раздел "О книге" */
+document.getElementById('authorNotes')
+.value =
+currentBook.notes || '';
+
 
 showBookSection('about');
 
 }
 
 
-/* НАЗАД К ПИСАТЕЛЮ */
+/* НАЗАД */
 
 function backToWriter() {
 
-document.getElementById('bookWorkspace').classList.remove('active');
+document.getElementById('bookWorkspace')
+.classList.remove('active');
 
-document.getElementById('writer').classList.add('active');
+document.getElementById('writer')
+.classList.add('active');
 
 }
 
@@ -1220,17 +1591,20 @@ document.getElementById('writer').classList.add('active');
 
 function showBookSection(sectionId, button) {
 
-document.querySelectorAll('.book-section').forEach(function(section) {
+document.querySelectorAll('.book-section')
+.forEach(function(section) {
 
 section.style.display = 'none';
 
 });
 
 
-document.getElementById(sectionId).style.display = 'block';
+document.getElementById(sectionId)
+.style.display = 'block';
 
 
-document.querySelectorAll('.book-menu button').forEach(function(btn) {
+document.querySelectorAll('.book-menu button')
+.forEach(function(btn) {
 
 btn.classList.remove('active');
 
@@ -1243,9 +1617,29 @@ button.classList.add('active');
 
 } else {
 
-document.querySelector('.book-menu button').classList.add('active');
+document.querySelector('.book-menu button')
+.classList.add('active');
 
 }
+
+}
+
+
+/* СОХРАНИТЬ ЗАМЕТКИ */
+
+function saveNotes() {
+
+if (!currentBook) {
+return;
+}
+
+currentBook.notes =
+document.getElementById('authorNotes')
+.value;
+
+alert(
+'Изменения сохранены.'
+);
 
 }
 
@@ -1254,11 +1648,14 @@ document.querySelector('.book-menu button').classList.add('active');
 
 function openMyBooks() {
 
-document.getElementById('createBook').classList.remove('active');
+document.getElementById('createBook')
+.classList.remove('active');
 
-document.getElementById('writerProjects').style.display = 'none';
+document.getElementById('writerProjects')
+.style.display = 'none';
 
-document.getElementById('myBooks').classList.add('active');
+document.getElementById('myBooks')
+.classList.add('active');
 
 renderBooks();
 
@@ -1332,7 +1729,8 @@ openButton.textContent =
 openButton.onclick =
 function() {
 
-currentBook = books[index];
+currentBook =
+books[index];
 
 openBookWorkspace();
 
@@ -1366,9 +1764,7 @@ input.value.trim();
 
 
 if (text === '') {
-
 return;
-
 }
 
 
@@ -1413,7 +1809,7 @@ messages.scrollHeight;
 }
 
 
-/* ENTER В ЧАТЕ */
+/* ENTER */
 
 function handleEnter(event) {
 
