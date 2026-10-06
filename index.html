@@ -17,6 +17,13 @@
             color: #292333;
         }
 
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
         .app {
             display: flex;
             min-height: 100vh;
@@ -139,6 +146,7 @@
             border-radius: 20px;
             padding: 22px;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         .tool:hover {
@@ -253,6 +261,11 @@
             cursor: pointer;
         }
 
+        .primary-button:hover,
+        .send-button:hover {
+            background: #6338ad;
+        }
+
         .writer-intro {
             background: linear-gradient(135deg, #8b5bd6, #7043bd);
             color: white;
@@ -287,6 +300,10 @@
             padding: 13px 20px;
             font-weight: bold;
             cursor: pointer;
+        }
+
+        .secondary-button:hover {
+            background: #f7f2ff;
         }
 
         .books-title {
@@ -330,6 +347,120 @@
             line-height: 1.5;
         }
 
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(38, 28, 52, 0.45);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-window {
+            width: 100%;
+            max-width: 520px;
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(45, 25, 70, 0.2);
+        }
+
+        .modal-window h2 {
+            margin: 0 0 8px;
+            font-size: 25px;
+        }
+
+        .modal-description {
+            color: #817887;
+            margin: 0 0 25px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #51495b;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            border: 1px solid #ddd4e8;
+            border-radius: 13px;
+            padding: 13px 14px;
+            font-size: 15px;
+            outline: none;
+            background: white;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #8b5bd6;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .cancel-button {
+            border: 1px solid #ddd4e8;
+            background: white;
+            color: #5f5668;
+            border-radius: 14px;
+            padding: 13px 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .my-books {
+            display: none;
+        }
+
+        .my-books.active {
+            display: block;
+        }
+
+        .created-book {
+            background: white;
+            border: 1px solid #ece7f3;
+            border-radius: 20px;
+            padding: 22px;
+            margin-bottom: 15px;
+        }
+
+        .created-book h3 {
+            margin: 0 0 8px;
+            color: #4d3473;
+        }
+
+        .created-book p {
+            margin: 5px 0;
+            color: #817887;
+            font-size: 14px;
+        }
+
         @media (max-width: 900px) {
             .tools,
             .books {
@@ -360,6 +491,18 @@
             .tools,
             .books {
                 grid-template-columns: 1fr;
+            }
+
+            .chat {
+                min-height: 450px;
+            }
+
+            .chat-input {
+                flex-direction: column;
+            }
+
+            .send-button {
+                width: 100%;
             }
         }
     </style>
@@ -412,6 +555,8 @@
 
     <main class="content">
 
+        <!-- ГЛАВНАЯ -->
+
         <section id="home" class="page active">
 
             <div class="top">
@@ -421,6 +566,7 @@
 
             <section class="welcome">
                 <h2>Добро пожаловать в QwerZing</h2>
+
                 <p>
                     Твоя творческая AI-студия для общения,
                     написания историй, создания изображений
@@ -454,7 +600,7 @@
 
             <h2 class="section-title">Последние проекты</h2>
 
-            <section class="projects">
+            <section class="projects" id="homeProjects">
 
                 <div class="empty">
                     Здесь пока нет проектов.<br>
@@ -465,6 +611,8 @@
 
         </section>
 
+
+        <!-- ЧАТ -->
 
         <section id="chat" class="page">
 
@@ -509,6 +657,8 @@
         </section>
 
 
+        <!-- ПИСАТЕЛЬ -->
+
         <section id="writer" class="page">
 
             <div class="top">
@@ -530,66 +680,86 @@
 
             <div class="writer-actions">
 
-                <button class="primary-button">
+                <button class="primary-button" onclick="openCreateBook()">
                     ＋ Создать книгу
                 </button>
 
-                <button class="secondary-button">
+                <button class="secondary-button" onclick="showMyBooks()">
                     📚 Мои книги
                 </button>
 
             </div>
 
 
-            <h2 class="books-title">
-                Мои проекты
-            </h2>
+            <div id="writerMain">
+
+                <h2 class="books-title">
+                    Мои проекты
+                </h2>
+
+                <section class="books">
+
+                    <div class="book">
+
+                        <div class="book-cover">＋</div>
+
+                        <h3>Новая книга</h3>
+
+                        <p>
+                            Начни новую историю и создай
+                            свой первый писательский проект.
+                        </p>
+
+                    </div>
 
 
-            <section class="books">
+                    <div class="book">
 
-                <div class="book">
+                        <div class="book-cover">📖</div>
 
-                    <div class="book-cover">＋</div>
+                        <h3>Персонажи</h3>
 
-                    <h3>Новая книга</h3>
+                        <p>
+                            Создавай и храни персонажей
+                            своих историй.
+                        </p>
 
-                    <p>
-                        Начни новую историю и создай
-                        свой первый писательский проект.
-                    </p>
+                    </div>
+
+
+                    <div class="book">
+
+                        <div class="book-cover">🌍</div>
+
+                        <h3>Мир</h3>
+
+                        <p>
+                            Продумывай места, эпохи,
+                            правила и устройство мира.
+                        </p>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <div id="myBooks" class="my-books">
+
+                <h2 class="books-title">
+                    Мои книги
+                </h2>
+
+                <div id="booksList">
+
+                    <div class="empty">
+                        Ты ещё не создала ни одной книги.
+                    </div>
 
                 </div>
 
-
-                <div class="book">
-
-                    <div class="book-cover">📖</div>
-
-                    <h3>Персонажи</h3>
-
-                    <p>
-                        Создавай и храни персонажей
-                        своих историй.
-                    </p>
-
-                </div>
-
-
-                <div class="book">
-
-                    <div class="book-cover">🌍</div>
-
-                    <h3>Мир</h3>
-
-                    <p>
-                        Продумывай места, эпохи,
-                        правила и устройство мира.
-                    </p>
-
-                </div>
-
-            </section>
+            </div>
 
         </section>
 
@@ -598,7 +768,120 @@
 </div>
 
 
+<!-- ОКНО СОЗДАНИЯ КНИГИ -->
+
+<div class="modal" id="createBookModal">
+
+    <div class="modal-window">
+
+        <h2>Создать новую книгу</h2>
+
+        <p class="modal-description">
+            Давай создадим основу для твоей новой истории.
+        </p>
+
+
+        <div class="form-group">
+
+            <label for="bookTitle">
+                Название книги
+            </label>
+
+            <input
+                type="text"
+                id="bookTitle"
+                placeholder="Например: Последний рассвет"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="bookGenre">
+                Жанр
+            </label>
+
+            <select id="bookGenre">
+
+                <option value="Романтика">
+                    Романтика
+                </option>
+
+                <option value="Фэнтези">
+                    Фэнтези
+                </option>
+
+                <option value="Фантастика">
+                    Фантастика
+                </option>
+
+                <option value="Драма">
+                    Драма
+                </option>
+
+                <option value="Триллер">
+                    Триллер
+                </option>
+
+                <option value="Детектив">
+                    Детектив
+                </option>
+
+                <option value="Приключения">
+                    Приключения
+                </option>
+
+                <option value="Другое">
+                    Другое
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="bookDescription">
+                О чём книга?
+            </label>
+
+            <textarea
+                id="bookDescription"
+                placeholder="Коротко расскажи о своей задумке..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="cancel-button"
+                onclick="closeCreateBook()"
+            >
+                Отмена
+            </button>
+
+            <button
+                class="primary-button"
+                onclick="saveBook()"
+            >
+                Создать книгу
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 <script>
+
+    let books = [];
+
 
     function showPage(pageId, button) {
 
@@ -606,7 +889,11 @@
             page.classList.remove('active');
         });
 
-        document.getElementById(pageId).classList.add('active');
+        const page = document.getElementById(pageId);
+
+        if (page) {
+            page.classList.add('active');
+        }
 
         if (button) {
 
@@ -619,52 +906,230 @@
     }
 
 
+    function openCreateBook() {
+
+        document.getElementById('createBookModal')
+            .classList.add('active');
+
+        document.getElementById('bookTitle').focus();
+    }
+
+
+    function closeCreateBook() {
+
+        document.getElementById('createBookModal')
+            .classList.remove('active');
+
+    }
+
+
+    function saveBook() {
+
+        const title =
+            document.getElementById('bookTitle')
+            .value
+            .trim();
+
+        const genre =
+            document.getElementById('bookGenre')
+            .value;
+
+        const description =
+            document.getElementById('bookDescription')
+            .value
+            .trim();
+
+
+        if (title === '') {
+
+            alert('Введите название книги.');
+
+            return;
+        }
+
+
+        const book = {
+
+            title: title,
+
+            genre: genre,
+
+            description:
+                description ||
+                'Описание пока не добавлено.'
+
+        };
+
+
+        books.push(book);
+
+        renderBooks();
+
+        closeCreateBook();
+
+        document.getElementById('bookTitle').value = '';
+
+        document.getElementById('bookDescription').value = '';
+
+        showMyBooks();
+
+    }
+
+
+    function renderBooks() {
+
+        const list =
+            document.getElementById('booksList');
+
+
+        if (books.length === 0) {
+
+            list.innerHTML = `
+                <div class="empty">
+                    Ты ещё не создала ни одной книги.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        list.innerHTML = '';
+
+
+        books.forEach(function(book) {
+
+            const item =
+                document.createElement('div');
+
+            item.className =
+                'created-book';
+
+
+            item.innerHTML = `
+                <h3>📖 ${escapeHtml(book.title)}</h3>
+
+                <p>
+                    <strong>Жанр:</strong>
+                    ${escapeHtml(book.genre)}
+                </p>
+
+                <p>
+                    ${escapeHtml(book.description)}
+                </p>
+            `;
+
+
+            list.appendChild(item);
+
+        });
+
+    }
+
+
+    function showMyBooks() {
+
+        document.getElementById('writerMain')
+            .style.display = 'none';
+
+        document.getElementById('myBooks')
+            .classList.add('active');
+
+    }
+
+
+    function escapeHtml(text) {
+
+        const div =
+            document.createElement('div');
+
+        div.textContent = text;
+
+        return div.innerHTML;
+
+    }
+
+
     function sendMessage() {
 
-        const input = document.getElementById('userInput');
-        const text = input.value.trim();
+        const input =
+            document.getElementById('userInput');
+
+        const text =
+            input.value.trim();
+
 
         if (text === '') {
             return;
         }
 
-        const messages = document.getElementById('messages');
 
-        const userMessage = document.createElement('div');
+        const messages =
+            document.getElementById('messages');
 
-        userMessage.className = 'message user-message';
-        userMessage.textContent = text;
+
+        const userMessage =
+            document.createElement('div');
+
+        userMessage.className =
+            'message user-message';
+
+        userMessage.textContent =
+            text;
+
 
         messages.appendChild(userMessage);
 
         input.value = '';
 
+
         setTimeout(function() {
 
-            const aiMessage = document.createElement('div');
+            const aiMessage =
+                document.createElement('div');
 
-            aiMessage.className = 'message ai-message';
+            aiMessage.className =
+                'message ai-message';
 
             aiMessage.textContent =
                 'Я пока работаю в демонстрационном режиме. Скоро здесь появится настоящий искусственный интеллект.';
 
+
             messages.appendChild(aiMessage);
 
-            messages.scrollTop = messages.scrollHeight;
+            messages.scrollTop =
+                messages.scrollHeight;
 
         }, 500);
 
-        messages.scrollTop = messages.scrollHeight;
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
     }
 
 
     function handleEnter(event) {
 
         if (event.key === 'Enter') {
+
             sendMessage();
+
         }
 
     }
+
+
+    document.getElementById('createBookModal')
+        .addEventListener('click', function(event) {
+
+            if (event.target === this) {
+
+                closeCreateBook();
+
+            }
+
+        });
 
 </script>
 
