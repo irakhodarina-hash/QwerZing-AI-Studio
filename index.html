@@ -329,6 +329,7 @@ textarea {
     display: flex;
     gap: 8px;
     margin-top: 15px;
+    flex-wrap: wrap;
 }
 
 .small-btn {
@@ -367,6 +368,12 @@ textarea {
     border-radius: 14px;
     margin-bottom: 15px;
     line-height: 1.5;
+}
+
+.save-status {
+    font-size: 13px;
+    color: #7b7085;
+    margin-top: 10px;
 }
 
 @media (max-width: 700px) {
@@ -417,13 +424,17 @@ textarea {
                 <div class="card">
                     <h3>💬 Чат</h3>
                     <p>Общайся с ИИ, задавай вопросы и обсуждай свои идеи.</p>
-                    <button class="primary-btn" onclick="showPage('chat')">Открыть чат</button>
+                    <button class="primary-btn" onclick="showPage('chat')">
+                        Открыть чат
+                    </button>
                 </div>
 
                 <div class="card">
                     <h3>✍️ Писатель</h3>
                     <p>Создавай книги, персонажей, миры и полноценные истории.</p>
-                    <button class="primary-btn" onclick="showPage('writer')">Открыть</button>
+                    <button class="primary-btn" onclick="showPage('writer')">
+                        Открыть
+                    </button>
                 </div>
 
                 <div class="card">
@@ -448,6 +459,7 @@ textarea {
 
         <section id="writer" class="page">
             <h1>Писатель</h1>
+
             <div class="subtitle">
                 Твоя писательская студия. Создавай книги, продумывай персонажей,
                 строй миры и превращай идеи в полноценные истории.
@@ -464,13 +476,27 @@ textarea {
             </div>
 
             <div id="createBookForm" class="form-box" style="display:none;">
+
                 <h2>Создание новой книги</h2>
-                <p>Давай создадим основу для твоей истории.</p>
 
-                <label for="bookTitle">Название книги</label>
-                <input id="bookTitle" type="text" placeholder="Например: Рассвет">
+                <p>
+                    Давай создадим основу для твоей истории.
+                </p>
 
-                <label for="bookGenre">Жанр</label>
+                <label for="bookTitle">
+                    Название книги
+                </label>
+
+                <input
+                    id="bookTitle"
+                    type="text"
+                    placeholder="Например: Рассвет"
+                >
+
+                <label for="bookGenre">
+                    Жанр
+                </label>
+
                 <select id="bookGenre">
                     <option>Фэнтези</option>
                     <option>Роман</option>
@@ -483,507 +509,1299 @@ textarea {
                     <option>Другое</option>
                 </select>
 
-                <label for="bookDescription">О чём книга?</label>
-                <textarea id="bookDescription" placeholder="Кратко опиши свою историю..."></textarea>
+                <label for="bookDescription">
+                    О чём книга?
+                </label>
+
+                <textarea
+                    id="bookDescription"
+                    placeholder="Кратко опиши свою историю..."
+                ></textarea>
 
                 <div class="form-buttons">
-                    <button class="primary-btn" onclick="createBook()">Создать книгу</button>
-                    <button class="secondary-btn" onclick="cancelCreateBook()">Отмена</button>
+
+                    <button
+                        class="primary-btn"
+                        onclick="createBook()"
+                    >
+                        Создать книгу
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        onclick="cancelCreateBook()"
+                    >
+                        Отмена
+                    </button>
+
                 </div>
+
             </div>
 
             <div id="booksList"></div>
+
         </section>
 
 
         <section id="workspace" class="page">
 
             <div class="workspace-header">
-                <button class="back-btn" onclick="backToWriter()">← Назад</button>
-                <div id="workspaceTitle" class="workspace-title"></div>
+
+                <button
+                    class="back-btn"
+                    onclick="backToWriter()"
+                >
+                    ← Назад
+                </button>
+
+                <div
+                    id="workspaceTitle"
+                    class="workspace-title"
+                ></div>
+
             </div>
+
 
             <div class="workspace-menu">
-                <button id="menuAbout" onclick="showBookSection('about')">📋 О книге</button>
-                <button id="menuCharacters" onclick="showBookSection('characters')">👤 Персонажи</button>
-                <button id="menuWorld" onclick="showBookSection('world')">🌍 Мир</button>
-                <button id="menuPlan" onclick="showBookSection('plan')">📝 План</button>
-                <button id="menuChapters" onclick="showBookSection('chapters')">📚 Главы</button>
-                <button id="menuAI" onclick="showBookSection('ai')">🤖 AI-помощник</button>
+
+                <button
+                    id="menuAbout"
+                    onclick="showBookSection('about')"
+                >
+                    📋 О книге
+                </button>
+
+                <button
+                    id="menuCharacters"
+                    onclick="showBookSection('characters')"
+                >
+                    👤 Персонажи
+                </button>
+
+                <button
+                    id="menuWorld"
+                    onclick="showBookSection('world')"
+                >
+                    🌍 Мир
+                </button>
+
+                <button
+                    id="menuPlan"
+                    onclick="showBookSection('plan')"
+                >
+                    📝 План
+                </button>
+
+                <button
+                    id="menuChapters"
+                    onclick="showBookSection('chapters')"
+                >
+                    📚 Главы
+                </button>
+
+                <button
+                    id="menuAI"
+                    onclick="showBookSection('ai')"
+                >
+                    🤖 AI-помощник
+                </button>
+
             </div>
 
 
-            <div id="aboutSection" class="workspace-section">
+            <div
+                id="aboutSection"
+                class="workspace-section"
+            >
 
                 <div class="info-card">
+
                     <h2>О книге</h2>
 
                     <div class="info-row">
-                        <div class="info-label">Название</div>
-                        <div id="aboutTitle" class="info-value"></div>
+
+                        <div class="info-label">
+                            Название
+                        </div>
+
+                        <div
+                            id="aboutTitle"
+                            class="info-value"
+                        ></div>
+
                     </div>
 
-                    <div class="info-row">
-                        <div class="info-label">Жанр</div>
-                        <div id="aboutGenre" class="info-value"></div>
-                    </div>
 
                     <div class="info-row">
-                        <div class="info-label">Описание</div>
-                        <div id="workspaceDescription" class="info-value"></div>
+
+                        <div class="info-label">
+                            Жанр
+                        </div>
+
+                        <div
+                            id="aboutGenre"
+                            class="info-value"
+                        ></div>
+
                     </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-label">
+                            Описание
+                        </div>
+
+                        <div
+                            id="workspaceDescription"
+                            class="info-value"
+                        ></div>
+
+                    </div>
+
                 </div>
 
+
                 <div class="info-card">
+
                     <h2>Заметки автора</h2>
 
-                    <textarea id="authorNotes"
-                        placeholder="Записывай здесь идеи, мысли, важные детали и всё, что не хочется потерять."></textarea>
+                    <textarea
+                        id="authorNotes"
+                        placeholder="Записывай здесь идеи, мысли, важные детали и всё, что не хочется потерять."
+                    ></textarea>
 
-                    <button class="primary-btn" onclick="saveNotes()" style="margin-top:15px;">
+                    <button
+                        class="primary-btn"
+                        onclick="saveNotes()"
+                        style="margin-top:15px;"
+                    >
                         Сохранить заметки
                     </button>
+
+                    <div
+                        id="notesSaveStatus"
+                        class="save-status"
+                    ></div>
+
                 </div>
 
             </div>
 
 
-            <div id="charactersSection" class="workspace-section">
+            <div
+                id="charactersSection"
+                class="workspace-section"
+            >
 
                 <div class="character-header">
-                    <h2>Персонажи</h2>
 
-                    <button class="primary-btn" onclick="openCharacterForm()">
+                    <h2>
+                        Персонажи
+                    </h2>
+
+                    <button
+                        class="primary-btn"
+                        onclick="openCharacterForm()"
+                    >
                         ＋ Добавить персонажа
                     </button>
+
                 </div>
 
-                <div id="characterForm" class="form-box" style="display:none;">
 
-                    <h2 id="characterFormTitle">Новый персонаж</h2>
+                <div
+                    id="characterForm"
+                    class="form-box"
+                    style="display:none;"
+                >
 
-                    <label for="characterName">Имя</label>
-                    <input id="characterName" type="text" placeholder="Имя персонажа">
+                    <h2 id="characterFormTitle">
+                        Новый персонаж
+                    </h2>
 
-                    <label for="characterRole">Роль в истории</label>
-                    <input id="characterRole" type="text" placeholder="Главный герой, антагонист, друг...">
 
-                    <label for="characterAge">Возраст</label>
-                    <input id="characterAge" type="text" placeholder="Например: 18 лет">
+                    <label for="characterName">
+                        Имя персонажа
+                    </label>
 
-                    <label for="characterAppearance">Внешность</label>
-                    <textarea id="characterAppearance"
-                        placeholder="Опиши внешность персонажа..."></textarea>
+                    <input
+                        id="characterName"
+                        type="text"
+                        placeholder="Например: Рэйчел Холл"
+                    >
 
-                    <label for="characterPersonality">Характер</label>
-                    <textarea id="characterPersonality"
-                        placeholder="Черты характера, привычки, особенности..."></textarea>
 
-                    <label for="characterBiography">Биография</label>
-                    <textarea id="characterBiography"
-                        placeholder="Прошлое персонажа, семья, важные события..."></textarea>
+                    <label for="characterRole">
+                        Роль
+                    </label>
 
-                    <label for="characterRelationships">Отношения</label>
-                    <textarea id="characterRelationships"
-                        placeholder="Связи персонажа с другими героями..."></textarea>
+                    <input
+                        id="characterRole"
+                        type="text"
+                        placeholder="Главная героиня, антагонист, друг..."
+                    >
 
-                    <label for="characterNotes">Заметки</label>
-                    <textarea id="characterNotes"
-                        placeholder="Любые дополнительные идеи..."></textarea>
+
+                    <label for="characterAge">
+                        Возраст
+                    </label>
+
+                    <input
+                        id="characterAge"
+                        type="text"
+                        placeholder="Например: 18 лет"
+                    >
+
+
+                    <label for="characterAppearance">
+                        Внешность
+                    </label>
+
+                    <textarea
+                        id="characterAppearance"
+                        placeholder="Опиши внешность персонажа..."
+                    ></textarea>
+
+
+                    <label for="characterPersonality">
+                        Характер
+                    </label>
+
+                    <textarea
+                        id="characterPersonality"
+                        placeholder="Черты характера, привычки, особенности..."
+                    ></textarea>
+
+
+                    <label for="characterBiography">
+                        Биография
+                    </label>
+
+                    <textarea
+                        id="characterBiography"
+                        placeholder="Прошлое персонажа, семья, важные события..."
+                    ></textarea>
+
+
+                    <label for="characterRelationships">
+                        Отношения
+                    </label>
+
+                    <textarea
+                        id="characterRelationships"
+                        placeholder="Связи персонажа с другими героями..."
+                    ></textarea>
+
+
+                    <label for="characterNotes">
+                        Заметки
+                    </label>
+
+                    <textarea
+                        id="characterNotes"
+                        placeholder="Любые дополнительные идеи..."
+                    ></textarea>
+
 
                     <div class="form-buttons">
-                        <button class="primary-btn" onclick="saveCharacter()">
+
+                        <button
+                            class="primary-btn"
+                            onclick="saveCharacter()"
+                        >
                             Сохранить персонажа
                         </button>
 
-                        <button class="secondary-btn" onclick="closeCharacterForm()">
+                        <button
+                            class="secondary-btn"
+                            onclick="closeCharacterForm()"
+                        >
                             Отмена
                         </button>
+
                     </div>
 
                 </div>
+
 
                 <div id="charactersList"></div>
 
             </div>
 
 
-            <div id="worldSection" class="workspace-section">
+            <div
+                id="worldSection"
+                class="workspace-section"
+            >
+
                 <div class="empty-state">
-                    <h2>🌍 Мир книги</h2>
-                    <p>Здесь будет редактор мира твоей книги.</p>
+
+                    <h2>
+                        🌍 Мир книги
+                    </h2>
+
+                    <p>
+                        Здесь будет редактор мира твоей книги.
+                    </p>
+
                 </div>
+
             </div>
 
 
-            <div id="planSection" class="workspace-section">
+            <div
+                id="planSection"
+                class="workspace-section"
+            >
+
                 <div class="empty-state">
-                    <h2>📝 План книги</h2>
-                    <p>Здесь будет план истории, сюжетные линии и структура книги.</p>
+
+                    <h2>
+                        📝 План книги
+                    </h2>
+
+                    <p>
+                        Здесь будет план истории, сюжетные линии и структура книги.
+                    </p>
+
                 </div>
+
             </div>
 
 
-            <div id="chaptersSection" class="workspace-section">
+            <div
+                id="chaptersSection"
+                class="workspace-section"
+            >
+
                 <div class="empty-state">
-                    <h2>📚 Главы</h2>
-                    <p>Здесь будут храниться главы твоей книги.</p>
+
+                    <h2>
+                        📚 Главы
+                    </h2>
+
+                    <p>
+                        Здесь будут храниться главы твоей книги.
+                    </p>
+
                 </div>
+
             </div>
 
 
-            <div id="aiSection" class="workspace-section">
+            <div
+                id="aiSection"
+                class="workspace-section"
+            >
+
                 <div class="empty-state">
-                    <h2>🤖 AI-помощник</h2>
-                    <p>Здесь появится AI-помощник, который будет знать твою книгу.</p>
+
+                    <h2>
+                        🤖 AI-помощник
+                    </h2>
+
+                    <p>
+                        Здесь появится AI-помощник, который будет знать твою книгу.
+                    </p>
+
                 </div>
+
             </div>
 
         </section>
 
 
         <section id="artist" class="page">
-            <h1>Художник</h1>
-            <div class="subtitle">Создание изображений появится здесь.</div>
+
+            <h1>
+                Художник
+            </h1>
+
+            <div class="subtitle">
+                Создание изображений появится здесь.
+            </div>
 
             <div class="empty-state">
-                <h2>🎨 AI Художник</h2>
-                <p>Этот раздел пока находится в разработке.</p>
+
+                <h2>
+                    🎨 AI Художник
+                </h2>
+
+                <p>
+                    Этот раздел пока находится в разработке.
+                </p>
+
             </div>
+
         </section>
 
 
         <section id="projects" class="page">
-            <h1>Проекты</h1>
-            <div class="subtitle">Все твои творческие проекты в одном месте.</div>
+
+            <h1>
+                Проекты
+            </h1>
+
+            <div class="subtitle">
+                Все твои творческие проекты в одном месте.
+            </div>
 
             <div class="empty-state">
-                <h2>📁 Проекты</h2>
-                <p>Здесь будут отображаться твои проекты.</p>
+
+                <h2>
+                    📁 Проекты
+                </h2>
+
+                <p>
+                    Здесь будут отображаться твои проекты.
+                </p>
+
             </div>
+
         </section>
 
 
         <section id="memory" class="page">
-            <h1>Память</h1>
-            <div class="subtitle">Здесь будет храниться информация, которую AI помнит о твоих проектах.</div>
+
+            <h1>
+                Память
+            </h1>
+
+            <div class="subtitle">
+                Здесь будет храниться информация, которую AI помнит о твоих проектах.
+            </div>
 
             <div class="empty-state">
-                <h2>🧠 Память QwerZing</h2>
-                <p>Система памяти появится здесь.</p>
+
+                <h2>
+                    🧠 Память QwerZing
+                </h2>
+
+                <p>
+                    Система памяти появится здесь.
+                </p>
+
             </div>
+
         </section>
 
 
         <section id="settings" class="page">
-            <h1>Настройки</h1>
-            <div class="subtitle">Настрой QwerZing под себя.</div>
+
+            <h1>
+                Настройки
+            </h1>
+
+            <div class="subtitle">
+                Настрой QwerZing под себя.
+            </div>
 
             <div class="empty-state">
-                <h2>⚙️ Настройки</h2>
-                <p>Настройки приложения появятся здесь.</p>
+
+                <h2>
+                    ⚙️ Настройки
+                </h2>
+
+                <p>
+                    Настройки приложения появятся здесь.
+                </p>
+
             </div>
+
         </section>
 
     </main>
+
 </div>
 
 
 <script>
+
+/*
+    ============================================================
+    QWERZING DATA STORAGE
+    ============================================================
+
+    Данные пользователя хранятся отдельно от интерфейса.
+
+    Это означает:
+    - обновление index.html не должно удалять книги;
+    - персонажи сохраняются;
+    - заметки сохраняются;
+    - структура данных имеет собственную версию;
+    - в будущем можно добавлять миграции.
+*/
+
+const STORAGE_KEY = 'qwerzing_user_data';
+const DATA_VERSION = 1;
 
 let books = [];
 let currentBook = null;
 let editingCharacterIndex = null;
 
 
-function showPage(pageId) {
+/*
+    ============================================================
+    ЗАГРУЗКА ДАННЫХ
+    ============================================================
+*/
 
-    document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-    });
+function loadUserData() {
 
-    document.getElementById(pageId).classList.add('active');
+    try {
 
-    document.querySelectorAll('.nav button').forEach(button => {
-        button.classList.remove('active');
-    });
+        const savedData =
+            localStorage.getItem(STORAGE_KEY);
 
-    if (pageId === 'home') {
-        document.getElementById('navHome').classList.add('active');
-    }
+        if (!savedData) {
 
-    if (pageId === 'chat') {
-        document.getElementById('navChat').classList.add('active');
-    }
+            books = [];
 
-    if (pageId === 'writer') {
-        document.getElementById('navWriter').classList.add('active');
-        renderBooks();
+            return;
+        }
+
+
+        const parsedData =
+            JSON.parse(savedData);
+
+
+        if (
+            !parsedData ||
+            typeof parsedData !== 'object'
+        ) {
+
+            books = [];
+
+            return;
+        }
+
+
+        books =
+            Array.isArray(parsedData.books)
+            ? parsedData.books
+            : [];
+
+
+        books.forEach(book => {
+
+            if (!Array.isArray(book.characters)) {
+                book.characters = [];
+            }
+
+            if (!Array.isArray(book.chapters)) {
+                book.chapters = [];
+            }
+
+            if (typeof book.notes !== 'string') {
+                book.notes = '';
+            }
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            'Не удалось загрузить данные QwerZing:',
+            error
+        );
+
+        books = [];
     }
 }
 
 
+/*
+    ============================================================
+    СОХРАНЕНИЕ ДАННЫХ
+    ============================================================
+*/
+
+function saveUserData() {
+
+    try {
+
+        const data = {
+
+            version: DATA_VERSION,
+
+            updatedAt:
+                new Date().toISOString(),
+
+            books: books
+        };
+
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            'Не удалось сохранить данные QwerZing:',
+            error
+        );
+
+        alert(
+            'Не удалось сохранить данные. Возможно, хранилище браузера переполнено.'
+        );
+    }
+}
+
+
+/*
+    ============================================================
+    НАВИГАЦИЯ
+    ============================================================
+*/
+
+function showPage(pageId) {
+
+    document.querySelectorAll('.page')
+        .forEach(page => {
+
+            page.classList.remove('active');
+
+        });
+
+
+    const targetPage =
+        document.getElementById(pageId);
+
+
+    if (targetPage) {
+
+        targetPage.classList.add('active');
+
+    }
+
+
+    document.querySelectorAll('.nav button')
+        .forEach(button => {
+
+            button.classList.remove('active');
+
+        });
+
+
+    if (pageId === 'home') {
+
+        document
+            .getElementById('navHome')
+            .classList.add('active');
+
+    }
+
+
+    if (pageId === 'chat') {
+
+        document
+            .getElementById('navChat')
+            .classList.add('active');
+
+    }
+
+
+    if (pageId === 'writer') {
+
+        document
+            .getElementById('navWriter')
+            .classList.add('active');
+
+        renderBooks();
+
+    }
+
+}
+
+
+/*
+    ============================================================
+    СОЗДАНИЕ КНИГИ
+    ============================================================
+*/
+
 function showCreateBookForm() {
 
-    document.getElementById('createBookForm').style.display = 'block';
-    document.getElementById('booksList').innerHTML = '';
+    document
+        .getElementById('createBookForm')
+        .style.display = 'block';
 
-    document.getElementById('bookTitle').focus();
+
+    document
+        .getElementById('booksList')
+        .innerHTML = '';
+
+
+    document
+        .getElementById('bookTitle')
+        .focus();
+
 }
 
 
 function cancelCreateBook() {
 
-    document.getElementById('createBookForm').style.display = 'none';
+    document
+        .getElementById('createBookForm')
+        .style.display = 'none';
 
-    document.getElementById('bookTitle').value = '';
-    document.getElementById('bookDescription').value = '';
+
+    document
+        .getElementById('bookTitle')
+        .value = '';
+
+
+    document
+        .getElementById('bookDescription')
+        .value = '';
+
 }
 
 
 function createBook() {
 
-    const title = document.getElementById('bookTitle').value.trim();
-    const genre = document.getElementById('bookGenre').value;
-    const description = document.getElementById('bookDescription').value.trim();
+    const title =
+        document
+            .getElementById('bookTitle')
+            .value
+            .trim();
+
+
+    const genre =
+        document
+            .getElementById('bookGenre')
+            .value;
+
+
+    const description =
+        document
+            .getElementById('bookDescription')
+            .value
+            .trim();
+
 
     if (!title) {
-        alert('Пожалуйста, введи название книги.');
+
+        alert(
+            'Пожалуйста, введи название книги.'
+        );
+
         return;
     }
 
+
     const newBook = {
-        title: title,
-        genre: genre,
-        description: description || 'Описание пока не добавлено.',
-        notes: '',
-        characters: [],
-        chapters: []
+
+        id:
+            generateId('book'),
+
+        title:
+            title,
+
+        genre:
+            genre,
+
+        description:
+            description ||
+            'Описание пока не добавлено.',
+
+        notes:
+            '',
+
+        characters:
+            [],
+
+        chapters:
+            [],
+
+        createdAt:
+            new Date().toISOString(),
+
+        updatedAt:
+            new Date().toISOString()
     };
+
 
     books.push(newBook);
 
     currentBook = newBook;
 
+
+    saveUserData();
+
     cancelCreateBook();
 
     openBookWorkspace();
+
 }
 
 
+/*
+    ============================================================
+    КНИГИ
+    ============================================================
+*/
+
 function showBooksList() {
 
-    document.getElementById('createBookForm').style.display = 'none';
+    document
+        .getElementById('createBookForm')
+        .style.display = 'none';
+
 
     renderBooks();
+
 }
 
 
 function renderBooks() {
 
-    const container = document.getElementById('booksList');
+    const container =
+        document.getElementById('booksList');
+
 
     if (books.length === 0) {
 
         container.innerHTML = `
+
             <div class="empty-state">
-                <h2>📚 Пока нет книг</h2>
-                <p>Создай свою первую книгу, чтобы начать работу.</p>
+
+                <h2>
+                    📚 Пока нет книг
+                </h2>
+
+                <p>
+                    Создай свою первую книгу,
+                    чтобы начать работу.
+                </p>
+
             </div>
+
         `;
 
         return;
     }
 
-    container.innerHTML = books.map((book, index) => {
 
-        return `
-            <div class="book-card">
-                <h3>${escapeHtml(book.title)}</h3>
-                <p><strong>Жанр:</strong> ${escapeHtml(book.genre)}</p>
-                <p><strong>Статус:</strong> в процессе</p>
-                <p><strong>Глав:</strong> ${book.chapters.length}</p>
-                <button class="primary-btn" onclick="openExistingBook(${index})">
-                    Открыть книгу
-                </button>
-            </div>
-        `;
+    container.innerHTML =
+        books.map((book, index) => {
 
-    }).join('');
+            return `
+
+                <div class="book-card">
+
+                    <h3>
+                        ${escapeHtml(book.title)}
+                    </h3>
+
+                    <p>
+                        <strong>Жанр:</strong>
+                        ${escapeHtml(book.genre)}
+                    </p>
+
+                    <p>
+                        <strong>Статус:</strong>
+                        в процессе
+                    </p>
+
+                    <p>
+                        <strong>Глав:</strong>
+                        ${book.chapters.length}
+                    </p>
+
+                    <p>
+                        <strong>Персонажей:</strong>
+                        ${book.characters.length}
+                    </p>
+
+                    <button
+                        class="primary-btn"
+                        onclick="openExistingBook(${index})"
+                    >
+                        Открыть книгу
+                    </button>
+
+                </div>
+
+            `;
+
+        }).join('');
+
 }
 
 
 function openExistingBook(index) {
 
-    currentBook = books[index];
+    if (!books[index]) {
+        return;
+    }
+
+
+    currentBook =
+        books[index];
+
 
     openBookWorkspace();
+
 }
 
 
+/*
+    ============================================================
+    РАБОЧЕЕ ПРОСТРАНСТВО КНИГИ
+    ============================================================
+*/
+
 function openBookWorkspace() {
 
-    if (!currentBook) return;
+    if (!currentBook) {
+        return;
+    }
 
-    document.getElementById('workspaceTitle').textContent = currentBook.title;
 
-    document.getElementById('aboutTitle').textContent = currentBook.title;
+    document
+        .getElementById('workspaceTitle')
+        .textContent =
+        currentBook.title;
 
-    document.getElementById('aboutGenre').textContent = currentBook.genre;
 
-    document.getElementById('workspaceDescription').textContent =
+    document
+        .getElementById('aboutTitle')
+        .textContent =
+        currentBook.title;
+
+
+    document
+        .getElementById('aboutGenre')
+        .textContent =
+        currentBook.genre;
+
+
+    document
+        .getElementById('workspaceDescription')
+        .textContent =
         currentBook.description;
 
-    document.getElementById('authorNotes').value =
+
+    document
+        .getElementById('authorNotes')
+        .value =
         currentBook.notes || '';
 
-    document.getElementById('writer').classList.remove('active');
-    document.getElementById('workspace').classList.add('active');
+
+    document
+        .getElementById('writer')
+        .classList.remove('active');
+
+
+    document
+        .getElementById('workspace')
+        .classList.add('active');
+
 
     showBookSection('about');
+
 }
 
 
 function backToWriter() {
 
-    document.getElementById('workspace').classList.remove('active');
-    document.getElementById('writer').classList.add('active');
+    document
+        .getElementById('workspace')
+        .classList.remove('active');
+
+
+    document
+        .getElementById('writer')
+        .classList.add('active');
+
 
     renderBooks();
+
 }
 
+
+/*
+    ============================================================
+    РАЗДЕЛЫ КНИГИ
+    ============================================================
+*/
 
 function showBookSection(section) {
 
-    document.querySelectorAll('.workspace-section').forEach(item => {
-        item.classList.remove('active');
-    });
+    document
+        .querySelectorAll('.workspace-section')
+        .forEach(item => {
 
-    document.getElementById(section + 'Section').classList.add('active');
+            item.classList.remove('active');
 
-    document.querySelectorAll('.workspace-menu button').forEach(button => {
-        button.classList.remove('active');
-    });
+        });
 
-    if (section === 'about') {
-        document.getElementById('menuAbout').classList.add('active');
+
+    const target =
+        document.getElementById(
+            section + 'Section'
+        );
+
+
+    if (target) {
+
+        target.classList.add('active');
+
     }
+
+
+    document
+        .querySelectorAll('.workspace-menu button')
+        .forEach(button => {
+
+            button.classList.remove('active');
+
+        });
+
+
+    const menuButton =
+        document.getElementById(
+            'menu' +
+            section.charAt(0).toUpperCase() +
+            section.slice(1)
+        );
+
+
+    if (menuButton) {
+
+        menuButton.classList.add('active');
+
+    }
+
 
     if (section === 'characters') {
-        document.getElementById('menuCharacters').classList.add('active');
+
         renderCharacters();
+
     }
 
-    if (section === 'world') {
-        document.getElementById('menuWorld').classList.add('active');
-    }
-
-    if (section === 'plan') {
-        document.getElementById('menuPlan').classList.add('active');
-    }
-
-    if (section === 'chapters') {
-        document.getElementById('menuChapters').classList.add('active');
-    }
-
-    if (section === 'ai') {
-        document.getElementById('menuAI').classList.add('active');
-    }
 }
 
+
+/*
+    ============================================================
+    ЗАМЕТКИ
+    ============================================================
+*/
 
 function saveNotes() {
 
-    if (!currentBook) return;
+    if (!currentBook) {
+        return;
+    }
+
 
     currentBook.notes =
-        document.getElementById('authorNotes').value;
+        document
+            .getElementById('authorNotes')
+            .value;
 
-    alert('Заметки сохранены.');
+
+    currentBook.updatedAt =
+        new Date().toISOString();
+
+
+    saveUserData();
+
+
+    document
+        .getElementById('notesSaveStatus')
+        .textContent =
+        '✓ Сохранено';
+
 }
 
+
+/*
+    ============================================================
+    ПЕРСОНАЖИ
+    ============================================================
+*/
 
 function openCharacterForm() {
 
     editingCharacterIndex = null;
 
-    document.getElementById('characterFormTitle').textContent =
+
+    document
+        .getElementById('characterFormTitle')
+        .textContent =
         'Новый персонаж';
 
-    document.getElementById('characterForm').style.display =
-        'block';
 
     clearCharacterForm();
 
-    document.getElementById('characterName').focus();
+
+    document
+        .getElementById('characterForm')
+        .style.display =
+        'block';
+
+
+    document
+        .getElementById('characterName')
+        .focus();
+
 }
 
 
 function closeCharacterForm() {
 
-    document.getElementById('characterForm').style.display =
+    document
+        .getElementById('characterForm')
+        .style.display =
         'none';
+
 
     editingCharacterIndex = null;
 
+
     clearCharacterForm();
+
 }
 
 
 function clearCharacterForm() {
 
-    document.getElementById('characterName').value = '';
-    document.getElementById('characterRole').value = '';
-    document.getElementById('characterAge').value = '';
-    document.getElementById('characterAppearance').value = '';
-    document.getElementById('characterPersonality').value = '';
-    document.getElementById('characterBiography').value = '';
-    document.getElementById('characterRelationships').value = '';
-    document.getElementById('characterNotes').value = '';
+    document
+        .getElementById('characterName')
+        .value = '';
+
+
+    document
+        .getElementById('characterRole')
+        .value = '';
+
+
+    document
+        .getElementById('characterAge')
+        .value = '';
+
+
+    document
+        .getElementById('characterAppearance')
+        .value = '';
+
+
+    document
+        .getElementById('characterPersonality')
+        .value = '';
+
+
+    document
+        .getElementById('characterBiography')
+        .value = '';
+
+
+    document
+        .getElementById('characterRelationships')
+        .value = '';
+
+
+    document
+        .getElementById('characterNotes')
+        .value = '';
+
 }
 
 
 function saveCharacter() {
 
-    if (!currentBook) return;
-
-    const name =
-        document.getElementById('characterName').value.trim();
-
-    if (!name) {
-        alert('Пожалуйста, введи имя персонажа.');
+    if (!currentBook) {
         return;
     }
 
+
+    const name =
+        document
+            .getElementById('characterName')
+            .value
+            .trim();
+
+
+    if (!name) {
+
+        alert(
+            'Пожалуйста, введи имя персонажа.'
+        );
+
+        return;
+    }
+
+
     const character = {
 
-        name: name,
+        id:
+            editingCharacterIndex !== null &&
+            currentBook.characters[editingCharacterIndex]
+                ? currentBook.characters[editingCharacterIndex].id
+                : generateId('character'),
+
+        name:
+            name,
 
         role:
-            document.getElementById('characterRole').value.trim(),
+            document
+                .getElementById('characterRole')
+                .value
+                .trim(),
 
         age:
-            document.getElementById('characterAge').value.trim(),
+            document
+                .getElementById('characterAge')
+                .value
+                .trim(),
 
         appearance:
-            document.getElementById('characterAppearance').value.trim(),
+            document
+                .getElementById('characterAppearance')
+                .value
+                .trim(),
 
         personality:
-            document.getElementById('characterPersonality').value.trim(),
+            document
+                .getElementById('characterPersonality')
+                .value
+                .trim(),
 
         biography:
-            document.getElementById('characterBiography').value.trim(),
+            document
+                .getElementById('characterBiography')
+                .value
+                .trim(),
 
         relationships:
-            document.getElementById('characterRelationships').value.trim(),
+            document
+                .getElementById('characterRelationships')
+                .value
+                .trim(),
 
         notes:
-            document.getElementById('characterNotes').value.trim()
+            document
+                .getElementById('characterNotes')
+                .value
+                .trim(),
+
+        updatedAt:
+            new Date().toISOString()
     };
 
 
-    if (!currentBook.characters) {
+    if (!Array.isArray(currentBook.characters)) {
+
         currentBook.characters = [];
+
     }
 
 
@@ -993,14 +1811,24 @@ function saveCharacter() {
 
     } else {
 
-        currentBook.characters[editingCharacterIndex] =
-            character;
+        currentBook.characters[
+            editingCharacterIndex
+        ] = character;
+
     }
+
+
+    currentBook.updatedAt =
+        new Date().toISOString();
+
+
+    saveUserData();
 
 
     closeCharacterForm();
 
     renderCharacters();
+
 }
 
 
@@ -1009,16 +1837,27 @@ function renderCharacters() {
     const container =
         document.getElementById('charactersList');
 
-    if (!currentBook || !currentBook.characters ||
-        currentBook.characters.length === 0) {
+
+    if (
+        !currentBook ||
+        !Array.isArray(currentBook.characters) ||
+        currentBook.characters.length === 0
+    ) {
 
         container.innerHTML = `
+
             <div class="empty-state">
-                <h2>👤 Персонажей пока нет</h2>
+
+                <h2>
+                    👤 Персонажей пока нет
+                </h2>
+
                 <p>
                     Создай первого персонажа своей книги.
                 </p>
+
             </div>
+
         `;
 
         return;
@@ -1026,172 +1865,244 @@ function renderCharacters() {
 
 
     container.innerHTML =
-        currentBook.characters.map((character, index) => {
+        currentBook.characters
+            .map((character, index) => {
 
-            return `
+                return `
 
-                <div class="character-card">
+                    <div class="character-card">
 
-                    <h3>
-                        ${escapeHtml(character.name)}
-                    </h3>
-
-                    ${
-                        character.role
-                        ?
-                        `<div class="character-role">
-                            ${escapeHtml(character.role)}
-                        </div>`
-                        :
-                        ''
-                    }
+                        <h3>
+                            ${escapeHtml(character.name)}
+                        </h3>
 
 
-                    ${
-                        character.age
-                        ?
-                        `<div class="character-info">
-                            <strong>Возраст:</strong>
-                            ${escapeHtml(character.age)}
-                        </div>`
-                        :
-                        ''
-                    }
+                        ${
+                            character.role
+                            ?
+                            `
+                                <div class="character-role">
+                                    ${escapeHtml(character.role)}
+                                </div>
+                            `
+                            :
+                            ''
+                        }
 
 
-                    ${
-                        character.appearance
-                        ?
-                        `<div class="character-info">
-                            <strong>Внешность:</strong><br>
-                            ${escapeHtml(character.appearance)}
-                        </div>`
-                        :
-                        ''
-                    }
+                        ${
+                            character.age
+                            ?
+                            `
+                                <div class="character-info">
+                                    <strong>Возраст:</strong>
+                                    ${escapeHtml(character.age)}
+                                </div>
+                            `
+                            :
+                            ''
+                        }
 
 
-                    ${
-                        character.personality
-                        ?
-                        `<div class="character-info">
-                            <strong>Характер:</strong><br>
-                            ${escapeHtml(character.personality)}
-                        </div>`
-                        :
-                        ''
-                    }
+                        ${
+                            character.appearance
+                            ?
+                            `
+                                <div class="character-info">
+                                    <strong>Внешность:</strong><br>
+                                    ${escapeHtml(character.appearance)}
+                                </div>
+                            `
+                            :
+                            ''
+                        }
 
 
-                    ${
-                        character.biography
-                        ?
-                        `<div class="character-info">
-                            <strong>Биография:</strong><br>
-                            ${escapeHtml(character.biography)}
-                        </div>`
-                        :
-                        ''
-                    }
+                        ${
+                            character.personality
+                            ?
+                            `
+                                <div class="character-info">
+                                    <strong>Характер:</strong><br>
+                                    ${escapeHtml(character.personality)}
+                                </div>
+                            `
+                            :
+                            ''
+                        }
 
 
-                    ${
-                        character.relationships
-                        ?
-                        `<div class="character-info">
-                            <strong>Отношения:</strong><br>
-                            ${escapeHtml(character.relationships)}
-                        </div>`
-                        :
-                        ''
-                    }
+                        ${
+                            character.biography
+                            ?
+                            `
+                                <div class="character-info">
+                                    <strong>Биография:</strong><br>
+                                    ${escapeHtml(character.biography)}
+                                </div>
+                            `
+                            :
+                            ''
+                        }
 
 
-                    ${
-                        character.notes
-                        ?
-                        `<div class="character-info">
-                            <strong>Заметки:</strong><br>
-                            ${escapeHtml(character.notes)}
-                        </div>`
-                        :
-                        ''
-                    }
+                        ${
+                            character.relationships
+                            ?
+                            `
+                                <div class="character-info">
+                                    <strong>Отношения:</strong><br>
+                                    ${escapeHtml(character.relationships)}
+                                </div>
+                            `
+                            :
+                            ''
+                        }
 
 
-                    <div class="character-buttons">
+                        ${
+                            character.notes
+                            ?
+                            `
+                                <div class="character-info">
+                                    <strong>Заметки:</strong><br>
+                                    ${escapeHtml(character.notes)}
+                                </div>
+                            `
+                            :
+                            ''
+                        }
 
-                        <button
-                            class="small-btn"
-                            onclick="editCharacter(${index})">
-                            ✏️ Редактировать
-                        </button>
 
-                        <button
-                            class="small-btn delete-btn"
-                            onclick="deleteCharacter(${index})">
-                            🗑 Удалить
-                        </button>
+                        <div class="character-buttons">
+
+                            <button
+                                class="small-btn"
+                                onclick="editCharacter(${index})"
+                            >
+                                ✏️ Редактировать
+                            </button>
+
+
+                            <button
+                                class="small-btn delete-btn"
+                                onclick="deleteCharacter(${index})"
+                            >
+                                🗑 Удалить
+                            </button>
+
+                        </div>
 
                     </div>
 
-                </div>
+                `;
 
-            `;
+            })
+            .join('');
 
-        }).join('');
 }
 
 
 function editCharacter(index) {
 
+    if (
+        !currentBook ||
+        !currentBook.characters[index]
+    ) {
+        return;
+    }
+
+
     const character =
         currentBook.characters[index];
 
-    editingCharacterIndex = index;
 
-    document.getElementById('characterFormTitle').textContent =
+    editingCharacterIndex =
+        index;
+
+
+    document
+        .getElementById('characterFormTitle')
+        .textContent =
         'Редактирование персонажа';
 
 
-    document.getElementById('characterName').value =
+    document
+        .getElementById('characterName')
+        .value =
         character.name || '';
 
-    document.getElementById('characterRole').value =
+
+    document
+        .getElementById('characterRole')
+        .value =
         character.role || '';
 
-    document.getElementById('characterAge').value =
+
+    document
+        .getElementById('characterAge')
+        .value =
         character.age || '';
 
-    document.getElementById('characterAppearance').value =
+
+    document
+        .getElementById('characterAppearance')
+        .value =
         character.appearance || '';
 
-    document.getElementById('characterPersonality').value =
+
+    document
+        .getElementById('characterPersonality')
+        .value =
         character.personality || '';
 
-    document.getElementById('characterBiography').value =
+
+    document
+        .getElementById('characterBiography')
+        .value =
         character.biography || '';
 
-    document.getElementById('characterRelationships').value =
+
+    document
+        .getElementById('characterRelationships')
+        .value =
         character.relationships || '';
 
-    document.getElementById('characterNotes').value =
+
+    document
+        .getElementById('characterNotes')
+        .value =
         character.notes || '';
 
 
-    document.getElementById('characterForm').style.display =
+    document
+        .getElementById('characterForm')
+        .style.display =
         'block';
 
-    document.getElementById('characterForm').scrollIntoView({
-        behavior: 'smooth'
-    });
+
+    document
+        .getElementById('characterForm')
+        .scrollIntoView({
+            behavior: 'smooth'
+        });
+
 }
 
 
 function deleteCharacter(index) {
 
+    if (
+        !currentBook ||
+        !currentBook.characters[index]
+    ) {
+        return;
+    }
+
+
     const character =
         currentBook.characters[index];
+
 
     const confirmed =
         confirm(
@@ -1200,23 +2111,91 @@ function deleteCharacter(index) {
             '»?'
         );
 
-    if (!confirmed) return;
 
-    currentBook.characters.splice(index, 1);
+    if (!confirmed) {
+        return;
+    }
+
+
+    currentBook.characters.splice(
+        index,
+        1
+    );
+
+
+    currentBook.updatedAt =
+        new Date().toISOString();
+
+
+    saveUserData();
 
     renderCharacters();
+
+}
+
+
+/*
+    ============================================================
+    ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+    ============================================================
+*/
+
+function generateId(prefix) {
+
+    return (
+        prefix +
+        '_' +
+        Date.now() +
+        '_' +
+        Math.random()
+            .toString(36)
+            .substring(2, 9)
+    );
+
 }
 
 
 function escapeHtml(value) {
 
     return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+
+        .replace(
+            /&/g,
+            '&amp;'
+        )
+
+        .replace(
+            /</g,
+            '&lt;'
+        )
+
+        .replace(
+            />/g,
+            '&gt;'
+        )
+
+        .replace(
+            /"/g,
+            '&quot;'
+        )
+
+        .replace(
+            /'/g,
+            '&#039;'
+        );
+
 }
+
+
+/*
+    ============================================================
+    ЗАПУСК QWERZING
+    ============================================================
+*/
+
+loadUserData();
+
+renderBooks();
 
 </script>
 
