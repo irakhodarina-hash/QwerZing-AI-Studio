@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -294,6 +295,15 @@ button {
     font-size: 15px;
 }
 
+.send-button {
+    border: none;
+    border-radius: 14px;
+    padding: 13px 20px;
+    background: #7448c7;
+    color: white;
+    font-weight: bold;
+}
+
 /* СОЗДАНИЕ КНИГИ */
 
 #createBook {
@@ -344,7 +354,7 @@ button {
     margin-top: 20px;
 }
 
-/* КНИГИ */
+/* МОИ КНИГИ */
 
 #myBooks {
     display: none;
@@ -367,10 +377,19 @@ button {
     color: #60409b;
 }
 
+.created-book p {
+    color: #817887;
+    line-height: 1.5;
+}
+
 /* РАБОЧАЯ ОБЛАСТЬ КНИГИ */
 
 #bookWorkspace {
     display: none;
+}
+
+#bookWorkspace.active {
+    display: block;
 }
 
 .book-header {
@@ -1060,21 +1079,15 @@ let currentBook = null;
 function showPage(pageId, button) {
 
 document.querySelectorAll('.page').forEach(function(page) {
-
 page.classList.remove('active');
-
 });
 
-
 document.getElementById(pageId).classList.add('active');
-
 
 if (button) {
 
 document.querySelectorAll('.nav-button').forEach(function(btn) {
-
 btn.classList.remove('active');
-
 });
 
 button.classList.add('active');
@@ -1088,25 +1101,22 @@ button.classList.add('active');
 
 function openCreateBook() {
 
-document.getElementById('createBook')
-.classList.add('active');
+document.getElementById('createBook').classList.add('active');
 
-document.getElementById('myBooks')
-.classList.remove('active');
+document.getElementById('myBooks').classList.remove('active');
 
-document.getElementById('writerProjects')
-.style.display = 'none';
+document.getElementById('writerProjects').style.display = 'none';
 
 }
 
 
+/* ЗАКРЫТЬ СОЗДАНИЕ */
+
 function closeCreateBook() {
 
-document.getElementById('createBook')
-.classList.remove('active');
+document.getElementById('createBook').classList.remove('active');
 
-document.getElementById('writerProjects')
-.style.display = 'block';
+document.getElementById('writerProjects').style.display = 'block';
 
 }
 
@@ -1149,57 +1159,59 @@ description || 'Описание пока не добавлено.'
 books.push(currentBook);
 
 
+/* Очищаем форму */
+
 document.getElementById('bookTitle').value = '';
 
 document.getElementById('bookDescription').value = '';
 
+
+/* Сразу открываем книгу */
 
 openBookWorkspace();
 
 }
 
 
-/* ОТКРЫТЬ КНИГУ */
+/* ОТКРЫТЬ РАБОЧУЮ ОБЛАСТЬ КНИГИ */
 
 function openBookWorkspace() {
 
-document.getElementById('createBook')
-.classList.remove('active');
+document.getElementById('home').classList.remove('active');
 
-document.getElementById('writer')
-.classList.remove('active');
+document.getElementById('chat').classList.remove('active');
 
-document.getElementById('bookWorkspace')
-.classList.add('active');
+document.getElementById('writer').classList.remove('active');
 
-
-document.getElementById('workspaceTitle')
-textContent = currentBook.title;
+document.getElementById('bookWorkspace').classList.add('active');
 
 
-document.getElementById('workspaceGenre')
-textContent = currentBook.genre;
+/* ВАЖНО: здесь исправлена ошибка */
+
+document.getElementById('workspaceTitle').textContent =
+currentBook.title;
+
+document.getElementById('workspaceGenre').textContent =
+currentBook.genre;
+
+document.getElementById('workspaceDescription').textContent =
+currentBook.description;
 
 
-document.getElementById('workspaceDescription')
-textContent = currentBook.description;
-
+/* Открываем раздел "О книге" */
 
 showBookSection('about');
-
 
 }
 
 
-/* НАЗАД */
+/* НАЗАД К ПИСАТЕЛЮ */
 
 function backToWriter() {
 
-document.getElementById('bookWorkspace')
-.classList.remove('active');
+document.getElementById('bookWorkspace').classList.remove('active');
 
-document.getElementById('writer')
-.classList.add('active');
+document.getElementById('writer').classList.add('active');
 
 }
 
@@ -1215,20 +1227,23 @@ section.style.display = 'none';
 });
 
 
-document.getElementById(sectionId)
-.style.display = 'block';
+document.getElementById(sectionId).style.display = 'block';
 
 
-if (button) {
-
-document.querySelectorAll('.book-menu button')
-.forEach(function(btn) {
+document.querySelectorAll('.book-menu button').forEach(function(btn) {
 
 btn.classList.remove('active');
 
 });
 
+
+if (button) {
+
 button.classList.add('active');
+
+} else {
+
+document.querySelector('.book-menu button').classList.add('active');
 
 }
 
@@ -1239,19 +1254,18 @@ button.classList.add('active');
 
 function openMyBooks() {
 
-document.getElementById('createBook')
-.classList.remove('active');
+document.getElementById('createBook').classList.remove('active');
 
-document.getElementById('writerProjects')
-.style.display = 'none';
+document.getElementById('writerProjects').style.display = 'none';
 
-document.getElementById('myBooks')
-.classList.add('active');
+document.getElementById('myBooks').classList.add('active');
 
 renderBooks();
 
 }
 
+
+/* ПОКАЗАТЬ КНИГИ */
 
 function renderBooks() {
 
@@ -1399,6 +1413,8 @@ messages.scrollHeight;
 }
 
 
+/* ENTER В ЧАТЕ */
+
 function handleEnter(event) {
 
 if (event.key === 'Enter') {
@@ -1413,3 +1429,4 @@ sendMessage();
 
 </body>
 </html>
+```
