@@ -13,85 +13,190 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f7f3ff;
-            color: #292235;
+            background: #f7f5fb;
+            color: #292333;
         }
 
-        header {
-            padding: 25px 20px;
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
             background: #ffffff;
-            border-bottom: 1px solid #e8def5;
+            border-right: 1px solid #e9e3f2;
+            padding: 25px 16px;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #7b4dcc;
+            font-size: 23px;
+            font-weight: 800;
+            color: #7448c7;
+            margin-bottom: 35px;
+            padding: 0 10px;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 50px 20px;
+        .nav-title {
+            font-size: 12px;
+            color: #9a91a5;
+            margin: 20px 10px 10px;
+            text-transform: uppercase;
         }
 
-        .welcome {
-            background: #ffffff;
-            border-radius: 25px;
-            padding: 40px 25px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(100, 70, 150, 0.08);
-        }
-
-        h1 {
-            margin-top: 0;
-            font-size: 36px;
-        }
-
-        .subtitle {
-            font-size: 18px;
-            color: #766d80;
-            line-height: 1.6;
-        }
-
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 35px;
-        }
-
-        button {
+        .nav-button {
+            width: 100%;
             border: none;
-            border-radius: 16px;
-            padding: 20px;
-            font-size: 16px;
-            font-weight: bold;
-            background: #f0e8ff;
-            color: #6540a8;
+            background: transparent;
+            text-align: left;
+            padding: 13px 12px;
+            border-radius: 12px;
+            font-size: 15px;
+            color: #51495b;
+            margin-bottom: 5px;
             cursor: pointer;
         }
 
-        button:hover {
-            background: #e5d8ff;
+        .nav-button:hover,
+        .nav-button.active {
+            background: #f0e8ff;
+            color: #7043bd;
         }
 
-        .main-button {
-            background: #7b4dcc;
+        .content {
+            flex: 1;
+            padding: 35px;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .top h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .profile {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #e7dbfa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7043bd;
+            font-weight: bold;
+        }
+
+        .welcome {
+            background: linear-gradient(135deg, #8b5bd6, #7043bd);
             color: white;
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 30px;
         }
 
-        .main-button:hover {
-            background: #693bb5;
+        .welcome h2 {
+            margin: 0 0 10px;
+            font-size: 27px;
+        }
+
+        .welcome p {
+            margin: 0;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 650px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin: 30px 0 15px;
+        }
+
+        .tools {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .tool {
+            background: white;
+            border: 1px solid #ece7f3;
+            border-radius: 20px;
+            padding: 22px;
+            cursor: pointer;
+        }
+
+        .tool:hover {
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .tool h3 {
+            margin: 0 0 8px;
+            font-size: 17px;
+        }
+
+        .tool p {
+            margin: 0;
+            color: #817887;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .projects {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #ece7f3;
+            padding: 25px;
+        }
+
+        .empty {
+            text-align: center;
+            color: #8b8292;
+            padding: 25px 10px;
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .tools {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 600px) {
-            h1 {
-                font-size: 28px;
+            .app {
+                display: block;
             }
 
-            .buttons {
-                grid-template-columns: 1fr;
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #e9e3f2;
+            }
+
+            .nav-button {
+                width: auto;
+                display: inline-block;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .top h1 {
+                font-size: 24px;
             }
         }
     </style>
@@ -99,29 +204,134 @@
 
 <body>
 
-    <header>
-        <div class="logo">QwerZing AI Studio</div>
-    </header>
+<div class="app">
 
-    <main class="container">
+    <aside class="sidebar">
+
+        <div class="logo">
+            QwerZing
+        </div>
+
+        <div class="nav-title">
+            Основное
+        </div>
+
+        <button class="nav-button active">
+            🏠 Главная
+        </button>
+
+        <button class="nav-button">
+            💬 Чат
+        </button>
+
+        <button class="nav-button">
+            ✍️ Писатель
+        </button>
+
+        <button class="nav-button">
+            🎨 Художник
+        </button>
+
+        <div class="nav-title">
+            Рабочее пространство
+        </div>
+
+        <button class="nav-button">
+            📁 Проекты
+        </button>
+
+        <button class="nav-button">
+            🧠 Память
+        </button>
+
+        <div class="nav-title">
+            Система
+        </div>
+
+        <button class="nav-button">
+            ⚙️ Настройки
+        </button>
+
+    </aside>
+
+
+    <main class="content">
+
+        <div class="top">
+            <h1>Главная</h1>
+            <div class="profile">Q</div>
+        </div>
+
+
         <section class="welcome">
-            <h1>Добро пожаловать в QwerZing</h1>
 
-            <p class="subtitle">
-                Твоя творческая AI-студия для общения, письма,
-                создания изображений и работы над проектами.
+            <h2>Добро пожаловать в QwerZing</h2>
+
+            <p>
+                Твоя творческая AI-студия для общения,
+                написания историй, создания изображений
+                и работы над собственными проектами.
             </p>
 
-            <div class="buttons">
-                <button class="main-button">💬 Чат</button>
-                <button>🤖 AI Друг</button>
-                <button>✍️ Писатель</button>
-                <button>🎨 Художник</button>
-                <button>📁 Проекты</button>
-                <button>🧠 Память</button>
-            </div>
         </section>
+
+
+        <h2 class="section-title">
+            Что создаём сегодня?
+        </h2>
+
+
+        <section class="tools">
+
+            <div class="tool">
+                <div class="icon">💬</div>
+                <h3>Чат</h3>
+                <p>
+                    Общайся с искусственным интеллектом
+                    и получай ответы на свои вопросы.
+                </p>
+            </div>
+
+
+            <div class="tool">
+                <div class="icon">✍️</div>
+                <h3>Писатель</h3>
+                <p>
+                    Создавай книги, персонажей, миры
+                    и полноценные истории.
+                </p>
+            </div>
+
+
+            <div class="tool">
+                <div class="icon">🎨</div>
+                <h3>Художник</h3>
+                <p>
+                    Превращай идеи и описания
+                    в изображения.
+                </p>
+            </div>
+
+        </section>
+
+
+        <h2 class="section-title">
+            Последние проекты
+        </h2>
+
+
+        <section class="projects">
+
+            <div class="empty">
+                Здесь пока нет проектов.<br>
+                Создай свой первый проект в QwerZing.
+            </div>
+
+        </section>
+
     </main>
+
+</div>
 
 </body>
 </html>
