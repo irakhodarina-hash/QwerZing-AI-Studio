@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -469,7 +468,7 @@ button {
 }
 
 
-/* НОВАЯ СТРАНИЦА "О КНИГЕ" */
+/* О КНИГЕ */
 
 .workspace-card {
     background: white;
@@ -557,6 +556,124 @@ button {
 }
 
 
+/* ПЕРСОНАЖИ */
+
+.characters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.characters-header h2 {
+    margin: 0;
+}
+
+.characters-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.character-card {
+    background: #faf8fd;
+    border: 1px solid #eee8f4;
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.character-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    background: #e9ddfa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7043bd;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.character-card h3 {
+    margin: 0 0 6px;
+    font-size: 20px;
+}
+
+.character-role {
+    color: #7448c7;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.character-age {
+    color: #817887;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.character-card p {
+    margin: 0 0 15px;
+    color: #665d70;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.character-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.character-buttons button {
+    padding: 9px 13px;
+    border-radius: 11px;
+    font-size: 13px;
+}
+
+.character-form {
+    display: none;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #eee8f4;
+}
+
+.character-form.active {
+    display: block;
+}
+
+.character-form h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.character-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.character-form .form-group.full {
+    grid-column: 1 / -1;
+}
+
+.character-form textarea {
+    min-height: 120px;
+}
+
+.character-empty {
+    background: #faf8fd;
+    border: 1px dashed #d9cdec;
+    border-radius: 16px;
+    padding: 35px 20px;
+    text-align: center;
+    color: #8b8292;
+    margin-bottom: 25px;
+}
+
+
 /* ОСТАЛЬНЫЕ РАЗДЕЛЫ */
 
 .workspace-card p {
@@ -597,6 +714,10 @@ button {
         display: inline-block;
     }
 
+    .characters-list {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 @media (max-width: 650px) {
@@ -617,7 +738,8 @@ button {
 
     .tools,
     .books,
-    .book-info-grid {
+    .book-info-grid,
+    .character-form-grid {
         grid-template-columns: 1fr;
     }
 
@@ -631,6 +753,15 @@ button {
 
     .book-header-top {
         flex-direction: column;
+    }
+
+    .characters-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .character-form .form-group.full {
+        grid-column: auto;
     }
 
 }
@@ -1270,17 +1401,185 @@ id="characters"
 class="workspace-card book-section"
 style="display:none;">
 
+<div class="characters-header">
+
 <h2>
 Персонажи
 </h2>
 
-<p>
-Здесь будут храниться персонажи твоей книги.
-</p>
+<button
+class="primary-button"
+onclick="openCharacterForm()">
 
-<div class="workspace-placeholder">
+＋ Добавить персонажа
 
-Скоро здесь появится редактор персонажей.
+</button>
+
+</div>
+
+
+<div id="charactersList">
+
+<div class="character-empty">
+
+У этой книги пока нет персонажей.<br>
+Создай первого персонажа, чтобы начать.
+
+</div>
+
+</div>
+
+
+<div
+id="characterForm"
+class="character-form">
+
+<h3 id="characterFormTitle">
+Новый персонаж
+</h3>
+
+
+<div class="character-form-grid">
+
+
+<div class="form-group">
+
+<label>
+Имя персонажа
+</label>
+
+<input
+id="characterName"
+type="text"
+placeholder="Например: Рейчел Холл"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Роль
+</label>
+
+<input
+id="characterRole"
+type="text"
+placeholder="Главная героиня, друг, антагонист..."
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Возраст
+</label>
+
+<input
+id="characterAge"
+type="text"
+placeholder="18 лет"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Внешность
+</label>
+
+<input
+id="characterAppearance"
+type="text"
+placeholder="Волосы, глаза, рост, особенности..."
+>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Характер
+</label>
+
+<textarea
+id="characterPersonality"
+placeholder="Какая у персонажа личность? Что он любит, чего боится, как ведёт себя с людьми?"
+></textarea>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Биография
+</label>
+
+<textarea
+id="characterBiography"
+placeholder="Прошлое персонажа, семья, важные события его жизни..."
+></textarea>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Отношения
+</label>
+
+<textarea
+id="characterRelationships"
+placeholder="Связи с другими персонажами, дружба, любовь, конфликты..."
+></textarea>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Заметки
+</label>
+
+<textarea
+id="characterNotes"
+placeholder="Любые дополнительные детали персонажа..."
+></textarea>
+
+</div>
+
+
+</div>
+
+
+<div class="form-buttons">
+
+<button
+class="primary-button"
+onclick="saveCharacter()">
+
+Сохранить персонажа
+
+</button>
+
+<button
+class="secondary-button"
+onclick="closeCharacterForm()">
+
+Отмена
+
+</button>
+
+</div>
 
 </div>
 
@@ -1404,6 +1703,8 @@ let books = [];
 
 let currentBook = null;
 
+let editingCharacterIndex = null;
+
 
 /* НАВИГАЦИЯ */
 
@@ -1502,7 +1803,9 @@ description:
 description ||
 'Описание пока не добавлено.',
 
-notes: ''
+notes: '',
+
+characters: []
 
 };
 
@@ -1569,6 +1872,8 @@ document.getElementById('authorNotes')
 currentBook.notes || '';
 
 
+renderCharacters();
+
 showBookSection('about');
 
 }
@@ -1617,8 +1922,29 @@ button.classList.add('active');
 
 } else {
 
-document.querySelector('.book-menu button')
-.classList.add('active');
+let buttons =
+document.querySelectorAll('.book-menu button');
+
+buttons.forEach(function(btn) {
+
+if (
+btn.getAttribute('onclick') &&
+btn.getAttribute('onclick')
+.includes("'" + sectionId + "'")
+) {
+
+btn.classList.add('active');
+
+}
+
+});
+
+}
+
+
+if (sectionId === 'characters') {
+
+renderCharacters();
 
 }
 
@@ -1640,6 +1966,459 @@ document.getElementById('authorNotes')
 alert(
 'Изменения сохранены.'
 );
+
+}
+
+
+/* ========================= */
+/* ПЕРСОНАЖИ */
+/* ========================= */
+
+
+/* ОТКРЫТЬ ФОРМУ */
+
+function openCharacterForm() {
+
+editingCharacterIndex = null;
+
+
+document.getElementById('characterFormTitle')
+.textContent =
+'Новый персонаж';
+
+
+document.getElementById('characterName')
+.value = '';
+
+document.getElementById('characterRole')
+.value = '';
+
+document.getElementById('characterAge')
+.value = '';
+
+document.getElementById('characterAppearance')
+.value = '';
+
+document.getElementById('characterPersonality')
+.value = '';
+
+document.getElementById('characterBiography')
+.value = '';
+
+document.getElementById('characterRelationships')
+.value = '';
+
+document.getElementById('characterNotes')
+.value = '';
+
+
+document.getElementById('characterForm')
+.classList.add('active');
+
+
+document.getElementById('characterName')
+.focus();
+
+}
+
+
+/* ЗАКРЫТЬ ФОРМУ */
+
+function closeCharacterForm() {
+
+document.getElementById('characterForm')
+.classList.remove('active');
+
+editingCharacterIndex = null;
+
+}
+
+
+/* СОХРАНИТЬ ПЕРСОНАЖА */
+
+function saveCharacter() {
+
+if (!currentBook) {
+return;
+}
+
+
+let name =
+document.getElementById('characterName')
+.value
+.trim();
+
+
+let role =
+document.getElementById('characterRole')
+.value
+.trim();
+
+
+let age =
+document.getElementById('characterAge')
+.value
+.trim();
+
+
+let appearance =
+document.getElementById('characterAppearance')
+.value
+.trim();
+
+
+let personality =
+document.getElementById('characterPersonality')
+.value
+.trim();
+
+
+let biography =
+document.getElementById('characterBiography')
+.value
+.trim();
+
+
+let relationships =
+document.getElementById('characterRelationships')
+.value
+.trim();
+
+
+let notes =
+document.getElementById('characterNotes')
+.value
+.trim();
+
+
+if (name === '') {
+
+alert(
+'Пожалуйста, введи имя персонажа.'
+);
+
+return;
+
+}
+
+
+let character = {
+
+name: name,
+
+role:
+role || 'Роль не указана',
+
+age:
+age || 'Возраст не указан',
+
+appearance:
+appearance || 'Внешность пока не добавлена.',
+
+personality:
+personality || 'Характер пока не описан.',
+
+biography:
+biography || 'Биография пока не добавлена.',
+
+relationships:
+relationships || 'Отношения пока не добавлены.',
+
+notes:
+notes || ''
+
+};
+
+
+if (
+editingCharacterIndex === null
+) {
+
+currentBook.characters.push(character);
+
+} else {
+
+currentBook.characters[
+editingCharacterIndex
+] = character;
+
+}
+
+
+renderCharacters();
+
+closeCharacterForm();
+
+}
+
+
+/* ПОКАЗАТЬ ПЕРСОНАЖЕЙ */
+
+function renderCharacters() {
+
+if (!currentBook) {
+return;
+}
+
+
+if (!currentBook.characters) {
+
+currentBook.characters = [];
+
+}
+
+
+let list =
+document.getElementById('charactersList');
+
+
+if (
+currentBook.characters.length === 0
+) {
+
+list.innerHTML = `
+<div class="character-empty">
+У этой книги пока нет персонажей.<br>
+Создай первого персонажа, чтобы начать.
+</div>
+`;
+
+return;
+
+}
+
+
+list.innerHTML = '';
+
+
+currentBook.characters.forEach(
+function(character, index) {
+
+let card =
+document.createElement('div');
+
+card.className =
+'character-card';
+
+
+let avatar =
+document.createElement('div');
+
+avatar.className =
+'character-avatar';
+
+
+avatar.textContent =
+character.name
+.charAt(0)
+.toUpperCase();
+
+
+let name =
+document.createElement('h3');
+
+name.textContent =
+character.name;
+
+
+let role =
+document.createElement('div');
+
+role.className =
+'character-role';
+
+role.textContent =
+character.role;
+
+
+let age =
+document.createElement('div');
+
+age.className =
+'character-age';
+
+age.textContent =
+'Возраст: ' + character.age;
+
+
+let appearance =
+document.createElement('p');
+
+appearance.textContent =
+character.appearance;
+
+
+let buttons =
+document.createElement('div');
+
+buttons.className =
+'character-buttons';
+
+
+let editButton =
+document.createElement('button');
+
+editButton.className =
+'secondary-button';
+
+editButton.textContent =
+'Редактировать';
+
+
+editButton.onclick =
+function() {
+
+editCharacter(index);
+
+};
+
+
+let deleteButton =
+document.createElement('button');
+
+deleteButton.className =
+'secondary-button';
+
+deleteButton.textContent =
+'Удалить';
+
+
+deleteButton.onclick =
+function() {
+
+deleteCharacter(index);
+
+};
+
+
+buttons.appendChild(editButton);
+
+buttons.appendChild(deleteButton);
+
+
+card.appendChild(avatar);
+
+card.appendChild(name);
+
+card.appendChild(role);
+
+card.appendChild(age);
+
+card.appendChild(appearance);
+
+card.appendChild(buttons);
+
+
+list.appendChild(card);
+
+});
+
+}
+
+
+/* РЕДАКТИРОВАТЬ ПЕРСОНАЖА */
+
+function editCharacter(index) {
+
+let character =
+currentBook.characters[index];
+
+
+editingCharacterIndex =
+index;
+
+
+document.getElementById('characterFormTitle')
+.textContent =
+'Редактирование персонажа';
+
+
+document.getElementById('characterName')
+.value =
+character.name;
+
+
+document.getElementById('characterRole')
+.value =
+character.role;
+
+
+document.getElementById('characterAge')
+.value =
+character.age;
+
+
+document.getElementById('characterAppearance')
+.value =
+character.appearance;
+
+
+document.getElementById('characterPersonality')
+.value =
+character.personality;
+
+
+document.getElementById('characterBiography')
+.value =
+character.biography;
+
+
+document.getElementById('characterRelationships')
+.value =
+character.relationships;
+
+
+document.getElementById('characterNotes')
+.value =
+character.notes;
+
+
+document.getElementById('characterForm')
+.classList.add('active');
+
+
+document.getElementById('characterForm')
+.scrollIntoView({
+behavior: 'smooth',
+block: 'start'
+});
+
+}
+
+
+/* УДАЛИТЬ ПЕРСОНАЖА */
+
+function deleteCharacter(index) {
+
+if (!currentBook) {
+return;
+}
+
+
+let character =
+currentBook.characters[index];
+
+
+let confirmed =
+confirm(
+'Удалить персонажа «' +
+character.name +
+'»?'
+);
+
+
+if (!confirmed) {
+return;
+}
+
+
+currentBook.characters.splice(
+index,
+1
+);
+
+
+renderCharacters();
 
 }
 
@@ -1825,4 +2604,3 @@ sendMessage();
 
 </body>
 </html>
-```
