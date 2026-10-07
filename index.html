@@ -2,543 +2,1350 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#090914">
 <title>QwerZing AI Studio</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-:root {
-    --bg: #f7f5fb;
-    --card: #ffffff;
-    --text: #292432;
-    --muted: #81798e;
-    --purple: #8157d9;
-    --purple-dark: #6840bf;
-    --purple-light: #eee7ff;
-    --border: #e8e2f0;
-    --danger: #d94c67;
-    --shadow: 0 10px 35px rgba(80, 55, 120, 0.08);
+:root{
+    --bg:#080812;
+    --bg2:#0d0d1b;
+    --panel:#111121;
+    --panel2:#151528;
+    --border:#30304d;
+    --purple:#8b4dff;
+    --purple2:#b45cff;
+    --pink:#ff3fa4;
+    --cyan:#24e5d0;
+    --orange:#ff9b32;
+    --green:#39e69b;
+    --text:#f5f2ff;
+    --muted:#9b98b0;
+    --soft:#19192c;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
+body{
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:
+        radial-gradient(circle at 40% 0%,rgba(104,53,255,.09),transparent 30%),
+        #080812;
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
 button,
 input,
 textarea,
-select {
-    font: inherit;
+select{
+    font:inherit;
 }
 
-button {
-    cursor: pointer;
+button{
+    cursor:pointer;
 }
 
-.app {
-    display: flex;
-    min-height: 100vh;
+.app{
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr) 270px;
+    min-height:100vh;
 }
 
-/* SIDEBAR */
+/* LEFT SIDEBAR */
 
-.sidebar {
-    width: 250px;
-    min-width: 250px;
-    background: #fff;
-    border-right: 1px solid var(--border);
-    padding: 22px 15px;
-    display: flex;
-    flex-direction: column;
+.sidebar{
+    border-right:1px solid #25253b;
+    background:linear-gradient(180deg,#090914,#0c0c18);
+    padding:18px 14px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
 }
 
-.logo {
-    padding: 8px 12px 25px;
-    font-size: 23px;
-    font-weight: 800;
-    color: var(--purple);
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:4px 8px 20px;
 }
 
-.logo span {
-    color: var(--text);
+.logo-star{
+    width:36px;
+    height:36px;
+    display:grid;
+    place-items:center;
+    font-size:34px;
+    color:#c54dff;
+    text-shadow:0 0 20px #9c36ff;
 }
 
-.navigation {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.logo-name{
+    font-size:21px;
+    font-weight:800;
+    background:linear-gradient(90deg,#9b62ff,#ff4fb3);
+    -webkit-background-clip:text;
+    color:transparent;
 }
 
-.nav-button {
-    width: 100%;
-    border: none;
-    background: transparent;
-    padding: 13px 14px;
-    border-radius: 13px;
-    text-align: left;
-    color: #554e61;
-    transition: .2s;
+.logo-sub{
+    font-size:10px;
+    letter-spacing:4px;
+    color:#e5e0ed;
+    margin-top:1px;
 }
 
-.nav-button:hover {
-    background: var(--purple-light);
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
 }
 
-.nav-button.active {
-    background: var(--purple-light);
-    color: var(--purple-dark);
-    font-weight: 700;
+.nav-item{
+    border:1px solid transparent;
+    background:transparent;
+    color:#ddd9e8;
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:12px 12px;
+    border-radius:12px;
+    text-align:left;
+    font-size:15px;
+    transition:.2s;
+}
+
+.nav-item:hover{
+    background:#151528;
+    border-color:#292942;
+}
+
+.nav-item.active{
+    background:linear-gradient(135deg,#6327bd,#44207d);
+    border-color:#a45cff;
+    box-shadow:0 0 20px rgba(139,77,255,.25);
+    color:white;
+}
+
+.nav-icon{
+    width:23px;
+    text-align:center;
+    font-size:21px;
+}
+
+.nav-arrow{
+    margin-left:auto;
+    opacity:.7;
+}
+
+.divider{
+    height:1px;
+    background:#29293d;
+    margin:13px 7px;
+}
+
+.pro-card{
+    margin-top:22px;
+    border:1px solid #543b7e;
+    border-radius:17px;
+    padding:17px 13px;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(184,72,255,.25),transparent 60%),
+        #111020;
+    text-align:center;
+}
+
+.pro-card .pro-icon{
+    font-size:28px;
+    color:#ff54c2;
+}
+
+.pro-card h3{
+    margin-top:7px;
+    font-size:16px;
+}
+
+.pro-card p{
+    font-size:12px;
+    color:#aaa5bb;
+    line-height:1.5;
+    margin:7px 0 13px;
+}
+
+.pro-button{
+    border:0;
+    width:100%;
+    padding:10px;
+    border-radius:11px;
+    background:linear-gradient(90deg,#8b43ff,#ef3fa5);
+    color:white;
+    font-weight:700;
+}
+
+.version-card{
+    margin-top:16px;
+    padding:13px;
+    border:1px solid #303049;
+    border-radius:14px;
+    background:#10101e;
+    font-size:12px;
+    color:#aaa6b9;
+}
+
+.version-card strong{
+    color:white;
+    display:block;
+    margin-bottom:7px;
 }
 
 /* MAIN */
 
-.main {
-    flex: 1;
-    min-width: 0;
-    padding: 32px;
+.main{
+    min-width:0;
+    padding:14px 18px 30px;
 }
 
-.page {
-    max-width: 1180px;
-    margin: auto;
+.topbar{
+    height:50px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:14px;
 }
 
-.page-header {
-    margin-bottom: 28px;
+.search{
+    flex:1;
+    height:43px;
+    border:1px solid #37374f;
+    background:#111120;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    padding:0 15px;
+    gap:10px;
+    color:#aaa7b9;
 }
 
-.page-header h1 {
-    font-size: 34px;
-    margin-bottom: 8px;
+.search input{
+    flex:1;
+    background:transparent;
+    border:0;
+    outline:0;
+    color:white;
+    min-width:0;
 }
 
-.page-header p {
-    color: var(--muted);
-    line-height: 1.6;
+.search input::placeholder{
+    color:#9995aa;
 }
 
-/* CARDS */
-
-.card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow: var(--shadow);
+.search-key{
+    border:1px solid #41415a;
+    padding:3px 8px;
+    border-radius:6px;
+    font-size:11px;
 }
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+.top-icons{
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
 
-.feature-card {
-    min-height: 170px;
+.icon-button{
+    width:42px;
+    height:42px;
+    border:0;
+    background:transparent;
+    color:#eeeaf7;
+    font-size:22px;
+    border-radius:10px;
+    position:relative;
 }
 
-.feature-card .icon {
-    font-size: 30px;
-    margin-bottom: 15px;
+.icon-button:hover{
+    background:#17172a;
 }
 
-.feature-card h3 {
-    margin-bottom: 8px;
+.notification{
+    position:absolute;
+    top:2px;
+    right:2px;
+    background:#f04baf;
+    color:white;
+    width:17px;
+    height:17px;
+    border-radius:50%;
+    font-size:9px;
+    display:grid;
+    place-items:center;
 }
 
-.feature-card p {
-    color: var(--muted);
-    line-height: 1.5;
+/* PAGES */
+
+.page{
+    display:none;
 }
 
-/* BUTTONS */
-
-.primary-button,
-.secondary-button,
-.danger-button {
-    border: none;
-    border-radius: 12px;
-    padding: 12px 17px;
-    transition: .2s;
+.page.active{
+    display:block;
 }
 
-.primary-button {
-    background: var(--purple);
-    color: white;
+/* HERO */
+
+.hero{
+    min-height:288px;
+    border:1px solid #51406f;
+    border-radius:18px;
+    overflow:hidden;
+    position:relative;
+    padding:28px 28px;
+    display:flex;
+    align-items:center;
+    background:
+        linear-gradient(90deg,rgba(9,9,20,.96) 0%,rgba(9,9,20,.84) 38%,rgba(9,9,20,.18) 100%),
+        radial-gradient(circle at 75% 45%,rgba(171,47,255,.2),transparent 35%),
+        linear-gradient(120deg,#141023,#1a102b 55%,#101321);
 }
 
-.primary-button:hover {
-    background: var(--purple-dark);
+.hero-art{
+    position:absolute;
+    right:0;
+    top:0;
+    width:60%;
+    height:100%;
+    opacity:.92;
+    overflow:hidden;
 }
 
-.secondary-button {
-    background: var(--purple-light);
-    color: var(--purple-dark);
+.hero-art::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 55% 50%,rgba(255,72,177,.35),transparent 27%),
+        radial-gradient(circle at 75% 75%,rgba(107,58,255,.4),transparent 35%);
 }
 
-.secondary-button:hover {
-    background: #e4d9ff;
+.hero-woman{
+    position:absolute;
+    right:20%;
+    bottom:-20px;
+    width:240px;
+    height:300px;
+    border-radius:50% 50% 0 0;
+    background:
+        radial-gradient(circle at 50% 28%,#e3a69c 0 14%,transparent 15%),
+        radial-gradient(circle at 53% 29%,#261423 0 24%,transparent 25%),
+        radial-gradient(ellipse at 48% 30%,#32182c 0 31%,transparent 32%),
+        linear-gradient(120deg,#211329,#100c19);
+    filter:drop-shadow(0 0 30px rgba(202,55,255,.25));
+    transform:rotate(-3deg);
 }
 
-.danger-button {
-    background: #ffe7ec;
-    color: var(--danger);
+.hero-woman::after{
+    content:"";
+    position:absolute;
+    left:72px;
+    top:65px;
+    width:100px;
+    height:125px;
+    border-radius:48% 52% 46% 54%;
+    background:linear-gradient(145deg,#f2b5a9,#9e645e);
+    opacity:.82;
 }
 
-.button-row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 18px;
+.hero-cat{
+    position:absolute;
+    right:3%;
+    bottom:-20px;
+    width:210px;
+    height:170px;
+    border-radius:50% 50% 30% 30%;
+    background:linear-gradient(135deg,#8d718f,#302438);
+    box-shadow:0 0 40px rgba(196,98,255,.25);
 }
 
-/* WRITER */
-
-.book-toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 22px;
+.hero-cat::before,
+.hero-cat::after{
+    content:"";
+    position:absolute;
+    top:-40px;
+    width:70px;
+    height:80px;
+    background:#715b75;
 }
 
-.books-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+.hero-cat::before{
+    left:5px;
+    transform:rotate(-25deg);
+    clip-path:polygon(0 100%,35% 0,100% 100%);
 }
 
-.book-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 21px;
-    box-shadow: var(--shadow);
+.hero-cat::after{
+    right:5px;
+    transform:rotate(25deg);
+    clip-path:polygon(0 100%,65% 0,100% 100%);
 }
 
-.book-card h3 {
-    margin-bottom: 8px;
+.hero-text{
+    position:relative;
+    z-index:2;
+    max-width:530px;
 }
 
-.book-meta {
-    color: var(--muted);
-    font-size: 14px;
-    margin-bottom: 12px;
+.hero-small{
+    font-size:16px;
+    color:#d9d1e9;
+    margin-bottom:8px;
 }
 
-.book-description {
-    color: #625a6d;
-    line-height: 1.5;
-    min-height: 48px;
+.hero h1{
+    font-size:30px;
+    line-height:1.12;
+    margin-bottom:9px;
 }
 
-/* FORMS */
-
-.form-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: var(--shadow);
-    margin-bottom: 20px;
+.gradient-text{
+    background:linear-gradient(90deg,#9b58ff,#ff4db4);
+    -webkit-background-clip:text;
+    color:transparent;
 }
 
-.form-card h2 {
-    margin-bottom: 7px;
+.hero p{
+    max-width:510px;
+    color:#c0bccb;
+    line-height:1.55;
+    font-size:14px;
 }
 
-.form-card > p {
-    color: var(--muted);
-    margin-bottom: 22px;
+.hero-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:19px;
 }
 
-.field {
-    margin-bottom: 17px;
+.primary{
+    border:0;
+    color:white;
+    font-weight:700;
+    border-radius:10px;
+    padding:12px 18px;
+    background:linear-gradient(90deg,#7138ee,#f143a7);
+    box-shadow:0 0 20px rgba(130,60,255,.2);
 }
 
-.field label {
-    display: block;
-    margin-bottom: 7px;
-    font-weight: 700;
-    font-size: 14px;
+.secondary{
+    border:1px solid #5c526f;
+    color:#eeeaf7;
+    border-radius:10px;
+    padding:11px 17px;
+    background:#121222;
+}
+
+/* FEATURE CARDS */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-top:14px;
+}
+
+.feature{
+    min-height:265px;
+    border:1px solid #403653;
+    border-radius:17px;
+    overflow:hidden;
+    position:relative;
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    background:#11111f;
+}
+
+.feature-art{
+    position:absolute;
+    inset:0;
+    opacity:.8;
+}
+
+.feature.chat{
+    border-color:#6947b6;
+    background:linear-gradient(160deg,#171334,#111020);
+}
+
+.feature.friend{
+    border-color:#b43886;
+    background:linear-gradient(160deg,#281326,#16101e);
+}
+
+.feature.writer{
+    border-color:#188f92;
+    background:linear-gradient(160deg,#102c30,#101b20);
+}
+
+.feature.artist{
+    border-color:#a86630;
+    background:linear-gradient(160deg,#2d1e14,#181319);
+}
+
+.feature-visual{
+    position:absolute;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%);
+    width:130px;
+    height:110px;
+    border-radius:25px;
+    opacity:.9;
+}
+
+.chat .feature-visual{
+    background:
+        radial-gradient(circle at 50% 48%,#32dfff 0 7%,transparent 8%),
+        radial-gradient(circle at 50% 48%,rgba(34,213,255,.2) 0 32%,transparent 33%),
+        linear-gradient(145deg,#302172,#15152a);
+    box-shadow:0 0 45px rgba(60,150,255,.25);
+}
+
+.friend .feature-visual{
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 50% 42%,#d28e82 0 14%,transparent 15%),
+        radial-gradient(ellipse at 50% 42%,#351b31 0 30%,transparent 31%),
+        linear-gradient(145deg,#551e57,#211525);
+}
+
+.writer .feature-visual{
+    background:
+        linear-gradient(125deg,rgba(255,255,255,.15),transparent 35%),
+        #d5d1ba;
+    transform:translateX(-50%) rotate(-7deg);
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.artist .feature-visual{
+    background:
+        radial-gradient(circle at 50% 40%,#d18e4b 0 5%,transparent 6%),
+        linear-gradient(145deg,#8d5c31,#352114);
+}
+
+.feature-label{
+    position:absolute;
+    top:12px;
+    right:12px;
+    padding:5px 9px;
+    border:1px solid currentColor;
+    border-radius:12px;
+    font-size:10px;
+    z-index:2;
+}
+
+.feature h2{
+    position:relative;
+    z-index:2;
+    font-size:22px;
+    margin-bottom:2px;
+}
+
+.feature p{
+    position:relative;
+    z-index:2;
+    color:#bcb7c7;
+    font-size:13px;
+    line-height:1.45;
+    min-height:39px;
+}
+
+.feature-go{
+    margin-top:7px;
+    position:relative;
+    z-index:2;
+    width:39px;
+    height:39px;
+    border-radius:50%;
+    border:0;
+    color:white;
+    background:linear-gradient(135deg,#7138f0,#b750ff);
+    font-size:18px;
+}
+
+.friend .feature-go{
+    background:linear-gradient(135deg,#f03a9d,#ff6ab8);
+}
+
+.writer .feature-go{
+    background:linear-gradient(135deg,#12cbbd,#36e6c9);
+}
+
+.artist .feature-go{
+    background:linear-gradient(135deg,#ff922f,#ffb45d);
+}
+
+/* SECTION */
+
+.section{
+    margin-top:18px;
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.section-title h2{
+    font-size:20px;
+}
+
+.section-link{
+    color:#b5afc2;
+    font-size:13px;
+    border:0;
+    background:transparent;
+}
+
+/* CONTINUE */
+
+.continue-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.continue-card{
+    height:126px;
+    border:1px solid #35354d;
+    border-radius:13px;
+    background:#11111f;
+    display:flex;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.continue-image{
+    width:92px;
+    flex:none;
+    background:
+        radial-gradient(circle at 50% 35%,rgba(180,100,255,.7),transparent 18%),
+        linear-gradient(145deg,#31236c,#141427);
+}
+
+.continue-card:nth-child(2) .continue-image{
+    background:
+        radial-gradient(circle at 50% 30%,#c78780 0 15%,transparent 16%),
+        linear-gradient(145deg,#4a214e,#171321);
+}
+
+.continue-card:nth-child(3) .continue-image{
+    background:
+        radial-gradient(circle at 55% 45%,#ff8c53,transparent 12%),
+        linear-gradient(145deg,#201c54,#13131e);
+}
+
+.continue-card:nth-child(4) .continue-image{
+    background:
+        linear-gradient(145deg,#294d72,#17202e);
+}
+
+.continue-content{
+    padding:12px 10px;
+    min-width:0;
+}
+
+.continue-content h3{
+    font-size:13px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.tag{
+    display:inline-block;
+    margin:7px 0 5px;
+    padding:3px 8px;
+    border-radius:7px;
+    background:#6d37d8;
+    font-size:9px;
+}
+
+.continue-content p{
+    font-size:10px;
+    color:#9793a5;
+}
+
+/* QUICK */
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.quick{
+    min-height:80px;
+    border:1px solid #38384e;
+    background:#11111f;
+    border-radius:13px;
+    padding:13px;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    color:white;
+    text-align:left;
+}
+
+.quick:hover{
+    border-color:#7851bd;
+    background:#151527;
+}
+
+.quick-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    font-size:22px;
+    background:#27233d;
+}
+
+.quick strong{
+    display:block;
+    font-size:13px;
+}
+
+.quick span{
+    display:block;
+    color:#9f9baa;
+    font-size:11px;
+    margin-top:3px;
+}
+
+/* RIGHT */
+
+.rightbar{
+    border-left:1px solid #25253b;
+    background:#0a0a14;
+    padding:14px 14px 25px;
+    min-width:0;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:0 2px 13px;
+    border-bottom:1px solid #29293d;
+}
+
+.avatar{
+    width:43px;
+    height:43px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 50% 35%,#d99b8d 0 16%,transparent 17%),
+        linear-gradient(145deg,#5e284d,#21132a);
+    border:1px solid #6e4c77;
+    position:relative;
+}
+
+.avatar::after{
+    content:"";
+    position:absolute;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#35d99e;
+    bottom:0;
+    right:0;
+    border:2px solid #0a0a14;
+}
+
+.profile-text{
+    flex:1;
+}
+
+.profile-text strong{
+    font-size:13px;
+}
+
+.profile-text span{
+    display:block;
+    color:#8f8a9e;
+    font-size:11px;
+    margin-top:3px;
+}
+
+.profile-arrow{
+    font-size:17px;
+}
+
+.quote{
+    margin-top:16px;
+    padding:18px 14px;
+    border:1px solid #493878;
+    border-radius:15px;
+    background:#111020;
+}
+
+.quote-mark{
+    color:#d550ff;
+    font-size:27px;
+}
+
+.quote p{
+    color:#c3becd;
+    font-size:13px;
+    line-height:1.5;
+    margin-top:4px;
+}
+
+.quote small{
+    display:block;
+    margin-top:8px;
+    color:#a49fb0;
+}
+
+.stats{
+    margin-top:16px;
+    padding:15px;
+    border:1px solid #303048;
+    border-radius:15px;
+}
+
+.stats h3,
+.activity h3{
+    font-size:14px;
+    margin-bottom:11px;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.stat{
+    border:1px solid #303047;
+    background:#111121;
+    border-radius:11px;
+    padding:10px;
+}
+
+.stat-number{
+    font-size:19px;
+    font-weight:800;
+    color:#bb6dff;
+}
+
+.stat:nth-child(2) .stat-number{color:#3ee8ba}
+.stat:nth-child(3) .stat-number{color:#47c7ff}
+.stat:nth-child(4) .stat-number{color:#ffad43}
+
+.stat-label{
+    color:#aaa5b6;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.activity{
+    margin-top:16px;
+    padding:15px;
+    border:1px solid #303048;
+    border-radius:15px;
+}
+
+.activity-item{
+    display:flex;
+    gap:9px;
+    align-items:center;
+    margin-top:11px;
+}
+
+.activity-image{
+    width:42px;
+    height:42px;
+    border-radius:8px;
+    background:linear-gradient(145deg,#34247b,#17152c);
+    flex:none;
+}
+
+.activity-item:nth-child(3) .activity-image{
+    background:linear-gradient(145deg,#55253d,#201326);
+}
+
+.activity-item:nth-child(4) .activity-image{
+    background:linear-gradient(145deg,#303d83,#17152c);
+}
+
+.activity-item:nth-child(5) .activity-image{
+    background:linear-gradient(145deg,#315a39,#16251a);
+}
+
+.activity-text{
+    min-width:0;
+}
+
+.activity-text strong{
+    display:block;
+    font-size:11px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.activity-text span{
+    display:inline-block;
+    color:#8e899c;
+    font-size:9px;
+    margin-top:4px;
+}
+
+.activity-tag{
+    background:#c35d3a;
+    color:white;
+    padding:2px 6px;
+    border-radius:5px;
+}
+
+.bottom-message{
+    margin-top:16px;
+    border:1px solid #4a3b65;
+    border-radius:15px;
+    min-height:125px;
+    padding:16px;
+    background:
+        radial-gradient(circle at 70% 110%,rgba(167,55,255,.4),transparent 45%),
+        linear-gradient(150deg,#171026,#13101d);
+}
+
+.bottom-message .star{
+    color:#ff4dbb;
+    font-size:22px;
+}
+
+.bottom-message p{
+    font-size:13px;
+    line-height:1.45;
+    margin-top:6px;
+}
+
+/* INNER PAGES */
+
+.inner-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin:8px 0 18px;
+}
+
+.inner-header h1{
+    font-size:28px;
+}
+
+.inner-header p{
+    color:#9995a9;
+    margin-top:5px;
+    font-size:13px;
+}
+
+.panel{
+    border:1px solid #34344c;
+    border-radius:16px;
+    background:#10101e;
+    padding:18px;
+}
+
+.books-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+}
+
+.book-card{
+    border:1px solid #36364d;
+    border-radius:15px;
+    background:linear-gradient(145deg,#151529,#10101c);
+    padding:16px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.book-card:hover{
+    border-color:#8a55d9;
+    transform:translateY(-2px);
+}
+
+.book-cover{
+    height:130px;
+    border-radius:11px;
+    margin-bottom:13px;
+    background:
+        radial-gradient(circle at 60% 35%,rgba(255,112,203,.7),transparent 16%),
+        radial-gradient(circle at 40% 70%,rgba(90,72,255,.7),transparent 28%),
+        linear-gradient(145deg,#27183f,#111426);
+}
+
+.book-card h3{
+    font-size:16px;
+}
+
+.book-card p{
+    color:#9d98aa;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.create-form{
+    max-width:700px;
+}
+
+.field{
+    margin-bottom:14px;
+}
+
+.field label{
+    display:block;
+    font-size:12px;
+    color:#bdb8c8;
+    margin-bottom:6px;
 }
 
 .field input,
 .field textarea,
-.field select {
-    width: 100%;
-    border: 1px solid var(--border);
-    background: #fbfaff;
-    border-radius: 12px;
-    padding: 12px 13px;
-    outline: none;
+.field select{
+    width:100%;
+    border:1px solid #3a3a53;
+    background:#0c0c18;
+    color:white;
+    border-radius:10px;
+    padding:12px;
+    outline:none;
+}
+
+.field textarea{
+    min-height:110px;
+    resize:vertical;
 }
 
 .field input:focus,
 .field textarea:focus,
-.field select:focus {
-    border-color: var(--purple);
+.field select:focus{
+    border-color:#8c54e5;
+    box-shadow:0 0 0 2px rgba(140,84,229,.12);
 }
 
-.field textarea {
-    min-height: 110px;
-    resize: vertical;
+.form-actions{
+    display:flex;
+    gap:9px;
+    margin-top:17px;
 }
 
-/* WORKSPACE */
-
-.workspace-header {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    align-items: flex-start;
-    margin-bottom: 24px;
+.workspace-nav{
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+    padding-bottom:5px;
+    margin-bottom:15px;
 }
 
-.workspace-title h1 {
-    margin-bottom: 7px;
+.workspace-nav button{
+    white-space:nowrap;
+    border:1px solid #35354c;
+    background:#111120;
+    color:#bbb6c6;
+    padding:9px 12px;
+    border-radius:9px;
+    font-size:12px;
 }
 
-.workspace-title p {
-    color: var(--muted);
+.workspace-nav button.active{
+    color:white;
+    background:#6532b6;
+    border-color:#9959eb;
 }
 
-.workspace-menu {
-    display: flex;
-    gap: 7px;
-    flex-wrap: wrap;
-    margin-bottom: 22px;
+.workspace-content{
+    border:1px solid #34344c;
+    background:#10101e;
+    border-radius:16px;
+    padding:18px;
 }
 
-.workspace-menu button {
-    border: none;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 11px;
-    padding: 10px 13px;
-    color: #5d5568;
+.character-grid,
+.world-grid,
+.plan-grid,
+.chapter-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
 
-.workspace-menu button.active {
-    background: var(--purple-light);
-    color: var(--purple-dark);
-    font-weight: 700;
+.item-card{
+    border:1px solid #36364e;
+    border-radius:13px;
+    background:#141423;
+    padding:14px;
 }
 
-.workspace-section {
-    display: none;
+.item-card h3{
+    font-size:15px;
 }
 
-.workspace-section.active {
-    display: block;
+.item-card p{
+    color:#a39eae;
+    font-size:12px;
+    line-height:1.5;
+    margin-top:6px;
 }
 
-/* LISTS */
-
-.list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.item-card .small{
+    color:#777286;
+    font-size:10px;
 }
 
-.list-item {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 15px;
-    padding: 17px;
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    align-items: flex-start;
+.empty{
+    padding:35px 15px;
+    text-align:center;
+    color:#888397;
+    border:1px dashed #39394e;
+    border-radius:12px;
 }
 
-.list-item h3 {
-    margin-bottom: 6px;
+.chat-window{
+    min-height:460px;
+    display:flex;
+    flex-direction:column;
 }
 
-.list-item p {
-    color: var(--muted);
-    line-height: 1.5;
+.chat-messages{
+    flex:1;
+    overflow-y:auto;
+    padding:10px;
 }
 
-.empty {
-    background: white;
-    border: 1px dashed #d8cfea;
-    border-radius: 18px;
-    padding: 35px;
-    text-align: center;
-    color: var(--muted);
+.message{
+    max-width:78%;
+    padding:12px 14px;
+    border-radius:13px;
+    margin-bottom:10px;
+    font-size:13px;
+    line-height:1.5;
 }
 
-/* CHAT */
-
-.chat-box {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    min-height: 500px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+.message.ai{
+    background:#17172a;
+    border:1px solid #33334a;
 }
 
-.chat-messages {
-    flex: 1;
-    padding: 22px;
-    overflow-y: auto;
+.message.user{
+    margin-left:auto;
+    background:linear-gradient(135deg,#6532b5,#a43d93);
 }
 
-.message {
-    max-width: 75%;
-    padding: 13px 16px;
-    border-radius: 15px;
-    margin-bottom: 12px;
-    line-height: 1.5;
+.chat-input{
+    display:flex;
+    gap:8px;
+    border-top:1px solid #2b2b40;
+    padding-top:12px;
 }
 
-.message.ai {
-    background: var(--purple-light);
-}
-
-.message.user {
-    background: #eeeef2;
-    margin-left: auto;
-}
-
-.chat-input {
-    display: flex;
-    gap: 10px;
-    padding: 15px;
-    border-top: 1px solid var(--border);
-}
-
-.chat-input input {
-    flex: 1;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px;
-}
-
-/* SETTINGS */
-
-.setting {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 18px;
-    margin-bottom: 12px;
-}
-
-.setting h3 {
-    margin-bottom: 5px;
-}
-
-.setting p {
-    color: var(--muted);
-    line-height: 1.5;
+.chat-input input{
+    flex:1;
+    border:1px solid #38384f;
+    border-radius:10px;
+    background:#0b0b17;
+    color:white;
+    padding:12px;
+    outline:none;
 }
 
 /* MODAL */
 
-.modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(30, 20, 45, .45);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 100;
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(3,3,9,.78);
+    backdrop-filter:blur(8px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    z-index:100;
 }
 
-.modal-backdrop.show {
-    display: flex;
+.modal.show{
+    display:flex;
 }
 
-.modal {
-    width: 100%;
-    max-width: 600px;
-    max-height: 90vh;
-    overflow-y: auto;
-    background: white;
-    border-radius: 22px;
-    padding: 25px;
+.modal-box{
+    width:min(600px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:#111120;
+    border:1px solid #514269;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 25px 80px rgba(0,0,0,.6);
 }
 
-.modal h2 {
-    margin-bottom: 18px;
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
 }
 
-.close-button {
-    float: right;
-    border: none;
-    background: #f1edf6;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
+.close{
+    width:35px;
+    height:35px;
+    border-radius:9px;
+    border:1px solid #3c3c53;
+    background:#171728;
+    color:white;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:translate(-50%,20px);
+    background:#19192a;
+    border:1px solid #604589;
+    padding:11px 16px;
+    border-radius:10px;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    z-index:200;
+    font-size:13px;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
 }
 
 /* MOBILE */
 
-@media (max-width: 900px) {
-    .sidebar {
-        width: 210px;
-        min-width: 210px;
+@media(max-width:1100px){
+    .app{
+        grid-template-columns:190px minmax(0,1fr);
     }
 
-    .cards,
-    .books-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .rightbar{
+        display:none;
+    }
+
+    .features,
+    .continue-grid,
+    .quick-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 }
 
-@media (max-width: 650px) {
-    .app {
-        display: block;
+@media(max-width:750px){
+    .app{
+        display:block;
     }
 
-    .sidebar {
-        width: 100%;
-        min-width: 0;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding: 12px;
+    .sidebar{
+        position:fixed;
+        z-index:50;
+        left:-235px;
+        top:0;
+        width:220px;
+        transition:.25s;
+        box-shadow:20px 0 50px rgba(0,0,0,.5);
     }
 
-    .logo {
-        padding-bottom: 12px;
+    .sidebar.open{
+        left:0;
     }
 
-    .navigation {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+    .main{
+        padding:10px;
     }
 
-    .main {
-        padding: 18px;
+    .mobile-menu{
+        display:grid !important;
     }
 
-    .cards,
-    .books-grid {
-        grid-template-columns: 1fr;
+    .hero{
+        min-height:370px;
+        padding:20px;
+        align-items:flex-start;
     }
 
-    .book-toolbar,
-    .workspace-header {
-        display: block;
+    .hero-art{
+        width:100%;
+        opacity:.4;
     }
 
-    .book-toolbar .button-row,
-    .workspace-header .button-row {
-        margin-top: 15px;
+    .hero-text{
+        max-width:100%;
+    }
+
+    .hero h1{
+        font-size:26px;
+    }
+
+    .features,
+    .continue-grid,
+    .quick-grid,
+    .books-grid,
+    .character-grid,
+    .world-grid,
+    .plan-grid,
+    .chapter-grid{
+        grid-template-columns:1fr;
+    }
+
+    .feature{
+        min-height:235px;
+    }
+
+    .topbar{
+        gap:6px;
+    }
+
+    .search-key{
+        display:none;
+    }
+
+    .mobile-menu{
+        display:none;
+        width:42px;
+        height:42px;
+        border-radius:10px;
+        border:1px solid #3b3b52;
+        background:#111120;
+        color:white;
+        font-size:21px;
+    }
+
+    .hero-buttons{
+        flex-wrap:wrap;
+    }
+}
+
+@media(min-width:751px){
+    .mobile-menu{
+        display:none !important;
     }
 }
 </style>
@@ -548,553 +1355,637 @@ button {
 
 <div class="app">
 
-<aside class="sidebar">
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
 
     <div class="logo">
-        QwerZing <span>AI</span>
+        <div class="logo-star">✦</div>
+        <div>
+            <div class="logo-name">QwerZing</div>
+            <div class="logo-sub">AI STUDIO</div>
+        </div>
     </div>
 
-    <nav class="navigation">
+    <nav class="nav">
 
-        <button class="nav-button active" onclick="showPage('home')">
-            🏠 Главная
+        <button class="nav-item active" onclick="showPage('home')">
+            <span class="nav-icon">⌂</span>
+            <span>Главная</span>
         </button>
 
-        <button class="nav-button" onclick="showPage('chat')">
-            💬 Чат
+        <button class="nav-item" onclick="showPage('chat')">
+            <span class="nav-icon">▢</span>
+            <span>Чат</span>
+            <span class="nav-arrow">›</span>
         </button>
 
-        <button class="nav-button" onclick="showPage('friend')">
-            🤖 AI Friend
+        <button class="nav-item" onclick="showPage('friend')">
+            <span class="nav-icon">♧</span>
+            <span>Друг</span>
+            <span class="nav-arrow">›</span>
         </button>
 
-        <button class="nav-button" onclick="showPage('writer')">
-            ✍️ Писатель
+        <button class="nav-item" onclick="showPage('writer')">
+            <span class="nav-icon">╱</span>
+            <span>Писатель</span>
+            <span class="nav-arrow">›</span>
         </button>
 
-        <button class="nav-button" onclick="showPage('artist')">
-            🎨 Художник
+        <button class="nav-item" onclick="showPage('artist')">
+            <span class="nav-icon">▧</span>
+            <span>Художник</span>
+            <span class="nav-arrow">›</span>
         </button>
 
-        <button class="nav-button" onclick="showPage('projects')">
-            📁 Проекты
+        <div class="divider"></div>
+
+        <button class="nav-item" onclick="showPage('projects')">
+            <span class="nav-icon">□</span>
+            <span>Проекты</span>
         </button>
 
-        <button class="nav-button" onclick="showPage('memory')">
-            🧠 Память
+        <button class="nav-item" onclick="showPage('templates')">
+            <span class="nav-icon">▦</span>
+            <span>Шаблоны</span>
         </button>
 
-        <button class="nav-button" onclick="showPage('settings')">
-            ⚙️ Настройки
+        <button class="nav-item" onclick="showPage('library')">
+            <span class="nav-icon">▤</span>
+            <span>Библиотека</span>
+        </button>
+
+        <button class="nav-item" onclick="showPage('memory')">
+            <span class="nav-icon">♧</span>
+            <span>Память</span>
+        </button>
+
+        <button class="nav-item" onclick="showPage('settings')">
+            <span class="nav-icon">⚙</span>
+            <span>Настройки</span>
         </button>
 
     </nav>
 
+    <div class="pro-card">
+        <div class="pro-icon">✦</div>
+        <h3>Обновить до Pro</h3>
+        <p>Больше возможностей, больше моделей, больше магии.</p>
+        <button class="pro-button" onclick="showToast('Раздел Pro скоро появится')">
+            Перейти на Pro →
+        </button>
+    </div>
+
+    <div class="version-card">
+        <strong>◉ QwerZing</strong>
+        v1.0.0<br>
+        Создавай. Исследуй.<br>
+        Погружайся. ♡
+    </div>
+
 </aside>
 
+<!-- MAIN -->
 
 <main class="main">
 
-<!-- HOME -->
+    <div class="topbar">
 
-<section id="page-home" class="page">
+        <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
 
-    <div class="page-header">
-        <h1>Добро пожаловать в QwerZing AI Studio</h1>
-        <p>
-            Твоя творческая студия с искусственным интеллектом.
-            Пиши, создавай, рисуй и развивай собственные проекты.
-        </p>
-    </div>
-
-    <div class="cards">
-
-        <div class="card feature-card" onclick="showPage('chat')">
-            <div class="icon">💬</div>
-            <h3>Чат</h3>
-            <p>Общайся с AI и задавай любые вопросы.</p>
+        <div class="search">
+            <span>⌕</span>
+            <input id="globalSearch" placeholder="Найти проекты, чаты, идеи, персонажей, файлы..." onkeydown="globalSearch(event)">
+            <span class="search-key">⌘ K</span>
         </div>
 
-        <div class="card feature-card" onclick="showPage('writer')">
-            <div class="icon">✍️</div>
-            <h3>Писатель</h3>
-            <p>Создавай книги, персонажей, миры и главы.</p>
-        </div>
+        <div class="top-icons">
+            <button class="icon-button" onclick="toggleTheme()">☾</button>
 
-        <div class="card feature-card" onclick="showPage('artist')">
-            <div class="icon">🎨</div>
-            <h3>Художник</h3>
-            <p>Здесь появится твоя творческая мастерская.</p>
+            <button class="icon-button" onclick="showToast('Уведомлений: 3')">
+                ♧
+                <span class="notification">3</span>
+            </button>
+
+            <button class="icon-button" onclick="showPage('settings')">⚙</button>
         </div>
 
     </div>
 
-</section>
+    <!-- HOME -->
 
+    <section class="page active" id="page-home">
 
-<!-- CHAT -->
+        <div class="hero">
 
-<section id="page-chat" class="page" style="display:none">
-
-    <div class="page-header">
-        <h1>💬 Чат</h1>
-        <p>Твой универсальный AI-помощник.</p>
-    </div>
-
-    <div class="chat-box">
-
-        <div id="chatMessages" class="chat-messages">
-
-            <div class="message ai">
-                Привет! Я QwerZing AI. Пока я работаю в демонстрационном режиме, но уже могу отвечать на твои сообщения внутри интерфейса.
+            <div class="hero-art">
+                <div class="hero-woman"></div>
+                <div class="hero-cat"></div>
             </div>
 
-        </div>
+            <div class="hero-text">
 
-        <div class="chat-input">
-            <input
-                id="chatInput"
-                type="text"
-                placeholder="Напиши сообщение..."
-                onkeydown="if(event.key==='Enter') sendChatMessage()"
-            >
+                <div class="hero-small">Привет, София! 👋</div>
 
-            <button class="primary-button" onclick="sendChatMessage()">
-                Отправить
-            </button>
-        </div>
+                <h1>
+                    Добро пожаловать в<br>
+                    <span class="gradient-text">QwerZing AI Studio!</span>
+                </h1>
 
-    </div>
-
-</section>
-
-
-<!-- FRIEND -->
-
-<section id="page-friend" class="page" style="display:none">
-
-    <div class="page-header">
-        <h1>🤖 AI Friend</h1>
-        <p>Персональный цифровой собеседник.</p>
-    </div>
-
-    <div class="card">
-
-        <h2>Твой AI Friend</h2>
-
-        <p style="color:var(--muted);margin-top:10px;line-height:1.6">
-            Здесь мы позже сможем добавить отдельную личность,
-            характер, память, голос и стиль общения твоего AI Friend.
-        </p>
-
-        <div class="button-row">
-            <button class="primary-button" onclick="friendGreeting()">
-                Познакомиться
-            </button>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- WRITER -->
-
-<section id="page-writer" class="page" style="display:none">
-
-    <div class="page-header">
-        <h1>✍️ Писатель</h1>
-        <p>Твоя писательская студия.</p>
-    </div>
-
-    <div id="writerMain">
-
-        <div class="book-toolbar">
-
-            <div>
-                <h2>Мои книги</h2>
-                <p style="color:var(--muted);margin-top:5px">
-                    Все твои истории в одном месте.
+                <p>
+                    Твое пространство для идей, историй, образов
+                    и безграничных возможностей. Здесь ты можешь
+                    создавать, мечтать и воплощать в жизнь всё,
+                    что хочешь.
                 </p>
+
+                <div class="hero-buttons">
+                    <button class="primary" onclick="startCreating()">
+                        Начать создавать →
+                    </button>
+
+                    <button class="secondary" onclick="showPage('projects')">
+                        ▷ Изучить возможности
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="features">
+
+            <div class="feature chat">
+                <div class="feature-art"></div>
+                <span class="feature-label">Универсальный</span>
+                <div class="feature-visual"></div>
+
+                <h2>Чат</h2>
+                <p>Задавай любые вопросы, получай ответы, анализируй файлы и изображения, изучай новое.</p>
+                <button class="feature-go" onclick="showPage('chat')">→</button>
             </div>
 
-            <button class="primary-button" onclick="openCreateBook()">
-                ＋ Создать книгу
-            </button>
-
-        </div>
-
-        <div id="booksGrid" class="books-grid"></div>
-
-    </div>
-
-</section>
-
-
-<!-- ARTIST -->
-
-<section id="page-artist" class="page" style="display:none">
-
-    <div class="page-header">
-        <h1>🎨 Художник</h1>
-        <p>Твоя будущая AI-мастерская.</p>
-    </div>
-
-    <div class="card">
-
-        <h2>Художник</h2>
-
-        <p style="color:var(--muted);margin-top:10px;line-height:1.6">
-            Здесь мы позже подключим генерацию изображений,
-            персонажей, иллюстраций и обложек.
-        </p>
-
-        <div class="button-row">
-            <button class="primary-button" onclick="artistDemo()">
-                Создать идею
-            </button>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- PROJECTS -->
-
-<section id="page-projects" class="page" style="display:none">
-
-    <div class="page-header">
-        <h1>📁 Проекты</h1>
-        <p>Все твои творческие проекты.</p>
-    </div>
-
-    <div class="card">
-
-        <h2>Твои проекты</h2>
-
-        <p style="color:var(--muted);margin-top:10px">
-            Книги сейчас автоматически появляются здесь.
-        </p>
-
-        <div class="button-row">
-            <button class="primary-button" onclick="showPage('writer')">
-                Открыть книги
-            </button>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- MEMORY -->
-
-<section id="page-memory" class="page" style="display:none">
-
-    <div class="page-header">
-        <h1>🧠 Память</h1>
-        <p>Информация, которую QwerZing сможет сохранять для твоих проектов.</p>
-    </div>
-
-    <div class="card">
-
-        <div class="field">
-            <label>Общая память</label>
-
-            <textarea
-                id="globalMemory"
-                placeholder="Напиши здесь информацию, которую хочешь сохранить..."
-            ></textarea>
-        </div>
-
-        <button class="primary-button" onclick="saveGlobalMemory()">
-            Сохранить память
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- SETTINGS -->
-
-<section id="page-settings" class="page" style="display:none">
-
-    <div class="page-header">
-        <h1>⚙️ Настройки</h1>
-        <p>Настройки QwerZing AI Studio.</p>
-    </div>
-
-    <div class="setting">
-        <h3>💾 Данные</h3>
-        <p>
-            Твои книги и проекты сохраняются в памяти браузера этого устройства.
-        </p>
-
-        <div class="button-row">
-
-            <button class="primary-button" onclick="exportData()">
-                Экспортировать данные
-            </button>
-
-            <button class="secondary-button" onclick="document.getElementById('importFile').click()">
-                Импортировать данные
-            </button>
-
-            <input
-                id="importFile"
-                type="file"
-                accept=".json"
-                style="display:none"
-                onchange="importData(event)"
-            >
-
-        </div>
-    </div>
-
-    <div class="setting">
-        <h3>🔄 Сброс</h3>
-        <p>
-            Полностью удалить локальные данные QwerZing на этом устройстве.
-        </p>
-
-        <div class="button-row">
-            <button class="danger-button" onclick="resetAllData()">
-                Удалить все данные
-            </button>
-        </div>
-    </div>
-
-</section>
-
-
-<!-- BOOK WORKSPACE -->
-
-<section id="page-workspace" class="page" style="display:none">
-
-    <div class="workspace-header">
-
-        <div class="workspace-title">
-
-            <h1 id="workspaceTitle">
-                Книга
-            </h1>
-
-            <p id="workspaceGenre">
-                Жанр
-            </p>
-
-        </div>
-
-        <div class="button-row">
-            <button class="secondary-button" onclick="backToWriter()">
-                ← Мои книги
-            </button>
-        </div>
-
-    </div>
-
-
-    <div class="workspace-menu">
-
-        <button class="active" onclick="showBookSection('about', this)">
-            📋 О книге
-        </button>
-
-        <button onclick="showBookSection('characters', this)">
-            👤 Персонажи
-        </button>
-
-        <button onclick="showBookSection('world', this)">
-            🌍 Мир
-        </button>
-
-        <button onclick="showBookSection('plan', this)">
-            📝 План
-        </button>
-
-        <button onclick="showBookSection('chapters', this)">
-            📚 Главы
-        </button>
-
-        <button onclick="showBookSection('assistant', this)">
-            🤖 AI-помощник
-        </button>
-
-    </div>
-
-
-    <!-- ABOUT -->
-
-    <div id="book-about" class="workspace-section active">
-
-        <div class="form-card">
-
-            <h2 id="aboutTitle"></h2>
-
-            <p id="aboutGenre"></p>
-
-            <div class="field">
-                <label>Описание книги</label>
-
-                <textarea id="bookDescriptionInput"></textarea>
+            <div class="feature friend">
+                <span class="feature-label">Персональный</span>
+                <div class="feature-visual"></div>
+
+                <h2>Друг</h2>
+                <p>Создай своего AI-друга с уникальным характером, вкусами и историей.</p>
+                <button class="feature-go" onclick="showPage('friend')">→</button>
             </div>
 
-            <div class="field">
-                <label>Авторские заметки</label>
+            <div class="feature writer">
+                <span class="feature-label">Творческий</span>
+                <div class="feature-visual"></div>
 
-                <textarea
-                    id="authorNotes"
-                    placeholder="Записывай здесь идеи, мысли, важные детали и всё, что не хочется потерять."
-                ></textarea>
+                <h2>Писатель</h2>
+                <p>Пиши истории, развивай персонажей, строй миры и создавай целые книги.</p>
+                <button class="feature-go" onclick="showPage('writer')">→</button>
             </div>
 
-            <button class="primary-button" onclick="saveBookInfo()">
-                Сохранить
-            </button>
+            <div class="feature artist">
+                <span class="feature-label">Визуальный</span>
+                <div class="feature-visual"></div>
+
+                <h2>Художник</h2>
+                <p>Генерируй изображения, создавай образы и оживляй свои идеи.</p>
+                <button class="feature-go" onclick="showPage('artist')">→</button>
+            </div>
 
         </div>
 
-    </div>
+        <div class="section">
 
-
-    <!-- CHARACTERS -->
-
-    <div id="book-characters" class="workspace-section">
-
-        <div class="book-toolbar">
-
-            <div>
-                <h2>Персонажи</h2>
-                <p style="color:var(--muted);margin-top:5px">
-                    Создавай и храни героев своей истории.
-                </p>
+            <div class="section-title">
+                <h2>♫ Продолжить работу</h2>
+                <button class="section-link" onclick="showPage('projects')">Смотреть всё →</button>
             </div>
 
-            <button class="primary-button" onclick="openCharacterForm()">
-                ＋ Добавить персонажа
-            </button>
+            <div class="continue-grid" id="continueGrid"></div>
 
         </div>
 
-        <div id="charactersList" class="list"></div>
+        <div class="section">
 
-    </div>
-
-
-    <!-- WORLD -->
-
-    <div id="book-world" class="workspace-section">
-
-        <div class="book-toolbar">
-
-            <div>
-                <h2>Мир</h2>
-                <p style="color:var(--muted);margin-top:5px">
-                    Места, государства, правила мира, события и детали.
-                </p>
+            <div class="section-title">
+                <h2>⚡ Быстрое создание</h2>
+                <span style="color:#888397;font-size:12px;">Создавай мгновенно, без лишних шагов!</span>
             </div>
 
-            <button class="primary-button" onclick="openWorldForm()">
-                ＋ Добавить элемент
-            </button>
+            <div class="quick-grid">
 
-        </div>
+                <button class="quick" onclick="showPage('chat')">
+                    <div class="quick-icon">▢</div>
+                    <div>
+                        <strong>Новый чат →</strong>
+                        <span>Задать вопрос</span>
+                    </div>
+                </button>
 
-        <div id="worldList" class="list"></div>
+                <button class="quick" onclick="showPage('friend')">
+                    <div class="quick-icon">♧</div>
+                    <div>
+                        <strong>Новый друг →</strong>
+                        <span>Создать AI-друга</span>
+                    </div>
+                </button>
 
-    </div>
+                <button class="quick" onclick="openCreateBook()">
+                    <div class="quick-icon">╱</div>
+                    <div>
+                        <strong>Новый документ →</strong>
+                        <span>Написать текст</span>
+                    </div>
+                </button>
 
-
-    <!-- PLAN -->
-
-    <div id="book-plan" class="workspace-section">
-
-        <div class="book-toolbar">
-
-            <div>
-                <h2>План</h2>
-                <p style="color:var(--muted);margin-top:5px">
-                    Структура истории и основные события.
-                </p>
-            </div>
-
-            <button class="primary-button" onclick="openPlanForm()">
-                ＋ Добавить пункт
-            </button>
-
-        </div>
-
-        <div id="planList" class="list"></div>
-
-    </div>
-
-
-    <!-- CHAPTERS -->
-
-    <div id="book-chapters" class="workspace-section">
-
-        <div class="book-toolbar">
-
-            <div>
-                <h2>Главы</h2>
-                <p style="color:var(--muted);margin-top:5px">
-                    Здесь будут храниться главы книги.
-                </p>
-            </div>
-
-            <button class="primary-button" onclick="openChapterForm()">
-                ＋ Новая глава
-            </button>
-
-        </div>
-
-        <div id="chaptersList" class="list"></div>
-
-    </div>
-
-
-    <!-- AI ASSISTANT -->
-
-    <div id="book-assistant" class="workspace-section">
-
-        <div class="card">
-
-            <h2>🤖 AI-помощник книги</h2>
-
-            <p style="color:var(--muted);line-height:1.6;margin-top:10px">
-                Здесь позже появится полноценный AI-помощник,
-                который сможет видеть персонажей, мир, план и главы твоей книги.
-            </p>
-
-            <div class="button-row">
-
-                <button class="primary-button" onclick="bookAssistantDemo()">
-                    Спросить помощника
+                <button class="quick" onclick="showPage('artist')">
+                    <div class="quick-icon">▧</div>
+                    <div>
+                        <strong>Новое изображение →</strong>
+                        <span>Сгенерировать картинку</span>
+                    </div>
                 </button>
 
             </div>
 
         </div>
 
-    </div>
+    </section>
 
-</section>
+    <!-- CHAT -->
+
+    <section class="page" id="page-chat">
+
+        <div class="inner-header">
+            <div>
+                <h1>Чат</h1>
+                <p>Твой универсальный AI-помощник.</p>
+            </div>
+
+            <button class="primary" onclick="clearChat()">Новый чат</button>
+        </div>
+
+        <div class="panel chat-window">
+
+            <div class="chat-messages" id="chatMessages">
+
+                <div class="message ai">
+                    Привет! Я QwerZing. Чем займёмся сегодня?
+                </div>
+
+            </div>
+
+            <div class="chat-input">
+                <input id="chatInput" placeholder="Напиши сообщение..." onkeydown="sendChatOnEnter(event)">
+                <button class="primary" onclick="sendChat()">Отправить</button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FRIEND -->
+
+    <section class="page" id="page-friend">
+
+        <div class="inner-header">
+            <div>
+                <h1>AI Friend</h1>
+                <p>Создай своего персонального цифрового друга.</p>
+            </div>
+        </div>
+
+        <div class="panel">
+
+            <div class="field">
+                <label>Имя друга</label>
+                <input id="friendName" placeholder="Например, Алекс">
+            </div>
+
+            <div class="field">
+                <label>Характер</label>
+                <textarea id="friendPersonality" placeholder="Каким он должен быть? Добрым, смешным, спокойным, дерзким..."></textarea>
+            </div>
+
+            <button class="primary" onclick="saveFriend()">Создать AI-друга</button>
+
+        </div>
+
+    </section>
+
+    <!-- WRITER -->
+
+    <section class="page" id="page-writer">
+
+        <div id="writerMain">
+
+            <div class="inner-header">
+                <div>
+                    <h1>Писатель</h1>
+                    <p>Твоя личная писательская студия.</p>
+                </div>
+
+                <button class="primary" onclick="openCreateBook()">＋ Создать книгу</button>
+            </div>
+
+            <div id="booksGrid" class="books-grid"></div>
+
+        </div>
+
+    </section>
+
+    <!-- ARTIST -->
+
+    <section class="page" id="page-artist">
+
+        <div class="inner-header">
+            <div>
+                <h1>Художник</h1>
+                <p>Превращай идеи в изображения.</p>
+            </div>
+        </div>
+
+        <div class="panel">
+
+            <div class="field">
+                <label>Что хочешь создать?</label>
+                <textarea id="artistPrompt" placeholder="Например: девушка в длинном чёрном платье стоит возле замка ночью..."></textarea>
+            </div>
+
+            <button class="primary" onclick="generateDemoImage()">Создать изображение</button>
+
+            <div id="artistResult" style="margin-top:20px;"></div>
+
+        </div>
+
+    </section>
+
+    <!-- PROJECTS -->
+
+    <section class="page" id="page-projects">
+
+        <div class="inner-header">
+            <div>
+                <h1>Проекты</h1>
+                <p>Все твои творческие проекты в одном месте.</p>
+            </div>
+
+            <button class="primary" onclick="openCreateBook()">＋ Новый проект</button>
+        </div>
+
+        <div id="projectsGrid" class="books-grid"></div>
+
+    </section>
+
+    <!-- TEMPLATES -->
+
+    <section class="page" id="page-templates">
+
+        <div class="inner-header">
+            <div>
+                <h1>Шаблоны</h1>
+                <p>Готовые основы для новых идей.</p>
+            </div>
+        </div>
+
+        <div class="books-grid">
+
+            <div class="book-card" onclick="useTemplate('Роман')">
+                <div class="book-cover"></div>
+                <h3>Роман</h3>
+                <p>История любви, персонажи, конфликт и сюжет.</p>
+            </div>
+
+            <div class="book-card" onclick="useTemplate('Фэнтези')">
+                <div class="book-cover"></div>
+                <h3>Фэнтези-мир</h3>
+                <p>Мир, расы, магия, государства и персонажи.</p>
+            </div>
+
+            <div class="book-card" onclick="useTemplate('Детектив')">
+                <div class="book-cover"></div>
+                <h3>Детектив</h3>
+                <p>Тайна, преступление, расследование и разгадка.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- LIBRARY -->
+
+    <section class="page" id="page-library">
+
+        <div class="inner-header">
+            <div>
+                <h1>Библиотека</h1>
+                <p>Твои книги и созданные материалы.</p>
+            </div>
+        </div>
+
+        <div class="panel">
+
+            <div id="libraryContent" class="empty">
+                Здесь будут храниться твои материалы.
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- MEMORY -->
+
+    <section class="page" id="page-memory">
+
+        <div class="inner-header">
+            <div>
+                <h1>Память</h1>
+                <p>Информация, которую QwerZing должен помнить.</p>
+            </div>
+        </div>
+
+        <div class="panel">
+
+            <div class="field">
+                <label>Общая память</label>
+                <textarea id="globalMemory" style="min-height:250px;" placeholder="Напиши здесь важную информацию..."></textarea>
+            </div>
+
+            <button class="primary" onclick="saveMemory()">Сохранить память</button>
+
+        </div>
+
+    </section>
+
+    <!-- SETTINGS -->
+
+    <section class="page" id="page-settings">
+
+        <div class="inner-header">
+            <div>
+                <h1>Настройки</h1>
+                <p>Управление QwerZing AI Studio.</p>
+            </div>
+        </div>
+
+        <div class="panel">
+
+            <h3 style="margin-bottom:15px;">Данные</h3>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+
+                <button class="secondary" onclick="exportData()">
+                    ↓ Экспортировать данные
+                </button>
+
+                <label class="secondary" style="cursor:pointer;">
+                    ↑ Импортировать данные
+                    <input type="file" accept=".json" onchange="importData(event)" style="display:none;">
+                </label>
+
+                <button class="secondary" onclick="resetData()">
+                    Сбросить локальные данные
+                </button>
+
+            </div>
+
+            <div style="margin-top:25px;color:#8f8a9d;font-size:12px;line-height:1.6;">
+                Данные этого прототипа сохраняются в памяти браузера на этом устройстве.
+                Для переноса на другое устройство используй экспорт JSON.
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
-</div>
 
+<!-- RIGHT BAR -->
+
+<aside class="rightbar">
+
+    <div class="profile">
+
+        <div class="avatar"></div>
+
+        <div class="profile-text">
+            <strong>София</strong>
+            <span>Творческий режим</span>
+        </div>
+
+        <div class="profile-arrow">⌄</div>
+
+    </div>
+
+    <div class="quote">
+
+        <div class="quote-mark">“</div>
+
+        <p>
+            Творчество — это не талант,
+            это суперсила.
+        </p>
+
+        <small>— QwerZing</small>
+
+    </div>
+
+    <div class="stats">
+
+        <h3>Ваша статистика</h3>
+
+        <div class="stats-grid">
+
+            <div class="stat">
+                <div class="stat-number" id="statProjects">0</div>
+                <div class="stat-label">Проектов</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number">48</div>
+                <div class="stat-label">Чатов</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Текстов</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number">23</div>
+                <div class="stat-label">Изображения</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="activity">
+
+        <h3>Последняя активность</h3>
+
+        <div class="activity-item">
+            <div class="activity-image"></div>
+            <div class="activity-text">
+                <strong>Город мечты</strong>
+                <span class="activity-tag">Изображение</span>
+                <span>2 ч назад</span>
+            </div>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-image"></div>
+            <div class="activity-text">
+                <strong>Новая глава</strong>
+                <span class="activity-tag">История</span>
+                <span>5 ч назад</span>
+            </div>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-image"></div>
+            <div class="activity-text">
+                <strong>Идеи для будущего</strong>
+                <span class="activity-tag" style="background:#5934b5;">Чат</span>
+                <span>1 д назад</span>
+            </div>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-image"></div>
+            <div class="activity-text">
+                <strong>Лесная иллюстрация</strong>
+                <span class="activity-tag">Изображение</span>
+                <span>2 д назад</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bottom-message">
+
+        <div class="star">✦</div>
+
+        <p>
+            Продолжай создавать,
+            у тебя всё получится! ♡
+        </p>
+
+    </div>
+
+</aside>
+
+</div>
 
 <!-- MODAL -->
 
-<div id="modalBackdrop" class="modal-backdrop">
+<div class="modal" id="modal">
 
-    <div class="modal">
+    <div class="modal-box">
 
-        <button class="close-button" onclick="closeModal()">
-            ×
-        </button>
+        <div class="modal-header">
+            <h2 id="modalTitle">Создание</h2>
+            <button class="close" onclick="closeModal()">×</button>
+        </div>
 
         <div id="modalContent"></div>
 
@@ -1102,54 +1993,47 @@ button {
 
 </div>
 
+<div class="toast" id="toast"></div>
 
 <script>
+
+/* =========================================================
+   DATA
+========================================================= */
 
 const STORAGE_KEY = "qwerzing_ai_studio_data_v2";
 
 let data = loadData();
 let currentBookId = null;
-let editingCharacterId = null;
-let editingWorldId = null;
-let editingPlanId = null;
-let editingChapterId = null;
+let currentWorkspace = "about";
 
-
-/* DATA */
-
-function defaultData() {
+function defaultData(){
     return {
-        version: 2,
-        books: [],
-        globalMemory: ""
+        version:2,
+        books:[],
+        globalMemory:"",
+        friend:{
+            name:"",
+            personality:""
+        }
     };
 }
 
-function loadData() {
+function loadData(){
 
-    try {
+    try{
 
-        const saved = localStorage.getItem(STORAGE_KEY);
+        const raw = localStorage.getItem(STORAGE_KEY);
 
-        if (!saved) {
+        if(!raw){
             return defaultData();
         }
 
-        const parsed = JSON.parse(saved);
+        const parsed = JSON.parse(raw);
 
-        if (!parsed.books) {
-            parsed.books = [];
-        }
+        return normalizeData(parsed);
 
-        if (!parsed.globalMemory) {
-            parsed.globalMemory = "";
-        }
-
-        parsed.books.forEach(normalizeBook);
-
-        return parsed;
-
-    } catch (error) {
+    }catch(error){
 
         console.error(error);
 
@@ -1157,154 +2041,266 @@ function loadData() {
     }
 }
 
-function normalizeBook(book) {
+function normalizeData(input){
 
-    if (!book.id) {
-        book.id = generateId();
-    }
+    const base = defaultData();
 
-    if (!book.characters) {
-        book.characters = [];
-    }
-
-    if (!book.world) {
-        book.world = [];
-    }
-
-    if (!book.plan) {
-        book.plan = [];
-    }
-
-    if (!book.chapters) {
-        book.chapters = [];
-    }
-
-    if (!book.notes) {
-        book.notes = "";
-    }
-
-    if (!book.description) {
-        book.description = "";
-    }
-
-    return book;
-}
-
-function saveData() {
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(data)
-    );
-}
-
-function generateId() {
-
-    return Date.now().toString(36) +
-           Math.random().toString(36).substring(2);
-}
-
-
-/* PAGES */
-
-function showPage(page) {
-
-    document.querySelectorAll(".page").forEach(section => {
-        section.style.display = "none";
-    });
-
-    const target = document.getElementById("page-" + page);
-
-    if (target) {
-        target.style.display = "block";
-    }
-
-    document.querySelectorAll(".nav-button").forEach(button => {
-        button.classList.remove("active");
-    });
-
-    const buttons = document.querySelectorAll(".nav-button");
-
-    const map = {
-        home: 0,
-        chat: 1,
-        friend: 2,
-        writer: 3,
-        artist: 4,
-        projects: 5,
-        memory: 6,
-        settings: 7
+    const result = {
+        ...base,
+        ...input,
+        books:Array.isArray(input.books) ? input.books : []
     };
 
-    if (map[page] !== undefined && buttons[map[page]]) {
-        buttons[map[page]].classList.add("active");
+    result.books = result.books.map(book => ({
+        id:book.id || Date.now().toString()+Math.random(),
+        title:book.title || "Без названия",
+        genre:book.genre || "Не указан",
+        description:book.description || "",
+        notes:book.notes || "",
+        characters:Array.isArray(book.characters) ? book.characters : [],
+        world:Array.isArray(book.world) ? book.world : [],
+        plan:Array.isArray(book.plan) ? book.plan : [],
+        chapters:Array.isArray(book.chapters) ? book.chapters : [],
+        createdAt:book.createdAt || Date.now(),
+        updatedAt:book.updatedAt || Date.now()
+    }));
+
+    return result;
+}
+
+function saveData(){
+
+    try{
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast("Не удалось сохранить данные");
+
+    }
+}
+
+function uid(){
+
+    return Date.now().toString(36)+Math.random().toString(36).slice(2);
+
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showPage(page){
+
+    document.querySelectorAll(".page").forEach(p=>{
+        p.classList.remove("active");
+    });
+
+    const target=document.getElementById("page-"+page);
+
+    if(target){
+        target.classList.add("active");
     }
 
-    if (page === "writer") {
+    document.querySelectorAll(".nav-item").forEach(item=>{
+        item.classList.remove("active");
+    });
+
+    const buttons=document.querySelectorAll(".nav-item");
+
+    buttons.forEach(button=>{
+
+        const text=button.innerText.toLowerCase();
+
+        const map={
+            home:"главная",
+            chat:"чат",
+            friend:"друг",
+            writer:"писатель",
+            artist:"художник",
+            projects:"проекты",
+            templates:"шаблоны",
+            library:"библиотека",
+            memory:"память",
+            settings:"настройки"
+        };
+
+        if(text.includes(map[page] || "___")){
+            button.classList.add("active");
+        }
+
+    });
+
+    if(page==="writer"){
         renderBooks();
     }
 
-    if (page === "memory") {
-        document.getElementById("globalMemory").value =
-            data.globalMemory || "";
+    if(page==="projects"){
+        renderProjects();
     }
+
+    if(page==="library"){
+        renderLibrary();
+    }
+
+    if(page==="memory"){
+        document.getElementById("globalMemory").value=data.globalMemory || "";
+    }
+
+    closeSidebar();
+
 }
 
+function toggleSidebar(){
 
-/* BOOKS */
+    document.getElementById("sidebar").classList.toggle("open");
 
-function openCreateBook() {
+}
 
-    document.getElementById("writerMain").innerHTML = `
+function closeSidebar(){
 
-        <div class="form-card">
+    document.getElementById("sidebar").classList.remove("open");
 
-            <h2>Создание новой книги</h2>
+}
 
-            <p>
-                Давай создадим основу для твоей истории.
-            </p>
+/* =========================================================
+   HOME
+========================================================= */
+
+function startCreating(){
+
+    showPage("writer");
+
+}
+
+function renderContinue(){
+
+    const grid=document.getElementById("continueGrid");
+
+    if(!grid)return;
+
+    if(data.books.length===0){
+
+        grid.innerHTML=`
+
+            <div class="continue-card" onclick="openCreateBook()">
+
+                <div class="continue-image"></div>
+
+                <div class="continue-content">
+
+                    <h3>Создай свою первую книгу</h3>
+
+                    <span class="tag">Писатель</span>
+
+                    <p>Начни новую историю →</p>
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    const books=data.books.slice(-4).reverse();
+
+    grid.innerHTML=books.map(book=>`
+
+        <div class="continue-card" onclick="openBook('${book.id}')">
+
+            <div class="continue-image"></div>
+
+            <div class="continue-content">
+
+                <h3>${escapeHtml(book.title)}</h3>
+
+                <span class="tag">Книга</span>
+
+                <p>${book.chapters.length} глав</p>
+
+            </div>
+
+        </div>
+
+    `).join("");
+
+}
+
+/* =========================================================
+   WRITER
+========================================================= */
+
+function openCreateBook(){
+
+    showPage("writer");
+
+    document.getElementById("writerMain").innerHTML=`
+
+        <div class="inner-header">
+
+            <div>
+
+                <h1>Новая книга</h1>
+
+                <p>Давай создадим основу для твоей истории.</p>
+
+            </div>
+
+        </div>
+
+        <div class="panel create-form">
 
             <div class="field">
+
                 <label>Название книги</label>
 
-                <input
-                    id="newBookTitle"
-                    placeholder="Например: Рассвет"
-                >
+                <input id="newBookTitle" placeholder="Например: Рассвет">
+
             </div>
 
             <div class="field">
+
                 <label>Жанр</label>
 
-                <input
-                    id="newBookGenre"
-                    placeholder="Например: фэнтези"
-                >
+                <select id="newBookGenre">
+
+                    <option>Фэнтези</option>
+                    <option>Роман</option>
+                    <option>Фантастика</option>
+                    <option>Детектив</option>
+                    <option>Триллер</option>
+                    <option>Приключения</option>
+                    <option>Драма</option>
+                    <option>Другое</option>
+
+                </select>
+
             </div>
 
             <div class="field">
+
                 <label>О чём книга?</label>
 
-                <textarea
-                    id="newBookDescription"
-                    placeholder="Коротко расскажи о своей истории..."
-                ></textarea>
+                <textarea id="newBookDescription" placeholder="Опиши главную идею своей истории..."></textarea>
+
             </div>
 
-            <div class="button-row">
+            <div class="form-actions">
 
-                <button
-                    class="primary-button"
-                    onclick="createBook()"
-                >
+                <button class="primary" onclick="createBook()">
                     Создать книгу
                 </button>
 
-                <button
-                    class="secondary-button"
-                    onclick="restoreWriter()"
-                >
+                <button class="secondary" onclick="restoreWriter()">
                     Отмена
                 </button>
 
@@ -1313,1385 +2309,1444 @@ function openCreateBook() {
         </div>
 
     `;
+
 }
 
-function restoreWriter() {
+function restoreWriter(){
 
-    document.getElementById("writerMain").innerHTML = `
+    document.getElementById("writerMain").innerHTML=`
 
-        <div class="book-toolbar">
+        <div class="inner-header">
 
             <div>
-                <h2>Мои книги</h2>
-                <p style="color:var(--muted);margin-top:5px">
-                    Все твои истории в одном месте.
-                </p>
+
+                <h1>Писатель</h1>
+
+                <p>Твоя личная писательская студия.</p>
+
             </div>
 
-            <button class="primary-button" onclick="openCreateBook()">
+            <button class="primary" onclick="openCreateBook()">
                 ＋ Создать книгу
             </button>
 
         </div>
 
         <div id="booksGrid" class="books-grid"></div>
+
     `;
 
     renderBooks();
+
 }
 
-function createBook() {
+function createBook(){
 
-    const title =
-        document.getElementById("newBookTitle").value.trim();
+    const title=document.getElementById("newBookTitle").value.trim();
+    const genre=document.getElementById("newBookGenre").value;
+    const description=document.getElementById("newBookDescription").value.trim();
 
-    const genre =
-        document.getElementById("newBookGenre").value.trim();
+    if(!title){
 
-    const description =
-        document.getElementById("newBookDescription").value.trim();
-
-    if (!title) {
-
-        alert("Пожалуйста, введи название книги.");
+        showToast("Введи название книги");
 
         return;
+
     }
 
-    const book = {
+    const book={
 
-        id: generateId(),
+        id:uid(),
 
-        title: title,
+        title,
 
-        genre: genre || "Без жанра",
+        genre,
 
-        description: description || "",
+        description,
 
-        notes: "",
+        notes:"",
 
-        characters: [],
+        characters:[],
 
-        world: [],
+        world:[],
 
-        plan: [],
+        plan:[],
 
-        chapters: [],
+        chapters:[],
 
-        createdAt: new Date().toISOString(),
+        createdAt:Date.now(),
 
-        updatedAt: new Date().toISOString()
+        updatedAt:Date.now()
+
     };
 
     data.books.push(book);
 
     saveData();
 
-    currentBookId = book.id;
+    currentBookId=book.id;
 
-    openBookWorkspace();
+    showToast("Книга создана");
+
+    openBook(book.id);
 
 }
 
-function renderBooks() {
+function renderBooks(){
 
-    const grid = document.getElementById("booksGrid");
+    const grid=document.getElementById("booksGrid");
 
-    if (!grid) {
-        return;
-    }
+    if(!grid)return;
 
-    if (data.books.length === 0) {
+    if(data.books.length===0){
 
-        grid.innerHTML = `
+        grid.innerHTML=`
 
-            <div class="empty" style="grid-column:1/-1">
+            <div class="empty" style="grid-column:1/-1;">
 
-                <h3>У тебя пока нет книг</h3>
+                <div style="font-size:35px;margin-bottom:10px;">✦</div>
 
-                <p style="margin-top:8px">
-                    Создай первую историю и начни её развивать.
-                </p>
+                У тебя пока нет книг.<br>
+                Создай первую историю.
 
-                <div class="button-row" style="justify-content:center">
-                    <button
-                        class="primary-button"
-                        onclick="openCreateBook()"
-                    >
+                <div style="margin-top:14px;">
+
+                    <button class="primary" onclick="openCreateBook()">
                         ＋ Создать книгу
                     </button>
+
                 </div>
 
             </div>
+
         `;
 
         return;
+
     }
 
-    grid.innerHTML = data.books.map(book => `
+    grid.innerHTML=data.books.map(book=>`
 
-        <div class="book-card">
+        <div class="book-card" onclick="openBook('${book.id}')">
+
+            <div class="book-cover"></div>
 
             <h3>${escapeHtml(book.title)}</h3>
 
-            <div class="book-meta">
-                ${escapeHtml(book.genre)}
-                · ${book.chapters.length} глав
-                · ${book.characters.length} персонажей
+            <p>${escapeHtml(book.genre)} · ${book.chapters.length} глав · ${book.characters.length} персонажей</p>
+
+        </div>
+
+    `).join("");
+
+}
+
+function renderProjects(){
+
+    const grid=document.getElementById("projectsGrid");
+
+    if(!grid)return;
+
+    if(data.books.length===0){
+
+        grid.innerHTML=`
+
+            <div class="empty" style="grid-column:1/-1;">
+
+                Пока нет проектов.
+
             </div>
 
-            <div class="book-description">
-                ${escapeHtml(book.description || "Описание пока не добавлено.")}
+        `;
+
+        return;
+
+    }
+
+    grid.innerHTML=data.books.map(book=>`
+
+        <div class="book-card" onclick="openBook('${book.id}')">
+
+            <div class="book-cover"></div>
+
+            <h3>${escapeHtml(book.title)}</h3>
+
+            <p>${escapeHtml(book.genre)}</p>
+
+        </div>
+
+    `).join("");
+
+}
+
+/* =========================================================
+   BOOK WORKSPACE
+========================================================= */
+
+function getCurrentBook(){
+
+    return data.books.find(book=>book.id===currentBookId);
+
+}
+
+function openBook(id){
+
+    currentBookId=id;
+
+    const book=getCurrentBook();
+
+    if(!book)return;
+
+    document.getElementById("writerMain").innerHTML=`
+
+        <div class="inner-header">
+
+            <div>
+
+                <h1>${escapeHtml(book.title)}</h1>
+
+                <p>${escapeHtml(book.genre)} · ${book.chapters.length} глав</p>
+
             </div>
 
-            <div class="button-row">
+            <button class="secondary" onclick="restoreWriter()">
+                ← Книги
+            </button>
 
-                <button
-                    class="primary-button"
-                    onclick="openBook('${book.id}')"
+        </div>
+
+        <div class="workspace-nav">
+
+            <button onclick="workspace('about')" id="ws-about">📋 О книге</button>
+
+            <button onclick="workspace('characters')" id="ws-characters">👤 Персонажи</button>
+
+            <button onclick="workspace('world')" id="ws-world">🌍 Мир</button>
+
+            <button onclick="workspace('plan')" id="ws-plan">📝 План</button>
+
+            <button onclick="workspace('chapters')" id="ws-chapters">📚 Главы</button>
+
+            <button onclick="workspace('ai')" id="ws-ai">🤖 AI-помощник</button>
+
+        </div>
+
+        <div id="workspaceContent" class="workspace-content"></div>
+
+    `;
+
+    workspace("about");
+
+}
+
+function workspace(type){
+
+    currentWorkspace=type;
+
+    document.querySelectorAll(".workspace-nav button").forEach(button=>{
+        button.classList.remove("active");
+    });
+
+    const active=document.getElementById("ws-"+type);
+
+    if(active){
+        active.classList.add("active");
+    }
+
+    if(type==="about")renderAbout();
+    if(type==="characters")renderCharacters();
+    if(type==="world")renderWorld();
+    if(type==="plan")renderPlan();
+    if(type==="chapters")renderChapters();
+    if(type==="ai")renderBookAI();
+
+}
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+function renderAbout(){
+
+    const book=getCurrentBook();
+
+    document.getElementById("workspaceContent").innerHTML=`
+
+        <h2 style="margin-bottom:16px;">О книге</h2>
+
+        <div class="field">
+
+            <label>Название</label>
+
+            <input value="${escapeAttribute(book.title)}"
+                   onchange="updateBookField('title',this.value)">
+
+        </div>
+
+        <div class="field">
+
+            <label>Жанр</label>
+
+            <input value="${escapeAttribute(book.genre)}"
+                   onchange="updateBookField('genre',this.value)">
+
+        </div>
+
+        <div class="field">
+
+            <label>Описание</label>
+
+            <textarea onchange="updateBookField('description',this.value)">${escapeHtml(book.description)}</textarea>
+
+        </div>
+
+        <div class="field">
+
+            <label>Заметки</label>
+
+            <textarea onchange="updateBookField('notes',this.value)"
+                placeholder="Важные детали книги...">${escapeHtml(book.notes)}</textarea>
+
+        </div>
+
+        <button class="primary" onclick="saveBookChanges()">
+            Сохранить изменения
+        </button>
+
+        <button class="secondary" style="margin-left:8px;" onclick="deleteCurrentBook()">
+            Удалить книгу
+        </button>
+
+    `;
+
+}
+
+function updateBookField(field,value){
+
+    const book=getCurrentBook();
+
+    if(!book)return;
+
+    book[field]=value;
+
+    book.updatedAt=Date.now();
+
+    saveData();
+
+}
+
+function saveBookChanges(){
+
+    saveData();
+
+    showToast("Изменения сохранены");
+
+}
+
+/* =========================================================
+   CHARACTERS
+========================================================= */
+
+function renderCharacters(){
+
+    const book=getCurrentBook();
+
+    const container=document.getElementById("workspaceContent");
+
+    container.innerHTML=`
+
+        <div class="section-title">
+
+            <h2>Персонажи</h2>
+
+            <button class="primary" onclick="openCharacterEditor()">
+                ＋ Добавить персонажа
+            </button>
+
+        </div>
+
+        <div class="character-grid">
+
+            ${
+                book.characters.length
+                ?
+                book.characters.map((character,index)=>`
+
+                    <div class="item-card">
+
+                        <h3>${escapeHtml(character.name)}</h3>
+
+                        <div class="small">
+                            ${escapeHtml(character.role || "Роль не указана")}
+                            ${character.age ? " · "+escapeHtml(character.age)+" лет" : ""}
+                        </div>
+
+                        <p>${escapeHtml(character.personality || character.appearance || "Описание пока не добавлено.")}</p>
+
+                        <div style="margin-top:10px;display:flex;gap:6px;">
+
+                            <button class="secondary" onclick="openCharacterEditor(${index})">
+                                Изменить
+                            </button>
+
+                            <button class="secondary" onclick="deleteCharacter(${index})">
+                                Удалить
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `).join("")
+                :
+                `
+                    <div class="empty" style="grid-column:1/-1;">
+                        Пока нет персонажей.<br>
+                        Создай первого героя своей истории.
+                    </div>
+                `
+            }
+
+        </div>
+
+    `;
+
+}
+
+function openCharacterEditor(index=null){
+
+    const book=getCurrentBook();
+
+    const character=index===null
+        ? {
+            name:"",
+            role:"",
+            age:"",
+            appearance:"",
+            personality:"",
+            biography:"",
+            relationships:"",
+            notes:""
+        }
+        : book.characters[index];
+
+    document.getElementById("modalTitle").textContent=
+        index===null ? "Новый персонаж" : "Редактирование персонажа";
+
+    document.getElementById("modalContent").innerHTML=`
+
+        <div class="field">
+            <label>Имя персонажа</label>
+            <input id="charName" value="${escapeAttribute(character.name)}" placeholder="Например, Рэйчел Холл">
+        </div>
+
+        <div class="field">
+            <label>Роль</label>
+            <input id="charRole" value="${escapeAttribute(character.role)}" placeholder="Главная героиня">
+        </div>
+
+        <div class="field">
+            <label>Возраст</label>
+            <input id="charAge" value="${escapeAttribute(character.age)}" placeholder="18">
+        </div>
+
+        <div class="field">
+            <label>Внешность</label>
+            <textarea id="charAppearance">${escapeHtml(character.appearance)}</textarea>
+        </div>
+
+        <div class="field">
+            <label>Характер</label>
+            <textarea id="charPersonality">${escapeHtml(character.personality)}</textarea>
+        </div>
+
+        <div class="field">
+            <label>Биография</label>
+            <textarea id="charBiography">${escapeHtml(character.biography)}</textarea>
+        </div>
+
+        <div class="field">
+            <label>Отношения</label>
+            <textarea id="charRelationships">${escapeHtml(character.relationships)}</textarea>
+        </div>
+
+        <div class="field">
+            <label>Заметки</label>
+            <textarea id="charNotes">${escapeHtml(character.notes)}</textarea>
+        </div>
+
+        <button class="primary" onclick="saveCharacter(${index===null ? "null" : index})">
+            Сохранить персонажа
+        </button>
+
+    `;
+
+    openModal();
+
+}
+
+function saveCharacter(index){
+
+    const book=getCurrentBook();
+
+    const character={
+
+        name:document.getElementById("charName").value.trim() || "Без имени",
+
+        role:document.getElementById("charRole").value.trim(),
+
+        age:document.getElementById("charAge").value.trim(),
+
+        appearance:document.getElementById("charAppearance").value.trim(),
+
+        personality:document.getElementById("charPersonality").value.trim(),
+
+        biography:document.getElementById("charBiography").value.trim(),
+
+        relationships:document.getElementById("charRelationships").value.trim(),
+
+        notes:document.getElementById("charNotes").value.trim()
+
+    };
+
+    if(index===null){
+
+        book.characters.push(character);
+
+    }else{
+
+        book.characters[index]=character;
+
+    }
+
+    book.updatedAt=Date.now();
+
+    saveData();
+
+    closeModal();
+
+    renderCharacters();
+
+    showToast("Персонаж сохранён");
+
+}
+
+function deleteCharacter(index){
+
+    if(!confirm("Удалить этого персонажа?"))return;
+
+    const book=getCurrentBook();
+
+    book.characters.splice(index,1);
+
+    book.updatedAt=Date.now();
+
+    saveData();
+
+    renderCharacters();
+
+}
+
+/* =========================================================
+   WORLD
+========================================================= */
+
+function renderWorld(){
+
+    const book=getCurrentBook();
+
+    document.getElementById("workspaceContent").innerHTML=`
+
+        <div class="section-title">
+
+            <h2>Мир книги</h2>
+
+            <button class="primary" onclick="openWorldEditor()">
+                ＋ Добавить элемент
+            </button>
+
+        </div>
+
+        <div class="world-grid">
+
+            ${
+                book.world.length
+                ?
+                book.world.map((item,index)=>`
+
+                    <div class="item-card">
+
+                        <h3>${escapeHtml(item.title)}</h3>
+
+                        <p>${escapeHtml(item.description)}</p>
+
+                        <div style="margin-top:10px;display:flex;gap:6px;">
+
+                            <button class="secondary" onclick="openWorldEditor(${index})">
+                                Изменить
+                            </button>
+
+                            <button class="secondary" onclick="deleteWorld(${index})">
+                                Удалить
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `).join("")
+                :
+                `
+                    <div class="empty" style="grid-column:1/-1;">
+                        Здесь будут страны, города, правила мира,
+                        магия, история и другие детали.
+                    </div>
+                `
+            }
+
+        </div>
+
+    `;
+
+}
+
+function openWorldEditor(index=null){
+
+    const book=getCurrentBook();
+
+    const item=index===null
+        ? {title:"",description:""}
+        : book.world[index];
+
+    document.getElementById("modalTitle").textContent=
+        index===null ? "Новый элемент мира" : "Редактирование";
+
+    document.getElementById("modalContent").innerHTML=`
+
+        <div class="field">
+            <label>Название</label>
+            <input id="worldTitle" value="${escapeAttribute(item.title)}">
+        </div>
+
+        <div class="field">
+            <label>Описание</label>
+            <textarea id="worldDescription">${escapeHtml(item.description)}</textarea>
+        </div>
+
+        <button class="primary" onclick="saveWorld(${index===null ? "null" : index})">
+            Сохранить
+        </button>
+
+    `;
+
+    openModal();
+
+}
+
+function saveWorld(index){
+
+    const book=getCurrentBook();
+
+    const item={
+
+        title:document.getElementById("worldTitle").value.trim() || "Без названия",
+
+        description:document.getElementById("worldDescription").value.trim()
+
+    };
+
+    if(index===null)book.world.push(item);
+    else book.world[index]=item;
+
+    saveData();
+
+    closeModal();
+
+    renderWorld();
+
+    showToast("Элемент мира сохранён");
+
+}
+
+function deleteWorld(index){
+
+    if(!confirm("Удалить этот элемент?"))return;
+
+    const book=getCurrentBook();
+
+    book.world.splice(index,1);
+
+    saveData();
+
+    renderWorld();
+
+}
+
+/* =========================================================
+   PLAN
+========================================================= */
+
+function renderPlan(){
+
+    const book=getCurrentBook();
+
+    document.getElementById("workspaceContent").innerHTML=`
+
+        <div class="section-title">
+
+            <h2>План истории</h2>
+
+            <button class="primary" onclick="openPlanEditor()">
+                ＋ Добавить пункт
+            </button>
+
+        </div>
+
+        <div class="plan-grid">
+
+            ${
+                book.plan.length
+                ?
+                book.plan.map((item,index)=>`
+
+                    <div class="item-card">
+
+                        <h3>${escapeHtml(item.title)}</h3>
+
+                        <p>${escapeHtml(item.description)}</p>
+
+                        <div style="margin-top:10px;display:flex;gap:6px;">
+
+                            <button class="secondary" onclick="openPlanEditor(${index})">
+                                Изменить
+                            </button>
+
+                            <button class="secondary" onclick="deletePlan(${index})">
+                                Удалить
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `).join("")
+                :
+                `
+                    <div class="empty" style="grid-column:1/-1;">
+                        Построй здесь сюжет, арки персонажей
+                        и основные события книги.
+                    </div>
+                `
+            }
+
+        </div>
+
+    `;
+
+}
+
+function openPlanEditor(index=null){
+
+    const book=getCurrentBook();
+
+    const item=index===null
+        ? {title:"",description:""}
+        : book.plan[index];
+
+    document.getElementById("modalTitle").textContent="Пункт плана";
+
+    document.getElementById("modalContent").innerHTML=`
+
+        <div class="field">
+            <label>Название</label>
+            <input id="planTitle" value="${escapeAttribute(item.title)}">
+        </div>
+
+        <div class="field">
+            <label>Описание</label>
+            <textarea id="planDescription">${escapeHtml(item.description)}</textarea>
+        </div>
+
+        <button class="primary" onclick="savePlan(${index===null ? "null" : index})">
+            Сохранить
+        </button>
+
+    `;
+
+    openModal();
+
+}
+
+function savePlan(index){
+
+    const book=getCurrentBook();
+
+    const item={
+
+        title:document.getElementById("planTitle").value.trim() || "Новый пункт",
+
+        description:document.getElementById("planDescription").value.trim()
+
+    };
+
+    if(index===null)book.plan.push(item);
+    else book.plan[index]=item;
+
+    saveData();
+
+    closeModal();
+
+    renderPlan();
+
+}
+
+function deletePlan(index){
+
+    if(!confirm("Удалить этот пункт?"))return;
+
+    const book=getCurrentBook();
+
+    book.plan.splice(index,1);
+
+    saveData();
+
+    renderPlan();
+
+}
+
+/* =========================================================
+   CHAPTERS
+========================================================= */
+
+function renderChapters(){
+
+    const book=getCurrentBook();
+
+    document.getElementById("workspaceContent").innerHTML=`
+
+        <div class="section-title">
+
+            <h2>Главы</h2>
+
+            <button class="primary" onclick="openChapterEditor()">
+                ＋ Новая глава
+            </button>
+
+        </div>
+
+        <div class="chapter-grid">
+
+            ${
+                book.chapters.length
+                ?
+                book.chapters.map((chapter,index)=>`
+
+                    <div class="item-card">
+
+                        <div class="small">
+                            Глава ${index+1}
+                        </div>
+
+                        <h3 style="margin-top:4px;">
+                            ${escapeHtml(chapter.title)}
+                        </h3>
+
+                        <p>
+                            ${escapeHtml(chapter.text || "Глава пока пуста.")}
+                        </p>
+
+                        <div style="margin-top:10px;display:flex;gap:6px;">
+
+                            <button class="secondary" onclick="openChapterEditor(${index})">
+                                Открыть
+                            </button>
+
+                            <button class="secondary" onclick="deleteChapter(${index})">
+                                Удалить
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `).join("")
+                :
+                `
+                    <div class="empty" style="grid-column:1/-1;">
+                        Здесь будут главы твоей книги.
+                    </div>
+                `
+            }
+
+        </div>
+
+    `;
+
+}
+
+function openChapterEditor(index=null){
+
+    const book=getCurrentBook();
+
+    const chapter=index===null
+        ? {title:"",text:""}
+        : book.chapters[index];
+
+    document.getElementById("modalTitle").textContent=
+        index===null ? "Новая глава" : "Редактирование главы";
+
+    document.getElementById("modalContent").innerHTML=`
+
+        <div class="field">
+
+            <label>Название главы</label>
+
+            <input id="chapterTitle"
+                   value="${escapeAttribute(chapter.title)}"
+                   placeholder="Глава первая">
+
+        </div>
+
+        <div class="field">
+
+            <label>Текст главы</label>
+
+            <textarea id="chapterText"
+                      style="min-height:300px;"
+                      placeholder="Начни писать здесь...">${escapeHtml(chapter.text)}</textarea>
+
+        </div>
+
+        <button class="primary" onclick="saveChapter(${index===null ? "null" : index})">
+            Сохранить главу
+        </button>
+
+    `;
+
+    openModal();
+
+}
+
+function saveChapter(index){
+
+    const book=getCurrentBook();
+
+    const chapter={
+
+        title:document.getElementById("chapterTitle").value.trim() || "Без названия",
+
+        text:document.getElementById("chapterText").value
+
+    };
+
+    if(index===null){
+
+        book.chapters.push(chapter);
+
+    }else{
+
+        book.chapters[index]=chapter;
+
+    }
+
+    book.updatedAt=Date.now();
+
+    saveData();
+
+    closeModal();
+
+    renderChapters();
+
+    showToast("Глава сохранена");
+
+}
+
+function deleteChapter(index){
+
+    if(!confirm("Удалить эту главу?"))return;
+
+    const book=getCurrentBook();
+
+    book.chapters.splice(index,1);
+
+    book.updatedAt=Date.now();
+
+    saveData();
+
+    renderChapters();
+
+}
+
+/* =========================================================
+   BOOK AI
+========================================================= */
+
+function renderBookAI(){
+
+    document.getElementById("workspaceContent").innerHTML=`
+
+        <h2 style="margin-bottom:7px;">AI-помощник книги</h2>
+
+        <p style="color:#9691a3;font-size:13px;margin-bottom:18px;">
+            Здесь позже будет настоящий AI, который сможет работать
+            с персонажами, миром, планом и главами книги.
+        </p>
+
+        <div class="chat-window">
+
+            <div class="chat-messages">
+
+                <div class="message ai">
+                    Я могу помогать тебе развивать эту книгу,
+                    придумывать сюжет, персонажей, сцены и главы.
+                </div>
+
+            </div>
+
+            <div class="chat-input">
+
+                <input
+                    placeholder="Что хочешь изменить или придумать?"
+                    onclick="showToast('AI-модуль будет подключён следующим этапом')"
                 >
-                    Открыть
+
+                <button class="primary"
+                        onclick="showToast('AI-модуль будет подключён следующим этапом')">
+                    →
                 </button>
 
-                <button
-                    class="danger-button"
-                    onclick="deleteBook('${book.id}')"
-                >
-                    Удалить
-                </button>
+            </div>
 
+        </div>
+
+    `;
+
+}
+
+/* =========================================================
+   DELETE BOOK
+========================================================= */
+
+function deleteCurrentBook(){
+
+    const book=getCurrentBook();
+
+    if(!book)return;
+
+    if(!confirm("Удалить книгу «"+book.title+"»?"))return;
+
+    data.books=data.books.filter(item=>item.id!==book.id);
+
+    currentBookId=null;
+
+    saveData();
+
+    restoreWriter();
+
+    showToast("Книга удалена");
+
+}
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+function sendChatOnEnter(event){
+
+    if(event.key==="Enter"){
+        sendChat();
+    }
+
+}
+
+function sendChat(){
+
+    const input=document.getElementById("chatInput");
+
+    const text=input.value.trim();
+
+    if(!text)return;
+
+    const messages=document.getElementById("chatMessages");
+
+    messages.innerHTML+=`
+
+        <div class="message user">
+            ${escapeHtml(text)}
+        </div>
+
+        <div class="message ai">
+            Я получил твоё сообщение. В полноценной версии QwerZing здесь будет подключён AI-модуль.
+        </div>
+
+    `;
+
+    input.value="";
+
+    messages.scrollTop=messages.scrollHeight;
+
+}
+
+function clearChat(){
+
+    document.getElementById("chatMessages").innerHTML=`
+
+        <div class="message ai">
+            Новый чат создан. Чем займёмся?
+        </div>
+
+    `;
+
+}
+
+/* =========================================================
+   FRIEND
+========================================================= */
+
+function saveFriend(){
+
+    data.friend={
+
+        name:document.getElementById("friendName").value.trim(),
+
+        personality:document.getElementById("friendPersonality").value.trim()
+
+    };
+
+    saveData();
+
+    showToast("AI-друг сохранён");
+
+}
+
+/* =========================================================
+   ARTIST
+========================================================= */
+
+function generateDemoImage(){
+
+    const prompt=document.getElementById("artistPrompt").value.trim();
+
+    if(!prompt){
+
+        showToast("Сначала опиши изображение");
+
+        return;
+
+    }
+
+    document.getElementById("artistResult").innerHTML=`
+
+        <div style="
+            min-height:250px;
+            border:1px solid #704a35;
+            border-radius:15px;
+            background:
+                radial-gradient(circle at 70% 35%,rgba(255,149,62,.55),transparent 15%),
+                radial-gradient(circle at 35% 60%,rgba(93,64,220,.7),transparent 28%),
+                linear-gradient(145deg,#261629,#10101c);
+            display:flex;
+            align-items:flex-end;
+            padding:18px;
+        ">
+
+            <div>
+
+                <div style="font-size:12px;color:#aaa5b5;">
+                    Предпросмотр идеи
+                </div>
+
+                <strong>
+                    ${escapeHtml(prompt)}
+                </strong>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+/* =========================================================
+   LIBRARY
+========================================================= */
+
+function renderLibrary(){
+
+    const box=document.getElementById("libraryContent");
+
+    if(data.books.length===0){
+
+        box.innerHTML="Библиотека пока пуста.";
+
+        return;
+
+    }
+
+    box.innerHTML=data.books.map(book=>`
+
+        <div style="
+            padding:13px 0;
+            border-bottom:1px solid #29293d;
+            cursor:pointer;
+        "
+        onclick="openBook('${book.id}')">
+
+            <strong>${escapeHtml(book.title)}</strong>
+
+            <div style="color:#898496;font-size:11px;margin-top:4px;">
+                ${escapeHtml(book.genre)} · ${book.chapters.length} глав
             </div>
 
         </div>
 
     `).join("");
+
 }
 
-function openBook(id) {
+/* =========================================================
+   MEMORY
+========================================================= */
 
-    currentBookId = id;
+function saveMemory(){
 
-    openBookWorkspace();
-}
-
-function getCurrentBook() {
-
-    return data.books.find(
-        book => book.id === currentBookId
-    );
-}
-
-function deleteBook(id) {
-
-    const book =
-        data.books.find(book => book.id === id);
-
-    if (!book) {
-        return;
-    }
-
-    if (!confirm(
-        `Удалить книгу «${book.title}»? Это действие нельзя отменить.`
-    )) {
-        return;
-    }
-
-    data.books =
-        data.books.filter(book => book.id !== id);
+    data.globalMemory=document.getElementById("globalMemory").value;
 
     saveData();
 
-    renderBooks();
+    showToast("Память сохранена");
+
 }
 
+/* =========================================================
+   TEMPLATES
+========================================================= */
 
-/* WORKSPACE */
+function useTemplate(type){
 
-function openBookWorkspace() {
+    openCreateBook();
 
-    const book = getCurrentBook();
+    setTimeout(()=>{
 
-    if (!book) {
+        const genre=document.getElementById("newBookGenre");
+
+        if(type==="Фэнтези")genre.value="Фэнтези";
+        if(type==="Роман")genre.value="Роман";
+        if(type==="Детектив")genre.value="Детектив";
+
+    },50);
+
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function globalSearch(event){
+
+    if(event.key!=="Enter")return;
+
+    const query=event.target.value.trim().toLowerCase();
+
+    if(!query)return;
+
+    const found=data.books.find(book=>
+        book.title.toLowerCase().includes(query)
+        ||
+        book.description.toLowerCase().includes(query)
+    );
+
+    if(found){
+
         showPage("writer");
-        return;
+
+        setTimeout(()=>{
+            openBook(found.id);
+        },100);
+
+        showToast("Проект найден");
+
+    }else{
+
+        showToast("Ничего не найдено");
+
     }
 
-    document.querySelectorAll(".page").forEach(section => {
-        section.style.display = "none";
+}
+
+/* =========================================================
+   EXPORT / IMPORT
+========================================================= */
+
+function exportData(){
+
+    const json=JSON.stringify(data,null,2);
+
+    const blob=new Blob([json],{
+        type:"application/json"
     });
 
-    document.getElementById("page-workspace").style.display = "block";
+    const url=URL.createObjectURL(blob);
 
-    document.getElementById("workspaceTitle").textContent =
-        book.title;
+    const a=document.createElement("a");
 
-    document.getElementById("workspaceGenre").textContent =
-        book.genre;
+    a.href=url;
 
-    document.getElementById("aboutTitle").textContent =
-        book.title;
+    a.download="qwerzing-backup.json";
 
-    document.getElementById("aboutGenre").textContent =
-        book.genre;
-
-    document.getElementById("bookDescriptionInput").value =
-        book.description || "";
-
-    document.getElementById("authorNotes").value =
-        book.notes || "";
-
-    renderCharacters();
-    renderWorld();
-    renderPlan();
-    renderChapters();
-
-    showBookSection("about");
-}
-
-function backToWriter() {
-
-    currentBookId = null;
-
-    showPage("writer");
-}
-
-function showBookSection(section, clickedButton) {
-
-    document.querySelectorAll(".workspace-section").forEach(item => {
-        item.classList.remove("active");
-    });
-
-    const target =
-        document.getElementById("book-" + section);
-
-    if (target) {
-        target.classList.add("active");
-    }
-
-    document.querySelectorAll(".workspace-menu button")
-        .forEach(button => {
-            button.classList.remove("active");
-        });
-
-    if (clickedButton) {
-        clickedButton.classList.add("active");
-    }
-}
-
-function saveBookInfo() {
-
-    const book = getCurrentBook();
-
-    if (!book) {
-        return;
-    }
-
-    book.description =
-        document.getElementById("bookDescriptionInput").value;
-
-    book.notes =
-        document.getElementById("authorNotes").value;
-
-    book.updatedAt = new Date().toISOString();
-
-    saveData();
-
-    alert("Изменения сохранены.");
-}
-
-
-/* CHARACTERS */
-
-function openCharacterForm(character = null) {
-
-    editingCharacterId =
-        character ? character.id : null;
-
-    document.getElementById("modalContent").innerHTML = `
-
-        <h2>
-            ${character ? "Редактирование персонажа" : "Новый персонаж"}
-        </h2>
-
-        <div class="field">
-            <label>Имя персонажа</label>
-            <input
-                id="characterName"
-                value="${escapeAttribute(character?.name || "")}"
-                placeholder="Например: Рэйчел Холл"
-            >
-        </div>
-
-        <div class="field">
-            <label>Роль</label>
-            <input
-                id="characterRole"
-                value="${escapeAttribute(character?.role || "")}"
-                placeholder="Главная героиня"
-            >
-        </div>
-
-        <div class="field">
-            <label>Возраст</label>
-            <input
-                id="characterAge"
-                value="${escapeAttribute(character?.age || "")}"
-                placeholder="18"
-            >
-        </div>
-
-        <div class="field">
-            <label>Внешность</label>
-            <textarea id="characterAppearance">${escapeHtml(character?.appearance || "")}</textarea>
-        </div>
-
-        <div class="field">
-            <label>Характер</label>
-            <textarea id="characterPersonality">${escapeHtml(character?.personality || "")}</textarea>
-        </div>
-
-        <div class="field">
-            <label>Биография</label>
-            <textarea id="characterBiography">${escapeHtml(character?.biography || "")}</textarea>
-        </div>
-
-        <div class="field">
-            <label>Отношения</label>
-            <textarea id="characterRelationships">${escapeHtml(character?.relationships || "")}</textarea>
-        </div>
-
-        <div class="field">
-            <label>Заметки</label>
-            <textarea id="characterNotes">${escapeHtml(character?.notes || "")}</textarea>
-        </div>
-
-        <div class="button-row">
-
-            <button
-                class="primary-button"
-                onclick="saveCharacter()"
-            >
-                Сохранить
-            </button>
-
-            <button
-                class="secondary-button"
-                onclick="closeModal()"
-            >
-                Отмена
-            </button>
-
-        </div>
-    `;
-
-    openModal();
-}
-
-function saveCharacter() {
-
-    const book = getCurrentBook();
-
-    if (!book) {
-        return;
-    }
-
-    const character = {
-
-        id: editingCharacterId || generateId(),
-
-        name:
-            document.getElementById("characterName").value.trim(),
-
-        role:
-            document.getElementById("characterRole").value.trim(),
-
-        age:
-            document.getElementById("characterAge").value.trim(),
-
-        appearance:
-            document.getElementById("characterAppearance").value,
-
-        personality:
-            document.getElementById("characterPersonality").value,
-
-        biography:
-            document.getElementById("characterBiography").value,
-
-        relationships:
-            document.getElementById("characterRelationships").value,
-
-        notes:
-            document.getElementById("characterNotes").value
-    };
-
-    if (!character.name) {
-
-        alert("Введи имя персонажа.");
-
-        return;
-    }
-
-    if (editingCharacterId) {
-
-        const index =
-            book.characters.findIndex(
-                item => item.id === editingCharacterId
-            );
-
-        if (index !== -1) {
-            book.characters[index] = character;
-        }
-
-    } else {
-
-        book.characters.push(character);
-    }
-
-    book.updatedAt = new Date().toISOString();
-
-    saveData();
-
-    closeModal();
-
-    renderCharacters();
-}
-
-function renderCharacters() {
-
-    const list =
-        document.getElementById("charactersList");
-
-    if (!list) {
-        return;
-    }
-
-    const book = getCurrentBook();
-
-    if (!book || book.characters.length === 0) {
-
-        list.innerHTML = `
-
-            <div class="empty">
-
-                <h3>Персонажей пока нет</h3>
-
-                <p style="margin-top:8px">
-                    Создай первого героя своей истории.
-                </p>
-
-            </div>
-        `;
-
-        return;
-    }
-
-    list.innerHTML =
-        book.characters.map(character => `
-
-            <div class="list-item">
-
-                <div>
-
-                    <h3>
-                        ${escapeHtml(character.name)}
-                    </h3>
-
-                    <p>
-                        ${escapeHtml(character.role || "Роль не указана")}
-                        ${character.age ? " · " + escapeHtml(character.age) + " лет" : ""}
-                    </p>
-
-                    ${
-                        character.personality
-                        ?
-                        `<p style="margin-top:8px">
-                            ${escapeHtml(character.personality)}
-                        </p>`
-                        :
-                        ""
-                    }
-
-                </div>
-
-                <div class="button-row">
-
-                    <button
-                        class="secondary-button"
-                        onclick="editCharacter('${character.id}')"
-                    >
-                        Изменить
-                    </button>
-
-                    <button
-                        class="danger-button"
-                        onclick="deleteCharacter('${character.id}')"
-                    >
-                        Удалить
-                    </button>
-
-                </div>
-
-            </div>
-
-        `).join("");
-}
-
-function editCharacter(id) {
-
-    const book = getCurrentBook();
-
-    if (!book) {
-        return;
-    }
-
-    const character =
-        book.characters.find(
-            item => item.id === id
-        );
-
-    if (character) {
-        openCharacterForm(character);
-    }
-}
-
-function deleteCharacter(id) {
-
-    const book = getCurrentBook();
-
-    if (!book) {
-        return;
-    }
-
-    if (!confirm("Удалить этого персонажа?")) {
-        return;
-    }
-
-    book.characters =
-        book.characters.filter(
-            character => character.id !== id
-        );
-
-    saveData();
-
-    renderCharacters();
-}
-
-
-/* WORLD */
-
-function openWorldForm(item = null) {
-
-    editingWorldId =
-        item ? item.id : null;
-
-    document.getElementById("modalContent").innerHTML = `
-
-        <h2>
-            ${item ? "Редактирование элемента мира" : "Новый элемент мира"}
-        </h2>
-
-        <div class="field">
-            <label>Название</label>
-            <input
-                id="worldName"
-                value="${escapeAttribute(item?.name || "")}"
-                placeholder="Например: Национальный университет"
-            >
-        </div>
-
-        <div class="field">
-            <label>Описание</label>
-            <textarea id="worldDescription">${escapeHtml(item?.description || "")}</textarea>
-        </div>
-
-        <div class="button-row">
-
-            <button class="primary-button" onclick="saveWorldItem()">
-                Сохранить
-            </button>
-
-            <button class="secondary-button" onclick="closeModal()">
-                Отмена
-            </button>
-
-        </div>
-    `;
-
-    openModal();
-}
-
-function saveWorldItem() {
-
-    const book = getCurrentBook();
-
-    if (!book) {
-        return;
-    }
-
-    const item = {
-
-        id: editingWorldId || generateId(),
-
-        name:
-            document.getElementById("worldName").value.trim(),
-
-        description:
-            document.getElementById("worldDescription").value
-    };
-
-    if (!item.name) {
-
-        alert("Введи название.");
-
-        return;
-    }
-
-    if (editingWorldId) {
-
-        const index =
-            book.world.findIndex(
-                world => world.id === editingWorldId
-            );
-
-        if (index !== -1) {
-            book.world[index] = item;
-        }
-
-    } else {
-
-        book.world.push(item);
-    }
-
-    saveData();
-
-    closeModal();
-
-    renderWorld();
-}
-
-function renderWorld() {
-
-    const list =
-        document.getElementById("worldList");
-
-    if (!list) {
-        return;
-    }
-
-    const book = getCurrentBook();
-
-    if (!book || book.world.length === 0) {
-
-        list.innerHTML = `
-
-            <div class="empty">
-
-                <h3>Мир пока пуст</h3>
-
-                <p style="margin-top:8px">
-                    Добавь место, государство, правило мира или любую важную деталь.
-                </p>
-
-            </div>
-        `;
-
-        return;
-    }
-
-    list.innerHTML =
-        book.world.map(item => `
-
-            <div class="list-item">
-
-                <div>
-
-                    <h3>${escapeHtml(item.name)}</h3>
-
-                    <p>
-                        ${escapeHtml(item.description || "")}
-                    </p>
-
-                </div>
-
-                <div class="button-row">
-
-                    <button
-                        class="secondary-button"
-                        onclick="editWorld('${item.id}')"
-                    >
-                        Изменить
-                    </button>
-
-                    <button
-                        class="danger-button"
-                        onclick="deleteWorld('${item.id}')"
-                    >
-                        Удалить
-                    </button>
-
-                </div>
-
-            </div>
-
-        `).join("");
-}
-
-function editWorld(id) {
-
-    const book = getCurrentBook();
-
-    const item =
-        book.world.find(
-            world => world.id === id
-        );
-
-    if (item) {
-        openWorldForm(item);
-    }
-}
-
-function deleteWorld(id) {
-
-    const book = getCurrentBook();
-
-    if (!confirm("Удалить этот элемент мира?")) {
-        return;
-    }
-
-    book.world =
-        book.world.filter(
-            item => item.id !== id
-        );
-
-    saveData();
-
-    renderWorld();
-}
-
-
-/* PLAN */
-
-function openPlanForm(item = null) {
-
-    editingPlanId =
-        item ? item.id : null;
-
-    document.getElementById("modalContent").innerHTML = `
-
-        <h2>
-            ${item ? "Редактирование пункта" : "Новый пункт плана"}
-        </h2>
-
-        <div class="field">
-            <label>Название</label>
-
-            <input
-                id="planName"
-                value="${escapeAttribute(item?.name || "")}"
-                placeholder="Например: Встреча Рэйчел и Джейсона"
-            >
-        </div>
-
-        <div class="field">
-            <label>Описание</label>
-
-            <textarea id="planDescription">${escapeHtml(item?.description || "")}</textarea>
-        </div>
-
-        <div class="button-row">
-
-            <button class="primary-button" onclick="savePlanItem()">
-                Сохранить
-            </button>
-
-            <button class="secondary-button" onclick="closeModal()">
-                Отмена
-            </button>
-
-        </div>
-    `;
-
-    openModal();
-}
-
-function savePlanItem() {
-
-    const book = getCurrentBook();
-
-    const item = {
-
-        id: editingPlanId || generateId(),
-
-        name:
-            document.getElementById("planName").value.trim(),
-
-        description:
-            document.getElementById("planDescription").value
-    };
-
-    if (!item.name) {
-
-        alert("Введи название пункта.");
-
-        return;
-    }
-
-    if (editingPlanId) {
-
-        const index =
-            book.plan.findIndex(
-                plan => plan.id === editingPlanId
-            );
-
-        if (index !== -1) {
-            book.plan[index] = item;
-        }
-
-    } else {
-
-        book.plan.push(item);
-    }
-
-    saveData();
-
-    closeModal();
-
-    renderPlan();
-}
-
-function renderPlan() {
-
-    const list =
-        document.getElementById("planList");
-
-    if (!list) {
-        return;
-    }
-
-    const book = getCurrentBook();
-
-    if (!book || book.plan.length === 0) {
-
-        list.innerHTML = `
-
-            <div class="empty">
-
-                <h3>План пока пуст</h3>
-
-                <p style="margin-top:8px">
-                    Добавь первое событие своей истории.
-                </p>
-
-            </div>
-        `;
-
-        return;
-    }
-
-    list.innerHTML =
-        book.plan.map((item, index) => `
-
-            <div class="list-item">
-
-                <div>
-
-                    <h3>
-                        ${index + 1}. ${escapeHtml(item.name)}
-                    </h3>
-
-                    <p>
-                        ${escapeHtml(item.description || "")}
-                    </p>
-
-                </div>
-
-                <div class="button-row">
-
-                    <button
-                        class="secondary-button"
-                        onclick="editPlan('${item.id}')"
-                    >
-                        Изменить
-                    </button>
-
-                    <button
-                        class="danger-button"
-                        onclick="deletePlan('${item.id}')"
-                    >
-                        Удалить
-                    </button>
-
-                </div>
-
-            </div>
-
-        `).join("");
-}
-
-function editPlan(id) {
-
-    const book = getCurrentBook();
-
-    const item =
-        book.plan.find(
-            plan => plan.id === id
-        );
-
-    if (item) {
-        openPlanForm(item);
-    }
-}
-
-function deletePlan(id) {
-
-    const book = getCurrentBook();
-
-    if (!confirm("Удалить этот пункт?")) {
-        return;
-    }
-
-    book.plan =
-        book.plan.filter(
-            item => item.id !== id
-        );
-
-    saveData();
-
-    renderPlan();
-}
-
-
-/* CHAPTERS */
-
-function openChapterForm(chapter = null) {
-
-    editingChapterId =
-        chapter ? chapter.id : null;
-
-    document.getElementById("modalContent").innerHTML = `
-
-        <h2>
-            ${chapter ? "Редактирование главы" : "Новая глава"}
-        </h2>
-
-        <div class="field">
-            <label>Название главы</label>
-
-            <input
-                id="chapterTitle"
-                value="${escapeAttribute(chapter?.title || "")}"
-                placeholder="Например: Глава 1. Новый рассвет"
-            >
-        </div>
-
-        <div class="field">
-            <label>Текст главы</label>
-
-            <textarea
-                id="chapterText"
-                style="min-height:300px"
-                placeholder="Здесь будет текст главы..."
-            >${escapeHtml(chapter?.text || "")}</textarea>
-        </div>
-
-        <div class="button-row">
-
-            <button class="primary-button" onclick="saveChapter()">
-                Сохранить главу
-            </button>
-
-            <button class="secondary-button" onclick="closeModal()">
-                Отмена
-            </button>
-
-        </div>
-    `;
-
-    openModal();
-}
-
-function saveChapter() {
-
-    const book = getCurrentBook();
-
-    const chapter = {
-
-        id: editingChapterId || generateId(),
-
-        title:
-            document.getElementById("chapterTitle").value.trim(),
-
-        text:
-            document.getElementById("chapterText").value
-    };
-
-    if (!chapter.title) {
-
-        alert("Введи название главы.");
-
-        return;
-    }
-
-    if (editingChapterId) {
-
-        const index =
-            book.chapters.findIndex(
-                item => item.id === editingChapterId
-            );
-
-        if (index !== -1) {
-            book.chapters[index] = chapter;
-        }
-
-    } else {
-
-        book.chapters.push(chapter);
-    }
-
-    saveData();
-
-    closeModal();
-
-    renderChapters();
-}
-
-function renderChapters() {
-
-    const list =
-        document.getElementById("chaptersList");
-
-    if (!list) {
-        return;
-    }
-
-    const book = getCurrentBook();
-
-    if (!book || book.chapters.length === 0) {
-
-        list.innerHTML = `
-
-            <div class="empty">
-
-                <h3>Глав пока нет</h3>
-
-                <p style="margin-top:8px">
-                    Создай первую главу своей книги.
-                </p>
-
-            </div>
-        `;
-
-        return;
-    }
-
-    list.innerHTML =
-        book.chapters.map((chapter, index) => `
-
-            <div class="list-item">
-
-                <div>
-
-                    <h3>
-                        ${index + 1}. ${escapeHtml(chapter.title)}
-                    </h3>
-
-                    <p>
-                        ${escapeHtml(
-                            chapter.text
-                            ? chapter.text.substring(0, 180)
-                            : "Глава пока пустая."
-                        )}
-                    </p>
-
-                </div>
-
-                <div class="button-row">
-
-                    <button
-                        class="secondary-button"
-                        onclick="editChapter('${chapter.id}')"
-                    >
-                        Открыть
-                    </button>
-
-                    <button
-                        class="danger-button"
-                        onclick="deleteChapter('${chapter.id}')"
-                    >
-                        Удалить
-                    </button>
-
-                </div>
-
-            </div>
-
-        `).join("");
-}
-
-function editChapter(id) {
-
-    const book = getCurrentBook();
-
-    const chapter =
-        book.chapters.find(
-            item => item.id === id
-        );
-
-    if (chapter) {
-        openChapterForm(chapter);
-    }
-}
-
-function deleteChapter(id) {
-
-    const book = getCurrentBook();
-
-    if (!confirm("Удалить эту главу?")) {
-        return;
-    }
-
-    book.chapters =
-        book.chapters.filter(
-            chapter => chapter.id !== id
-        );
-
-    saveData();
-
-    renderChapters();
-}
-
-
-/* MODAL */
-
-function openModal() {
-
-    document
-        .getElementById("modalBackdrop")
-        .classList.add("show");
-}
-
-function closeModal() {
-
-    document
-        .getElementById("modalBackdrop")
-        .classList.remove("show");
-
-    editingCharacterId = null;
-    editingWorldId = null;
-    editingPlanId = null;
-    editingChapterId = null;
-}
-
-
-/* CHAT */
-
-function sendChatMessage() {
-
-    const input =
-        document.getElementById("chatInput");
-
-    const text =
-        input.value.trim();
-
-    if (!text) {
-        return;
-    }
-
-    const messages =
-        document.getElementById("chatMessages");
-
-    const userMessage =
-        document.createElement("div");
-
-    userMessage.className = "message user";
-
-    userMessage.textContent = text;
-
-    messages.appendChild(userMessage);
-
-    input.value = "";
-
-    setTimeout(() => {
-
-        const aiMessage =
-            document.createElement("div");
-
-        aiMessage.className = "message ai";
-
-        aiMessage.textContent =
-            "Я пока работаю в демонстрационном режиме. Но интерфейс уже готов, и позже сюда можно подключить настоящий AI.";
-
-        messages.appendChild(aiMessage);
-
-        messages.scrollTop =
-            messages.scrollHeight;
-
-    }, 400);
-}
-
-function friendGreeting() {
-
-    alert(
-        "Привет! Я твой будущий AI Friend. Здесь позже появится полноценный персональный помощник."
-    );
-}
-
-function artistDemo() {
-
-    alert(
-        "Мастерская художника готова к дальнейшему подключению генерации изображений."
-    );
-}
-
-function bookAssistantDemo() {
-
-    alert(
-        "AI-помощник книги скоро сможет анализировать персонажей, мир, план и главы."
-    );
-}
-
-
-/* MEMORY */
-
-function saveGlobalMemory() {
-
-    data.globalMemory =
-        document.getElementById("globalMemory").value;
-
-    saveData();
-
-    alert("Память сохранена.");
-}
-
-
-/* EXPORT */
-
-function exportData() {
-
-    const json =
-        JSON.stringify(data, null, 2);
-
-    const blob =
-        new Blob(
-            [json],
-            { type: "application/json" }
-        );
-
-    const url =
-        URL.createObjectURL(blob);
-
-    const link =
-        document.createElement("a");
-
-    link.href = url;
-
-    link.download =
-        "qwerzing-backup.json";
-
-    link.click();
+    a.click();
 
     URL.revokeObjectURL(url);
+
+    showToast("Резервная копия создана");
+
 }
 
+function importData(event){
 
-/* IMPORT */
+    const file=event.target.files[0];
 
-function importData(event) {
+    if(!file)return;
 
-    const file =
-        event.target.files[0];
+    const reader=new FileReader();
 
-    if (!file) {
-        return;
-    }
+    reader.onload=function(){
 
-    const reader =
-        new FileReader();
+        try{
 
-    reader.onload = function(e) {
+            const imported=JSON.parse(reader.result);
 
-        try {
-
-            const imported =
-                JSON.parse(e.target.result);
-
-            if (!imported.books) {
-                throw new Error();
-            }
-
-            data = imported;
-
-            data.books.forEach(normalizeBook);
+            data=normalizeData(imported);
 
             saveData();
 
-            alert("Данные успешно импортированы.");
+            showToast("Данные восстановлены");
 
-            location.reload();
+            setTimeout(()=>{
+                location.reload();
+            },700);
 
-        } catch {
+        }catch(error){
 
-            alert(
-                "Не удалось импортировать этот файл."
-            );
+            showToast("Файл повреждён или имеет неверный формат");
+
         }
 
     };
 
     reader.readAsText(file);
+
 }
 
+function resetData(){
 
-/* RESET */
-
-function resetAllData() {
-
-    const answer =
-        confirm(
-            "Ты уверена, что хочешь удалить ВСЕ книги и данные QwerZing?"
-        );
-
-    if (!answer) {
-        return;
-    }
+    if(!confirm(
+        "Удалить все книги, персонажей и данные QwerZing на этом устройстве?"
+    ))return;
 
     localStorage.removeItem(STORAGE_KEY);
 
-    data = defaultData();
+    data=defaultData();
 
-    currentBookId = null;
+    currentBookId=null;
 
-    showPage("writer");
+    showToast("Данные очищены");
 
-    alert("Все локальные данные удалены.");
+    setTimeout(()=>{
+        location.reload();
+    },700);
+
 }
 
+/* =========================================================
+   MODAL
+========================================================= */
 
-/* SECURITY */
+function openModal(){
 
-function escapeHtml(value) {
+    document.getElementById("modal").classList.add("show");
 
-    if (value === null || value === undefined) {
-        return "";
+}
+
+function closeModal(){
+
+    document.getElementById("modal").classList.remove("show");
+
+}
+
+document.getElementById("modal").addEventListener("click",function(event){
+
+    if(event.target===this){
+        closeModal();
     }
 
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+});
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+    const toast=document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer=setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },2200);
+
 }
 
-function escapeAttribute(value) {
+/* =========================================================
+   THEME
+========================================================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("light-preview");
+
+    showToast("Режим оформления переключён");
+
+}
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+function escapeAttribute(value){
 
     return escapeHtml(value);
+
 }
 
+/* =========================================================
+   START
+========================================================= */
 
-/* START */
+renderContinue();
 
-showPage("home");
+document.getElementById("statProjects").textContent=data.books.length;
 
 </script>
 
