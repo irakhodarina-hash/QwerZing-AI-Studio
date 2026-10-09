@@ -2,4477 +2,1764 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#09070f">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QwerZing AI Studio</title>
 
 <style>
-:root{
-  --bg:#09070f;
-  --bg2:#0d0a15;
-  --panel:#12101b;
-  --panel2:#171321;
-  --panel3:#1d1829;
-  --line:rgba(255,255,255,.08);
-  --line2:rgba(255,255,255,.13);
-  --text:#fff;
-  --muted:#aaa4b8;
-  --muted2:#777184;
-  --purple:#9b5cff;
-  --purple2:#c06cff;
-  --pink:#ff4fb8;
-  --cyan:#5ee7ff;
-  --orange:#ff9b54;
-  --green:#63e6a7;
-  --red:#ff6878;
-  --shadow:0 20px 60px rgba(0,0,0,.35);
-  --radius:22px;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  min-height:100%;
-  background:var(--bg);
-}
-
-body{
-  margin:0;
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 78% 4%,rgba(155,92,255,.12),transparent 27%),
-    radial-gradient(circle at 30% 90%,rgba(255,79,184,.06),transparent 28%),
-    var(--bg);
-  color:var(--text);
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  overflow-x:hidden;
-}
-
-button,
-input,
-textarea,
-select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-img{
-  max-width:100%;
-  display:block;
-}
-
-.app{
-  display:flex;
-  min-height:100vh;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-  position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
-  width:248px;
-  padding:24px 16px;
-  background:rgba(9,7,15,.94);
-  border-right:1px solid var(--line);
-  z-index:100;
-  display:flex;
-  flex-direction:column;
-  backdrop-filter:blur(22px);
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  padding:3px 10px 27px;
-  font-size:21px;
-  font-weight:800;
-  letter-spacing:-.5px;
-}
-
-.logo-mark{
-  width:34px;
-  height:34px;
-  border-radius:11px;
-  background:
-    radial-gradient(circle at 30% 25%,#fff 0 4%,transparent 5%),
-    linear-gradient(135deg,#9b5cff,#ff4fb8);
-  box-shadow:0 0 28px rgba(155,92,255,.42);
-  position:relative;
-  overflow:hidden;
+:root {
+  --bg: #fff8fb;
+  --panel: #ffffff;
+  --pink: #f3b8d5;
+  --purple: #c8b8f5;
+  --blue: #bce5ef;
+  --peach: #ffddc8;
+  --text: #51445d;
+  --muted: #94879c;
+  --border: #f0e5f0;
+  --shadow: 0 8px 28px rgba(146, 111, 163, .10);
 }
 
-.logo-mark:after{
-  content:"";
-  position:absolute;
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  border:2px solid rgba(255,255,255,.9);
-  left:8px;
-  top:8px;
+* {
+  box-sizing: border-box;
 }
 
-.nav{
-  display:flex;
-  flex-direction:column;
-  gap:5px;
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
 }
 
-.nav-label{
-  color:#5f596b;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1.4px;
-  text-transform:uppercase;
-  padding:17px 13px 8px;
+button, input, textarea, select {
+  font: inherit;
 }
 
-.nav-item{
-  width:100%;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  border:1px solid transparent;
-  background:transparent;
-  color:#aaa5b5;
-  padding:12px 13px;
-  border-radius:13px;
-  text-align:left;
-  transition:.2s ease;
+button {
+  cursor: pointer;
 }
 
-.nav-item:hover{
-  background:rgba(255,255,255,.04);
-  color:#fff;
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #ad8be7;
+  outline-offset: 2px;
 }
 
-.nav-item.active{
-  color:#fff;
-  background:linear-gradient(90deg,rgba(155,92,255,.2),rgba(155,92,255,.06));
-  border-color:rgba(155,92,255,.16);
-  box-shadow:inset 3px 0 0 var(--purple);
+.app {
+  min-height: 100vh;
 }
 
-.nav-icon{
-  width:20px;
-  text-align:center;
-  font-size:17px;
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 245px;
+  padding: 22px 15px;
+  background: #fff;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 10;
+  transition: width .25s;
 }
 
-.sidebar-bottom{
-  margin-top:auto;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px 25px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.free-badge{
-  margin:12px 5px 0;
-  padding:14px;
-  border:1px solid rgba(99,230,167,.13);
-  background:rgba(99,230,167,.05);
-  border-radius:15px;
+.brand-icon {
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
+  font-size: 22px;
+  color: white;
 }
 
-.free-badge strong{
-  display:block;
-  font-size:12px;
-  margin-bottom:4px;
+.nav-title {
+  padding: 10px 12px;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.free-badge span{
-  color:var(--muted2);
-  font-size:11px;
-  line-height:1.4;
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-/* MAIN */
-
-.main{
-  width:calc(100% - 248px);
-  margin-left:248px;
-  min-height:100vh;
-  padding:0 30px 40px;
-}
-
-.topbar{
-  height:78px;
-  display:flex;
-  align-items:center;
-  gap:16px;
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(9,7,15,.78);
-  backdrop-filter:blur(18px);
-}
-
-.mobile-menu{
-  display:none;
-  width:42px;
-  height:42px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  color:#fff;
-  background:var(--panel);
-}
-
-.search{
-  height:42px;
-  max-width:420px;
-  flex:1;
-  position:relative;
-}
-
-.search input{
-  width:100%;
-  height:100%;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.035);
-  color:#fff;
-  border-radius:13px;
-  outline:none;
-  padding:0 15px 0 43px;
-}
-
-.search input:focus{
-  border-color:rgba(155,92,255,.45);
-}
-
-.search-icon{
-  position:absolute;
-  left:15px;
-  top:11px;
-  color:#777184;
-}
-
-.top-actions{
-  margin-left:auto;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.icon-btn{
-  width:40px;
-  height:40px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  color:#c6c0cf;
-  background:rgba(255,255,255,.035);
-}
-
-.icon-btn:hover{
-  color:#fff;
-  border-color:var(--line2);
-}
-
-.profile-mini{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-left:6px;
-  padding-left:12px;
-  border-left:1px solid var(--line);
-}
-
-.avatar{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,#9b5cff,#ff4fb8);
-  font-weight:800;
-  font-size:13px;
-}
-
-.profile-mini strong{
-  font-size:12px;
-  display:block;
-}
-
-.profile-mini span{
-  display:block;
-  font-size:10px;
-  color:var(--muted2);
-  margin-top:2px;
-}
-
-/* PAGES */
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-/* DASHBOARD */
-
-.hero{
-  position:relative;
-  min-height:330px;
-  border:1px solid var(--line);
-  border-radius:28px;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 72% 50%,rgba(255,79,184,.16),transparent 33%),
-    linear-gradient(105deg,#171022 0%,#130e1d 50%,#171022 100%);
-  box-shadow:var(--shadow);
-}
-
-.hero:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(90deg,rgba(11,8,17,.96) 0%,rgba(11,8,17,.72) 42%,rgba(11,8,17,.1) 78%);
-  z-index:1;
-}
-
-.hero-content{
-  position:relative;
-  z-index:3;
-  width:52%;
-  min-width:460px;
-  padding:54px 0 50px 50px;
-}
-
-.hero-kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  color:#c7aaff;
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:16px;
-}
-
-.hero h1{
-  margin:0 0 10px;
-  font-size:34px;
-  line-height:1.12;
-  letter-spacing:-1.3px;
-}
-
-.hero h1 span{
-  background:linear-gradient(90deg,#fff,#d8b9ff);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  margin:0;
-  color:#aaa3b4;
-  line-height:1.65;
-  max-width:520px;
-  font-size:14px;
-}
-
-.hero-buttons{
-  display:flex;
-  gap:10px;
-  margin-top:25px;
-}
-
-.btn{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.05);
-  color:#fff;
-  padding:11px 17px;
-  border-radius:12px;
-  transition:.2s ease;
-}
-
-.btn:hover{
-  transform:translateY(-1px);
-  border-color:var(--line2);
-}
-
-.btn-primary{
-  border-color:rgba(155,92,255,.55);
-  background:linear-gradient(135deg,#8e4df3,#b34cff);
-  box-shadow:0 8px 25px rgba(155,92,255,.25);
-}
-
-.btn-primary:hover{
-  box-shadow:0 12px 35px rgba(155,92,255,.38);
-}
-
-.btn-soft{
-  background:rgba(255,255,255,.045);
-}
-
-.hero-image{
-  position:absolute;
-  right:0;
-  top:0;
-  width:55%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-  opacity:.94;
-  z-index:0;
-}
-
-.hero-glow{
-  position:absolute;
-  width:300px;
-  height:300px;
-  right:19%;
-  top:20px;
-  border-radius:50%;
-  background:rgba(255,79,184,.12);
-  filter:blur(50px);
-  z-index:0;
-}
-
-/* FEATURE CARDS */
-
-.section-title{
-  margin:32px 0 15px;
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-}
-
-.section-title h2{
-  margin:0;
-  font-size:18px;
-}
-
-.section-title p{
-  margin:5px 0 0;
-  color:var(--muted2);
-  font-size:12px;
-}
-
-.feature-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-
-.feature-card{
-  min-height:240px;
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:linear-gradient(180deg,#171321,#100d17);
-  cursor:pointer;
-  transition:.25s ease;
-}
-
-.feature-card:hover{
-  transform:translateY(-4px);
-  border-color:rgba(155,92,255,.3);
-  box-shadow:0 15px 40px rgba(0,0,0,.28);
-}
-
-.feature-image{
-  width:100%;
-  height:145px;
-  object-fit:cover;
-  object-position:center;
-  border-bottom:1px solid var(--line);
-}
-
-.feature-info{
-  padding:14px 15px;
-}
-
-.feature-info h3{
-  margin:0 0 5px;
-  font-size:15px;
-}
-
-.feature-info p{
-  margin:0;
-  color:var(--muted2);
-  font-size:11px;
-  line-height:1.5;
-}
-
-/* LOWER DASHBOARD */
-
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 310px;
-  gap:16px;
-  margin-top:25px;
-}
-
-.panel{
-  border:1px solid var(--line);
-  background:rgba(18,16,27,.82);
-  border-radius:20px;
-  padding:20px;
-}
-
-.panel-title{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:15px;
-}
-
-.panel-title h3{
-  margin:0;
-  font-size:15px;
-}
-
-.panel-title button{
-  border:0;
-  background:none;
-  color:#b88aff;
-  font-size:11px;
-}
-
-.continue-item{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:12px;
-  border-radius:15px;
-  background:rgba(255,255,255,.03);
-  border:1px solid transparent;
-  margin-bottom:9px;
-  cursor:pointer;
-}
-
-.continue-item:hover{
-  border-color:var(--line);
-  background:rgba(255,255,255,.045);
-}
-
-.continue-icon{
-  width:45px;
-  height:45px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,rgba(155,92,255,.2),rgba(255,79,184,.12));
-  font-size:20px;
-}
-
-.continue-item strong{
-  display:block;
-  font-size:13px;
-}
-
-.continue-item span{
-  display:block;
-  color:var(--muted2);
-  font-size:11px;
-  margin-top:4px;
-}
-
-.quick-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
-}
-
-.quick-btn{
-  min-height:82px;
-  border:1px solid var(--line);
-  border-radius:15px;
-  background:rgba(255,255,255,.025);
-  color:#fff;
-  text-align:left;
-  padding:14px;
-}
-
-.quick-btn:hover{
-  border-color:rgba(155,92,255,.28);
-  background:rgba(155,92,255,.06);
-}
-
-.quick-btn b{
-  display:block;
-  font-size:13px;
-  margin-bottom:5px;
+.nav button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 13px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
 }
 
-.quick-btn span{
-  color:var(--muted2);
-  font-size:10px;
+.nav button:hover,
+.nav button.active {
+  background: linear-gradient(100deg, #fbe5f0, #eee8ff);
 }
 
-/* RIGHT SIDE */
-
-.quote{
-  border-radius:17px;
-  padding:18px;
-  background:
-    radial-gradient(circle at 80% 10%,rgba(255,79,184,.17),transparent 38%),
-    linear-gradient(135deg,rgba(155,92,255,.12),rgba(255,255,255,.025));
-  border:1px solid rgba(155,92,255,.13);
-  margin-bottom:14px;
-}
-
-.quote .quote-mark{
-  font-size:28px;
-  color:#b97aff;
-  line-height:1;
-}
-
-.quote p{
-  font-size:12px;
-  line-height:1.65;
-  color:#d0cbd6;
-  margin:5px 0 0;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
-}
-
-.stat{
-  padding:15px;
-  border:1px solid var(--line);
-  border-radius:15px;
-  background:rgba(255,255,255,.025);
-}
-
-.stat strong{
-  display:block;
-  font-size:22px;
-}
-
-.stat span{
-  color:var(--muted2);
-  font-size:10px;
-}
-
-.activity{
-  margin-top:14px;
-}
-
-.activity-item{
-  display:flex;
-  gap:10px;
-  padding:10px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.activity-item:last-child{
-  border-bottom:0;
+.nav-icon {
+  width: 25px;
+  text-align: center;
+  font-size: 19px;
 }
 
-.activity-dot{
-  width:8px;
-  height:8px;
-  margin-top:5px;
-  border-radius:50%;
-  background:var(--purple);
-  box-shadow:0 0 12px rgba(155,92,255,.7);
-  flex:none;
+.sidebar-bottom {
+  margin-top: 25px;
+  padding: 15px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fff0f6, #f0edff, #eafaff);
+  text-align: center;
 }
 
-.activity-item strong{
-  display:block;
-  font-size:11px;
+.mascot {
+  font-size: 43px;
+  margin-bottom: 5px;
 }
 
-.activity-item span{
-  display:block;
-  color:var(--muted2);
-  font-size:10px;
-  margin-top:3px;
+.mascot-name {
+  font-weight: bold;
 }
 
-/* INNER PAGES */
-
-.page-header{
-  margin:15px 0 25px;
-}
-
-.page-header h1{
-  margin:0;
-  font-size:30px;
-  letter-spacing:-1px;
-}
-
-.page-header p{
-  color:var(--muted);
-  margin:8px 0 0;
-  max-width:650px;
-  line-height:1.6;
-  font-size:13px;
-}
-
-.toolbar{
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-  margin-bottom:18px;
-}
-
-.books-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
 }
 
-.book-card{
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:var(--panel);
-  padding:18px;
-  min-height:210px;
-  display:flex;
-  flex-direction:column;
-  transition:.2s;
+.main {
+  margin-left: 245px;
+  padding: 22px;
+  min-width: 0;
 }
 
-.book-card:hover{
-  border-color:rgba(155,92,255,.28);
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
 }
 
-.book-cover{
-  height:82px;
-  border-radius:15px;
-  margin-bottom:15px;
-  background:
-    radial-gradient(circle at 30% 20%,rgba(255,255,255,.18),transparent 20%),
-    linear-gradient(135deg,#7e42dc,#e64da8);
-  display:grid;
-  place-items:center;
-  font-size:31px;
+.menu-toggle {
+  display: none;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
 }
 
-.book-card h3{
-  margin:0 0 6px;
-  font-size:16px;
+.search {
+  flex: 1;
 }
 
-.book-card p{
-  margin:0;
-  color:var(--muted2);
-  font-size:11px;
-  line-height:1.5;
+.search input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: white;
+  color: var(--text);
 }
 
-.book-meta{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  margin-top:11px;
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 12px 7px 7px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
 }
 
-.tag{
-  padding:5px 8px;
-  border-radius:8px;
-  background:rgba(255,255,255,.05);
-  color:#aaa3b4;
-  font-size:9px;
+.avatar {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: white;
+  font-weight: bold;
 }
 
-.book-actions{
-  display:flex;
-  gap:7px;
-  margin-top:auto;
-  padding-top:16px;
+.page {
+  display: none;
 }
 
-.small-btn{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.04);
-  color:#fff;
-  border-radius:9px;
-  padding:8px 10px;
-  font-size:10px;
+.page.active {
+  display: block;
 }
 
-.small-btn:hover{
-  border-color:var(--line2);
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 38px;
+  border-radius: 25px;
+  background: linear-gradient(120deg, #ffe7ef, #eee8ff 58%, #e1f6fb);
+  box-shadow: var(--shadow);
 }
 
-.small-btn.danger{
-  color:#ff8996;
+.hero-label {
+  color: #9779b7;
+  font-size: 13px;
+  font-weight: bold;
 }
 
-/* FORM */
-
-.form-card{
-  max-width:760px;
-  border:1px solid var(--line);
-  background:var(--panel);
-  border-radius:22px;
-  padding:23px;
-}
-
-.field{
-  margin-bottom:16px;
-}
-
-.field label{
-  display:block;
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:7px;
+.hero h1 {
+  max-width: 620px;
+  margin: 15px 0;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.13;
 }
 
-.field input,
-.field textarea,
-.field select{
-  width:100%;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:#0d0a14;
-  color:#fff;
-  padding:12px 13px;
-  outline:none;
+.hero p {
+  max-width: 580px;
+  line-height: 1.8;
+  color: #786b83;
 }
 
-.field textarea{
-  min-height:120px;
-  resize:vertical;
+.hero-decoration {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  font-size: 100px;
+  opacity: .65;
+  pointer-events: none;
 }
 
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
-  border-color:rgba(155,92,255,.5);
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  color: var(--text);
 }
 
-.form-actions{
-  display:flex;
-  gap:9px;
+.btn.primary {
+  border: none;
+  background: linear-gradient(120deg, #e9b5d1, #c7b7f4);
+  color: #51405e;
+  font-weight: bold;
 }
 
-/* WORKSPACE */
-
-.workspace-head{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin:14px 0 22px;
+.btn:hover {
+  filter: brightness(.98);
+  transform: translateY(-1px);
 }
 
-.back-btn{
-  width:40px;
-  height:40px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:var(--panel);
-  color:#fff;
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
 }
 
-.workspace-head h1{
-  margin:0;
-  font-size:24px;
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 25px 0 16px;
 }
 
-.workspace-head p{
-  margin:4px 0 0;
-  color:var(--muted2);
-  font-size:11px;
+.section-head h1,
+.section-head h2 {
+  margin: 0;
 }
 
-.workspace-nav{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  margin-bottom:18px;
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
 }
 
-.workspace-tab{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.03);
-  color:#aaa4b3;
-  padding:9px 12px;
-  border-radius:10px;
-  font-size:11px;
+.feature {
+  overflow: hidden;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: white;
+  box-shadow: var(--shadow);
 }
 
-.workspace-tab.active{
-  color:#fff;
-  background:rgba(155,92,255,.15);
-  border-color:rgba(155,92,255,.3);
+.feature-art {
+  display: grid;
+  place-items: center;
+  height: 95px;
+  margin: -20px -20px 17px;
+  background: linear-gradient(135deg, #fff0f5, #eee9ff, #e5f8fb);
+  font-size: 43px;
 }
 
-.workspace-content{
-  min-height:300px;
+.feature h3 {
+  margin: 0 0 8px;
 }
 
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+.feature p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
 }
 
-.info-box{
-  padding:16px;
-  border:1px solid var(--line);
-  border-radius:15px;
-  background:rgba(255,255,255,.025);
+.panel {
+  padding: 22px;
+  margin-top: 18px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: white;
+  box-shadow: var(--shadow);
 }
 
-.info-box label{
-  display:block;
-  color:var(--muted2);
-  font-size:10px;
-  margin-bottom:6px;
+.panel h2 {
+  margin-top: 0;
 }
 
-.info-box strong{
-  font-size:13px;
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 17px;
 }
 
-.character-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
+.stat {
+  padding: 17px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fff1f6, #f2efff);
 }
 
-.character-card{
-  border:1px solid var(--line);
-  border-radius:17px;
-  padding:16px;
-  background:var(--panel);
+.stat strong {
+  display: block;
+  font-size: 25px;
+  margin-bottom: 5px;
 }
 
-.character-avatar{
-  width:48px;
-  height:48px;
-  border-radius:15px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,#9b5cff,#ff4fb8);
-  font-weight:800;
-  margin-bottom:11px;
+.form {
+  display: grid;
+  gap: 12px;
 }
 
-.character-card h3{
-  margin:0 0 5px;
-  font-size:14px;
+.form label {
+  font-size: 13px;
+  font-weight: bold;
 }
 
-.character-card p{
-  margin:0;
-  color:var(--muted2);
-  font-size:10px;
-  line-height:1.5;
+.form input,
+.form textarea,
+.form select {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fffafd;
+  color: var(--text);
 }
 
-.empty{
-  border:1px dashed var(--line2);
-  border-radius:18px;
-  padding:45px 20px;
-  text-align:center;
-  color:var(--muted2);
+.form textarea {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.6;
 }
 
-.empty-icon{
-  font-size:30px;
-  margin-bottom:10px;
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
-.empty strong{
-  display:block;
-  color:#ddd8e3;
-  font-size:14px;
-  margin-bottom:5px;
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
-
-/* CHAT */
 
-.chat-shell{
-  height:calc(100vh - 120px);
-  min-height:520px;
-  border:1px solid var(--line);
-  border-radius:22px;
-  background:var(--panel);
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
+.book-card {
+  padding: 19px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: white;
 }
 
-.chat-head{
-  padding:16px 19px;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  gap:11px;
+.book-card h3 {
+  margin-top: 0;
 }
 
-.chat-head-icon{
-  width:38px;
-  height:38px;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,#9b5cff,#ff4fb8);
+.book-meta {
+  margin: 8px 0 15px;
+  color: var(--muted);
+  font-size: 13px;
 }
 
-.chat-head strong{
-  font-size:13px;
+.book-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.chat-head span{
-  display:block;
-  color:var(--muted2);
-  font-size:10px;
-  margin-top:3px;
+.small-btn {
+  padding: 8px 11px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff8fc;
+  color: var(--text);
 }
 
-.chat-messages{
-  flex:1;
-  overflow:auto;
-  padding:20px;
+.workspace-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 18px 0;
 }
 
-.message{
-  max-width:75%;
-  padding:12px 14px;
-  border-radius:15px;
-  font-size:12px;
-  line-height:1.6;
-  margin-bottom:10px;
+.workspace-nav button {
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: white;
+  color: var(--text);
 }
 
-.message.ai{
-  background:#1b1724;
-  border:1px solid var(--line);
+.workspace-nav button.active {
+  background: #f0e8ff;
+  border-color: #d6c4f4;
 }
 
-.message.user{
-  margin-left:auto;
-  background:linear-gradient(135deg,#8146dd,#ad4fca);
+.character-card {
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
 }
 
-.chat-input{
-  padding:13px;
-  border-top:1px solid var(--line);
-  display:flex;
-  gap:8px;
+.chat-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 60vh;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: white;
 }
 
-.chat-input input{
-  flex:1;
-  border:1px solid var(--line);
-  background:#0d0a14;
-  color:#fff;
-  border-radius:12px;
-  padding:12px;
-  outline:none;
+.chat-messages {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
 }
 
-/* MEMORY / SETTINGS */
-
-.settings-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
+.message {
+  max-width: 85%;
+  padding: 12px 15px;
+  border-radius: 15px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
-.setting-card{
-  border:1px solid var(--line);
-  background:var(--panel);
-  border-radius:20px;
-  padding:20px;
+.message.ai {
+  align-self: flex-start;
+  background: #f4efff;
 }
 
-.setting-card h3{
-  margin:0 0 6px;
-  font-size:14px;
+.message.user {
+  align-self: flex-end;
+  background: #ffeaf3;
 }
 
-.setting-card p{
-  margin:0 0 16px;
-  color:var(--muted2);
-  font-size:11px;
-  line-height:1.5;
+.chat-input {
+  display: flex;
+  gap: 9px;
+  padding: 13px;
+  border-top: 1px solid var(--border);
 }
 
-.memory-box{
-  width:100%;
-  min-height:220px;
-  border:1px solid var(--line);
-  border-radius:15px;
-  background:#0d0a14;
-  color:#fff;
-  padding:15px;
-  outline:none;
-  resize:vertical;
+.chat-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
 }
 
-.file-input{
-  display:none;
+.empty {
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed #e5d8eb;
+  border-radius: 16px;
+  line-height: 1.7;
 }
 
-/* TOAST */
-
-.toast{
-  position:fixed;
-  right:22px;
-  bottom:22px;
-  z-index:999;
-  background:#211b2d;
-  border:1px solid rgba(155,92,255,.35);
-  box-shadow:0 15px 40px rgba(0,0,0,.35);
-  border-radius:13px;
-  padding:12px 16px;
-  color:#fff;
-  font-size:11px;
-  transform:translateY(20px);
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
+.toast {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 50;
+  padding: 13px 17px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: white;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: .2s;
+  pointer-events: none;
 }
 
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
 }
-
-/* MOBILE */
 
-@media(max-width:1100px){
-  .sidebar{
-    width:220px;
+@media (max-width: 950px) {
+  .sidebar {
+    width: 210px;
   }
 
-  .main{
-    width:calc(100% - 220px);
-    margin-left:220px;
-    padding-left:20px;
-    padding-right:20px;
+  .main {
+    margin-left: 210px;
+    padding: 17px;
   }
 
-  .feature-grid{
-    grid-template-columns:repeat(2,1fr);
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .books-grid{
-    grid-template-columns:repeat(2,1fr);
+  .hero {
+    padding: 27px;
+  }
+
+  .hero-decoration {
+    font-size: 65px;
+    right: 15px;
   }
 }
 
-@media(max-width:820px){
-  .sidebar{
-    transform:translateX(-100%);
-    transition:.25s ease;
+@media (max-width: 650px) {
+  .sidebar {
+    width: 245px;
+    transform: translateX(-100%);
+    transition: transform .25s;
   }
 
-  .sidebar.open{
-    transform:translateX(0);
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 10px 0 40px rgba(70, 50, 80, .15);
   }
 
-  .main{
-    width:100%;
-    margin-left:0;
-    padding:0 14px 30px;
+  .main {
+    margin-left: 0;
+    padding: 13px;
   }
 
-  .mobile-menu{
-    display:block;
+  .menu-toggle {
+    display: block;
   }
 
-  .topbar{
-    height:68px;
+  .profile .profile-text {
+    display: none;
   }
 
-  .profile-mini{
-    display:none;
+  .hero {
+    padding: 24px;
   }
 
-  .hero{
-    min-height:390px;
+  .hero-decoration {
+    top: 10px;
+    right: 10px;
+    font-size: 45px;
   }
 
-  .hero-content{
-    width:100%;
-    min-width:0;
-    padding:32px 25px;
+  .hero h1 {
+    font-size: 30px;
   }
 
-  .hero-image{
-    width:100%;
-    opacity:.35;
+  .cards,
+  .book-list,
+  .stats,
+  .form-row {
+    grid-template-columns: 1fr;
   }
 
-  .hero:before{
-    background:linear-gradient(90deg,rgba(11,8,17,.96),rgba(11,8,17,.7));
-  }
-
-  .hero h1{
-    font-size:29px;
-  }
-
-  .dashboard-grid{
-    grid-template-columns:1fr;
-  }
-
-  .books-grid{
-    grid-template-columns:1fr;
-  }
-
-  .character-grid{
-    grid-template-columns:1fr;
-  }
-
-  .settings-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:540px){
-  .search{
-    display:none;
-  }
-
-  .feature-grid{
-    grid-template-columns:1fr;
-  }
-
-  .feature-card{
-    min-height:230px;
-  }
-
-  .hero-buttons{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .info-grid{
-    grid-template-columns:1fr;
-  }
-
-  .top-actions{
-    margin-left:auto;
-  }
-
-  .page-header h1{
-    font-size:25px;
+  .section-head {
+    align-items: flex-start;
   }
 }
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <div class="brand-icon">✦</div>
+    <span>QwerZing AI Studio</span>
+  </div>
 
-    <div class="logo">
-      <div class="logo-mark"></div>
-      <span>QwerZing AI</span>
+  <div class="nav-title">Твоя студия</div>
+
+  <nav class="nav">
+    <button class="active" data-page="home"><span class="nav-icon">⌂</span>Главная</button>
+    <button data-page="chat"><span class="nav-icon">✧</span>AI-чат</button>
+    <button data-page="writer"><span class="nav-icon">✎</span>Писатель</button>
+    <button data-page="projects"><span class="nav-icon">▤</span>Мои проекты</button>
+    <button data-page="friend"><span class="nav-icon">♡</span>AI-друг</button>
+    <button data-page="artist"><span class="nav-icon">✿</span>AI-художник</button>
+    <button data-page="memory"><span class="nav-icon">✧</span>Память</button>
+    <button data-page="settings"><span class="nav-icon">⚙</span>Настройки</button>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="mascot">☁️</div>
+    <div class="mascot-name" id="sideMascotName">Зефирка</div>
+    <p class="muted">Твой маленький спутник в мире идей.</p>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню">☰</button>
+    <div class="search">
+      <input id="searchInput" type="search" placeholder="Найти раздел или книгу...">
     </div>
+    <div class="profile">
+      <div class="avatar">Q</div>
+      <div class="profile-text">
+        <strong>Твоя студия</strong>
+        <div class="muted">Творческое пространство</div>
+      </div>
+    </div>
+  </header>
 
-    <nav class="nav">
-
-      <div class="nav-label">Основное</div>
-
-      <button class="nav-item active" data-page="home">
-        <span class="nav-icon">⌂</span>
-        <span>Главная</span>
-      </button>
-
-      <button class="nav-item" data-page="chat">
-        <span class="nav-icon">◌</span>
-        <span>Чат</span>
-      </button>
-
-      <button class="nav-item" data-page="friend">
-        <span class="nav-icon">♡</span>
-        <span>Друг</span>
-      </button>
-
-      <button class="nav-item" data-page="writer">
-        <span class="nav-icon">✎</span>
-        <span>Писатель</span>
-      </button>
-
-      <button class="nav-item" data-page="characters">
-        <span class="nav-icon">♙</span>
-        <span>Персонажи</span>
-      </button>
-
-      <button class="nav-item" data-page="artist">
-        <span class="nav-icon">✦</span>
-        <span>Художник</span>
-      </button>
-
-      <div class="nav-label">Твоё пространство</div>
-
-      <button class="nav-item" data-page="projects">
-        <span class="nav-icon">▣</span>
-        <span>Проекты</span>
-      </button>
-
-      <button class="nav-item" data-page="novels">
-        <span class="nav-icon">▤</span>
-        <span>Романы</span>
-      </button>
-
-      <button class="nav-item" data-page="activity">
-        <span class="nav-icon">◷</span>
-        <span>Последняя активность</span>
-      </button>
-
-      <button class="nav-item" data-page="memory">
-        <span class="nav-icon">◈</span>
-        <span>Память</span>
-      </button>
-
-      <div class="nav-label">Система</div>
-
-      <button class="nav-item" data-page="settings">
-        <span class="nav-icon">⚙</span>
-        <span>Настройки</span>
-      </button>
-
-    </nav>
-
-    <div class="sidebar-bottom">
-      <div class="free-badge">
-        <strong>QwerZing бесплатно</strong>
-        <span>Все основные творческие инструменты доступны без Pro и подписок.</span>
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <div class="hero-decoration">✦</div>
+      <div class="hero-label">ТВОЯ ВСЕЛЕННАЯ ИДЕЙ</div>
+      <h1>Добро пожаловать в QwerZing AI Studio!</h1>
+      <p>Придумывай истории, создавай персонажей, записывай идеи и исследуй новые миры в одном уютном пространстве.</p>
+      <div class="hero-actions">
+        <button class="btn primary" data-goto="writer">✎ Создать книгу</button>
+        <button class="btn" data-goto="chat">✧ Открыть чат</button>
       </div>
     </div>
 
-  </aside>
+    <div class="section-head">
+      <h2>Твоя творческая мастерская</h2>
+    </div>
 
+    <div class="cards">
+      <article class="feature">
+        <div class="feature-art">✎</div>
+        <h3>AI-писатель</h3>
+        <p>Собирай сюжеты, описывай героев и храни главы своих книг.</p>
+        <button class="btn" data-goto="writer">Начать писать</button>
+      </article>
 
-  <!-- MAIN -->
-  <main class="main">
+      <article class="feature">
+        <div class="feature-art">✿</div>
+        <h3>AI-художник</h3>
+        <p>Придумывай изображения, сохраняй описания и собирай идеи для артов.</p>
+        <button class="btn" data-goto="artist">Создать идею</button>
+      </article>
 
-    <header class="topbar">
+      <article class="feature">
+        <div class="feature-art">♡</div>
+        <h3>AI-друг</h3>
+        <p>Место для размышлений, разговоров и обсуждения твоих идей.</p>
+        <button class="btn" data-goto="friend">Поговорить</button>
+      </article>
+    </div>
 
-      <button class="mobile-menu" id="mobileMenu">☰</button>
-
-      <div class="search">
-        <span class="search-icon">⌕</span>
-        <input id="globalSearch" type="text" placeholder="Поиск по QwerZing...">
+    <div class="panel">
+      <h2>Твоя статистика</h2>
+      <p class="muted">Всё, что ты создала в своей студии.</p>
+      <div class="stats">
+        <div class="stat"><strong id="statBooks">0</strong><span>Книг</span></div>
+        <div class="stat"><strong id="statChapters">0</strong><span>Глав</span></div>
+        <div class="stat"><strong id="statIdeas">0</strong><span>Идей художника</span></div>
       </div>
+    </div>
 
-      <div class="top-actions">
+    <div class="panel">
+      <h2>Недавно созданные книги</h2>
+      <div id="recentBooks" class="book-list"></div>
+    </div>
+  </section>
 
-        <button class="icon-btn" title="Тёмная тема">☾</button>
-        <button class="icon-btn" title="Уведомления">♧</button>
+  <section class="page" id="page-chat">
+    <div class="section-head">
+      <div>
+        <h1>AI-чат</h1>
+        <p class="muted">Место для вопросов и новых идей.</p>
+      </div>
+    </div>
 
-        <div class="profile-mini">
-          <div class="avatar">С</div>
-          <div>
-            <strong>София</strong>
-            <span>Творческий режим</span>
+    <div class="chat-wrap">
+      <div class="chat-messages" id="chatMessages">
+        <div class="message ai">Привет! Я пока работаю в демонстрационном режиме. Можем обсудить идею, персонажа или твою будущую книгу.</div>
+      </div>
+      <form class="chat-input" id="chatForm">
+        <input id="chatInput" placeholder="Напиши сообщение..." autocomplete="off" required>
+        <button class="btn primary" type="submit">Отправить</button>
+      </form>
+    </div>
+    <p class="muted">Важно: настоящий ИИ пока не подключён. Ответы в этой версии демонстрационные.</p>
+  </section>
+
+  <section class="page" id="page-writer">
+    <div class="section-head">
+      <div>
+        <h1>AI-писатель</h1>
+        <p class="muted">Начни с идеи, а потом преврати её в целую книгу.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Создать новую книгу</h2>
+      <form class="form" id="bookForm">
+        <label for="bookTitle">Название книги</label>
+        <input id="bookTitle" placeholder="Например, «Рассвет»" required>
+
+        <div class="form-row">
+          <div class="form">
+            <label for="bookGenre">Жанр</label>
+            <select id="bookGenre">
+              <option>Фэнтези</option>
+              <option>Романтика</option>
+              <option>Современный роман</option>
+              <option>Детектив</option>
+              <option>Фантастика</option>
+              <option>Ужасы</option>
+              <option>Приключения</option>
+              <option>Другое</option>
+            </select>
+          </div>
+
+          <div class="form">
+            <label for="bookStatus">Статус</label>
+            <select id="bookStatus">
+              <option>В процессе</option>
+              <option>Идея</option>
+              <option>Завершена</option>
+            </select>
           </div>
         </div>
 
+        <label for="bookDescription">Описание сюжета</label>
+        <textarea id="bookDescription" placeholder="Расскажи, о чём будет твоя история..."></textarea>
+
+        <button class="btn primary" type="submit">＋ Создать книгу</button>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h2>Мои книги</h2>
+      <div id="writerBooks" class="book-list"></div>
+    </div>
+  </section>
+
+  <section class="page" id="page-book">
+    <div class="section-head">
+      <div>
+        <h1 id="workspaceTitle">Моя книга</h1>
+        <p class="muted" id="workspaceMeta"></p>
       </div>
+      <button class="btn" data-goto="writer">← К книгам</button>
+    </div>
 
-    </header>
+    <div class="workspace-nav">
+      <button class="active" data-workspace="about">О книге</button>
+      <button data-workspace="characters">Персонажи</button>
+      <button data-workspace="world">Мир</button>
+      <button data-workspace="plan">План</button>
+      <button data-workspace="chapters">Главы</button>
+    </div>
 
+    <div class="panel" id="workspaceContent"></div>
+  </section>
 
-    <!-- ================= HOME ================= -->
-
-    <section class="page active" id="page-home">
-
-      <div class="hero">
-
-        <div class="hero-glow"></div>
-
-        <img
-          class="hero-image"
-          src="hero.jpg"
-          alt="Мир QwerZing"
-          onerror="this.style.display='none'"
-        >
-
-        <div class="hero-content">
-
-          <div class="hero-kicker">
-            ✦ Твоё пространство для идей
-          </div>
-
-          <h1>
-            Привет, София! 👋<br>
-            <span>Добро пожаловать в QwerZing AI Studio!</span>
-          </h1>
-
-          <p>
-            Придумывай истории, создавай персонажей, общайся с ИИ,
-            рисуй и превращай самые странные, красивые и неожиданные
-            идеи в настоящие проекты.
-          </p>
-
-          <div class="hero-buttons">
-            <button class="btn btn-primary" onclick="goTo('writer')">
-              ✦ Начать создавать
-            </button>
-
-            <button class="btn btn-soft" onclick="goTo('chat')">
-              Открыть чат
-            </button>
-          </div>
-
-        </div>
-
+  <section class="page" id="page-projects">
+    <div class="section-head">
+      <div>
+        <h1>Мои проекты</h1>
+        <p class="muted">Все твои книги и творческие идеи.</p>
       </div>
+    </div>
+    <div class="panel">
+      <h2>Книги</h2>
+      <div id="projectBooks" class="book-list"></div>
+    </div>
+    <div class="panel">
+      <h2>Идеи художника</h2>
+      <div id="projectIdeas"></div>
+    </div>
+  </section>
 
-
-      <div class="section-title">
-        <div>
-          <h2>Создавай с QwerZing</h2>
-          <p>Четыре главных инструмента для твоих идей</p>
-        </div>
+  <section class="page" id="page-friend">
+    <div class="section-head">
+      <div>
+        <h1>AI-друг</h1>
+        <p class="muted">Собеседник для мыслей, вопросов и творческих поисков.</p>
       </div>
+    </div>
 
+    <div class="panel">
+      <div style="font-size:45px">☁️</div>
+      <h2>Познакомься со своим спутником</h2>
+      <p class="muted">Ты можешь дать ему имя. Это имя будет отображаться в твоей студии.</p>
+      <form class="form" id="mascotForm">
+        <label for="mascotNameInput">Имя твоего спутника</label>
+        <input id="mascotNameInput" maxlength="30" placeholder="Например, Зефирка" required>
+        <button class="btn primary" type="submit">Сохранить имя</button>
+      </form>
+    </div>
 
-      <div class="feature-grid">
+    <div class="panel">
+      <h2 id="friendGreeting">Твой спутник рядом</h2>
+      <p>Пока это демонстрационная версия AI-друга. Настоящую модель с самостоятельными ответами нужно подключить отдельно.</p>
+    </div>
+  </section>
 
-        <div class="feature-card" onclick="goTo('chat')">
-          <img class="feature-image" src="chat.jpg" alt="Чат"
-               onerror="this.src='';this.style.background='linear-gradient(135deg,#25203a,#9b5cff)'">
-          <div class="feature-info">
-            <h3>Чат</h3>
-            <p>Общайся с ИИ, задавай вопросы, обсуждай идеи и находи новые решения.</p>
-          </div>
-        </div>
-
-
-        <div class="feature-card" onclick="goTo('friend')">
-          <img class="feature-image" src="friend.jpg" alt="Друг"
-               onerror="this.src='';this.style.background='linear-gradient(135deg,#21172f,#ff4fb8)'">
-          <div class="feature-info">
-            <h3>Друг</h3>
-            <p>Создай своего собственного AI-друга с характером и манерой общения.</p>
-          </div>
-        </div>
-
-
-        <div class="feature-card" onclick="goTo('writer')">
-          <img class="feature-image" src="writer.jpg" alt="Писатель"
-               onerror="this.src='';this.style.background='linear-gradient(135deg,#25203a,#c06cff)'">
-          <div class="feature-info">
-            <h3>Писатель</h3>
-            <p>Создавай романы, персонажей, миры, планы и главы в одной студии.</p>
-          </div>
-        </div>
-
-
-        <div class="feature-card" onclick="goTo('artist')">
-          <img class="feature-image" src="artist.jpg" alt="Художник"
-               onerror="this.src='';this.style.background='linear-gradient(135deg,#201c30,#5ee7ff)'">
-          <div class="feature-info">
-            <h3>Художник</h3>
-            <p>Работай с визуальными идеями и создавай изображения для своих проектов.</p>
-          </div>
-        </div>
-
+  <section class="page" id="page-artist">
+    <div class="section-head">
+      <div>
+        <h1>AI-художник</h1>
+        <p class="muted">Собирай описания для будущих иллюстраций.</p>
       </div>
+    </div>
 
+    <div class="panel">
+      <h2>Новая идея для изображения</h2>
+      <form class="form" id="artistForm">
+        <label for="artistPrompt">Опиши, что хочешь нарисовать</label>
+        <textarea id="artistPrompt" placeholder="Например: девушка с каштановыми волосами стоит в волшебном лесу..." required></textarea>
 
-      <div class="dashboard-grid">
-
-        <div>
-
-          <div class="panel">
-
-            <div class="panel-title">
-              <h3>Продолжить работу</h3>
-              <button onclick="goTo('novels')">Все проекты →</button>
-            </div>
-
-            <div id="continueList"></div>
-
+        <div class="form-row">
+          <div class="form">
+            <label for="artistStyle">Стиль</label>
+            <select id="artistStyle">
+              <option>Фэнтези</option>
+              <option>Реализм</option>
+              <option>Аниме</option>
+              <option>Мультяшный</option>
+              <option>Акварель</option>
+              <option>Книжная иллюстрация</option>
+              <option>Стиль визуальной новеллы</option>
+            </select>
           </div>
 
-
-          <div class="panel" style="margin-top:15px">
-
-            <div class="panel-title">
-              <h3>Быстрое создание</h3>
-            </div>
-
-            <div class="quick-grid">
-
-              <button class="quick-btn" onclick="createBookForm()">
-                <b>📖 Новая книга</b>
-                <span>Начать новый роман</span>
-              </button>
-
-              <button class="quick-btn" onclick="goTo('characters')">
-                <b>♙ Персонаж</b>
-                <span>Создать героя истории</span>
-              </button>
-
-              <button class="quick-btn" onclick="goTo('chat')">
-                <b>◌ Новый чат</b>
-                <span>Обсудить идею с ИИ</span>
-              </button>
-
-              <button class="quick-btn" onclick="goTo('artist')">
-                <b>✦ Изображение</b>
-                <span>Перейти к художнику</span>
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <aside>
-
-          <div class="quote">
-            <div class="quote-mark">“</div>
-            <p>
-              Любая большая история когда-то была всего лишь одной
-              маленькой идеей в голове.
-            </p>
-          </div>
-
-
-          <div class="panel">
-
-            <div class="panel-title">
-              <h3>Твоя студия</h3>
-            </div>
-
-            <div class="stats">
-
-              <div class="stat">
-                <strong id="statBooks">0</strong>
-                <span>Романов</span>
-              </div>
-
-              <div class="stat">
-                <strong id="statCharacters">0</strong>
-                <span>Персонажей</span>
-              </div>
-
-              <div class="stat">
-                <strong id="statChapters">0</strong>
-                <span>Глав</span>
-              </div>
-
-              <div class="stat">
-                <strong id="statProjects">0</strong>
-                <span>Проектов</span>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="panel activity">
-
-            <div class="panel-title">
-              <h3>Последняя активность</h3>
-              <button onclick="goTo('activity')">Все →</button>
-            </div>
-
-            <div id="homeActivity"></div>
-
-          </div>
-
-        </aside>
-
-      </div>
-
-    </section>
-
-
-    <!-- ================= CHAT ================= -->
-
-    <section class="page" id="page-chat">
-
-      <div class="page-header">
-        <h1>Чат</h1>
-        <p>Твоё обычное пространство для общения с QwerZing AI.</p>
-      </div>
-
-      <div class="chat-shell">
-
-        <div class="chat-head">
-          <div class="chat-head-icon">✦</div>
-          <div>
-            <strong>QwerZing AI</strong>
-            <span>Готов обсудить любую твою идею</span>
+          <div class="form">
+            <label for="artistFormat">Формат</label>
+            <select id="artistFormat">
+              <option>Портрет</option>
+              <option>Полный рост</option>
+              <option>Пейзаж</option>
+              <option>Квадратное изображение</option>
+            </select>
           </div>
         </div>
 
-        <div class="chat-messages" id="chatMessages">
-
-          <div class="message ai">
-            Привет! Я QwerZing AI. Можешь рассказать мне идею,
-            которую хочешь развить, или просто начать разговор.
-          </div>
-
-        </div>
-
-        <div class="chat-input">
-          <input
-            id="chatInput"
-            type="text"
-            placeholder="Напиши сообщение..."
-            onkeydown="if(event.key==='Enter') sendChat()"
-          >
-          <button class="btn btn-primary" onclick="sendChat()">Отправить</button>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ================= FRIEND ================= -->
-
-    <section class="page" id="page-friend">
-
-      <div class="page-header">
-        <h1>Друг</h1>
-        <p>Создай собственного AI-друга. Каким он будет, решаешь ты.</p>
-      </div>
-
-      <div class="form-card">
-
-        <div class="field">
-          <label>Имя друга</label>
-          <input id="friendName" placeholder="Например, Алекс">
-        </div>
-
-        <div class="field">
-          <label>Кто это?</label>
-          <select id="friendType">
-            <option>Друг</option>
-            <option>Подруга</option>
-            <option>Нейтральный персонаж</option>
-            <option>Любой другой образ</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>Характер</label>
-          <textarea id="friendPersonality" placeholder="Например: спокойный, смешной, заботливый, немного саркастичный..."></textarea>
-        </div>
-
-        <div class="field">
-          <label>Как должен общаться?</label>
-          <textarea id="friendStyle" placeholder="Опиши манеру общения..."></textarea>
-        </div>
-
-        <div class="form-actions">
-          <button class="btn btn-primary" onclick="saveFriend()">Сохранить друга</button>
-          <button class="btn" onclick="clearFriend()">Очистить</button>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ================= WRITER ================= -->
-
-    <section class="page" id="page-writer">
-
-      <div id="writerMain">
-
-        <div class="page-header">
-          <h1>Писатель</h1>
-          <p>
-            Твоя писательская студия. Создавай книги, продумывай
-            персонажей, строй миры и собирай истории в единое целое.
-          </p>
-        </div>
-
-        <div class="toolbar">
-          <button class="btn btn-primary" onclick="createBookForm()">＋ Создать книгу</button>
-          <button class="btn" onclick="goTo('novels')">📚 Мои романы</button>
-        </div>
-
-        <div id="bookCreateArea"></div>
-
-        <div class="books-grid" id="writerBooks"></div>
-
-      </div>
-
-      <div id="workspace" style="display:none"></div>
-
-    </section>
-
-
-    <!-- ================= CHARACTERS ================= -->
-
-    <section class="page" id="page-characters">
-
-      <div class="page-header">
-        <h1>Персонажи</h1>
-        <p>
-          Здесь хранятся персонажи твоих историй.
-          Выбери книгу, чтобы работать с её героями.
-        </p>
-      </div>
-
-      <div class="toolbar">
-        <button class="btn btn-primary" onclick="chooseCharacterBook()">＋ Добавить персонажа</button>
-      </div>
-
-      <div id="charactersContent"></div>
-
-    </section>
-
-
-    <!-- ================= ARTIST ================= -->
-
-    <section class="page" id="page-artist">
-
-      <div class="page-header">
-        <h1>Художник</h1>
-        <p>
-          Пространство для визуальных идей, персонажей, сцен и миров.
-        </p>
-      </div>
-
-      <div class="form-card">
-
-        <div class="field">
-          <label>Что хочешь создать?</label>
-          <textarea
-            id="artistPrompt"
-            placeholder="Например: ночной университет на острове, огромный дворец, девушка в длинном чёрном платье..."
-          ></textarea>
-        </div>
-
-        <div class="field">
-          <label>Стиль</label>
-          <select id="artistStyle">
-            <option>Реалистичный</option>
-            <option>Кинематографичный</option>
-            <option>Фэнтези</option>
-            <option>Манхва</option>
-            <option>Аниме</option>
-            <option>Романтический</option>
-          </select>
-        </div>
-
-        <button class="btn btn-primary" onclick="artistDemo()">
-          ✦ Подготовить идею
-        </button>
-
-        <div id="artistResult" style="margin-top:18px"></div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ================= PROJECTS ================= -->
-
-    <section class="page" id="page-projects">
-
-      <div class="page-header">
-        <h1>Проекты</h1>
-        <p>Все твои творческие проекты в одном месте.</p>
-      </div>
-
-      <div class="books-grid" id="projectsList"></div>
-
-    </section>
-
-
-    <!-- ================= NOVELS ================= -->
-
-    <section class="page" id="page-novels">
-
-      <div class="page-header">
-        <h1>Романы</h1>
-        <p>Твои книги и истории.</p>
-      </div>
-
-      <div class="toolbar">
-        <button class="btn btn-primary" onclick="createBookForm()">＋ Новый роман</button>
-      </div>
-
-      <div id="novelsList"></div>
-
-    </section>
-
-
-    <!-- ================= ACTIVITY ================= -->
-
-    <section class="page" id="page-activity">
-
-      <div class="page-header">
-        <h1>Последняя активность</h1>
-        <p>Здесь будут отображаться твои последние действия в QwerZing.</p>
-      </div>
-
-      <div class="panel">
-        <div id="activityFull"></div>
-      </div>
-
-    </section>
-
-
-    <!-- ================= MEMORY ================= -->
-
-    <section class="page" id="page-memory">
-
-      <div class="page-header">
+        <button class="btn primary" type="submit">＋ Сохранить идею</button>
+      </form>
+      <p class="muted">Эта версия сохраняет текстовые запросы, но пока не генерирует сами изображения.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Мои идеи</h2>
+      <div id="artistIdeas"></div>
+    </div>
+  </section>
+
+  <section class="page" id="page-memory">
+    <div class="section-head">
+      <div>
         <h1>Память</h1>
-        <p>
-          Здесь можно хранить важные сведения, которые QwerZing должен
-          учитывать в твоём творческом пространстве.
-        </p>
+        <p class="muted">Сохраняй важные заметки, чтобы возвращаться к ним позже.</p>
       </div>
+    </div>
 
-      <div class="form-card">
+    <div class="panel">
+      <form class="form" id="memoryForm">
+        <label for="memoryText">Твои заметки</label>
+        <textarea id="memoryText" style="min-height:300px" placeholder="Запиши идею, мысли, важные детали или планы..."></textarea>
+        <button class="btn primary" type="submit">Сохранить заметки</button>
+      </form>
+    </div>
+  </section>
 
-        <div class="field">
-          <label>Твоя память</label>
-
-          <textarea
-            class="memory-box"
-            id="memoryText"
-            placeholder="Например: я люблю писать длинные истории, предпочитаю большие абзацы..."
-          ></textarea>
-
-        </div>
-
-        <button class="btn btn-primary" onclick="saveMemory()">
-          Сохранить память
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- ================= SETTINGS ================= -->
-
-    <section class="page" id="page-settings">
-
-      <div class="page-header">
+  <section class="page" id="page-settings">
+    <div class="section-head">
+      <div>
         <h1>Настройки</h1>
-        <p>Управление твоим QwerZing AI Studio.</p>
+        <p class="muted">Управляй своими данными и настройками студии.</p>
       </div>
+    </div>
 
-      <div class="settings-grid">
-
-        <div class="setting-card">
-          <h3>Имя профиля</h3>
-          <p>Имя, которое отображается в интерфейсе.</p>
-
-          <input
-            id="profileName"
-            class="field-input"
-            style="width:100%;background:#0d0a14;border:1px solid var(--line);border-radius:12px;color:#fff;padding:12px"
-            placeholder="София"
-          >
-
-          <button class="btn btn-primary" style="margin-top:12px" onclick="saveProfile()">
-            Сохранить
-          </button>
-        </div>
-
-
-        <div class="setting-card">
-          <h3>Резервная копия</h3>
-          <p>
-            Сохрани свои книги, персонажей и настройки в JSON-файл.
-          </p>
-
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-
-            <button class="btn btn-primary" onclick="exportData()">
-              Скачать копию
-            </button>
-
-            <label class="btn" for="importFile">
-              Загрузить копию
-            </label>
-
-            <input
-              class="file-input"
-              id="importFile"
-              type="file"
-              accept=".json"
-              onchange="importData(event)"
-            >
-
-          </div>
-        </div>
-
-
-        <div class="setting-card">
-          <h3>Данные</h3>
-          <p>
-            Все созданные книги и персонажи сохраняются в памяти браузера
-            этого устройства.
-          </p>
-
-          <button class="btn" onclick="showStorageInfo()">
-            Проверить данные
-          </button>
-        </div>
-
-
-        <div class="setting-card">
-          <h3>QwerZing AI Studio</h3>
-          <p>
-            Творческая студия без Pro-раздела и обязательной подписки.
-          </p>
-
-          <div class="tag">Бесплатное пространство</div>
-
-        </div>
-
+    <div class="panel">
+      <h2>Резервная копия</h2>
+      <p class="muted">Скачай копию книг, глав, заметок и идей, чтобы сохранить их отдельно.</p>
+      <div class="hero-actions">
+        <button class="btn primary" id="exportBtn">↓ Скачать резервную копию</button>
+        <button class="btn" id="importBtn">↑ Восстановить данные</button>
+        <input type="file" id="importFile" accept=".json,application/json" hidden>
       </div>
+    </div>
 
-    </section>
+    <div class="panel">
+      <h2>О проекте</h2>
+      <p>QwerZing AI Studio помогает организовать творческие проекты в одном месте.</p>
+      <p class="muted">Это демонстрационная версия сайта. Для настоящего ИИ-чата и генерации изображений потребуется подключение соответствующих сервисов.</p>
+    </div>
 
-  </main>
+    <div class="panel">
+      <h2>Удаление данных</h2>
+      <p class="muted">Это действие удалит сохранённые на этом устройстве данные. Сначала скачай резервную копию, если хочешь сохранить свои материалы.</p>
+      <button class="btn" id="clearBtn">Удалить локальные данные</button>
+    </div>
+  </section>
 
+</main>
 </div>
-
 
 <div class="toast" id="toast"></div>
 
-
 <script>
-/* =========================================================
-   QWERZING AI STUDIO
-   Сохранение данных: НЕ МЕНЯЕМ старый ключ v2
-========================================================= */
+"use strict";
+
+/*
+  QwerZing AI Studio
+  Данные хранятся в браузере пользователя.
+  Настоящий ИИ пока не подключён.
+*/
 
 const STORAGE_KEY = "qwerzing_ai_studio_data_v2";
 
-let data = {
-  version: 2,
-  profile: {
-    name: "София"
-  },
-  memory: "",
-  friend: {
-    name: "",
-    type: "Друг",
-    personality: "",
-    style: ""
-  },
+const defaultData = {
   books: [],
-  activity: []
+  artistIdeas: [],
+  memory: "",
+  mascotName: "Зефирка"
 };
 
-let currentBookId = null;
-let currentWorkspaceTab = "about";
+function createId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+}
 
+function normalizeData(raw) {
+  const source = raw && typeof raw === "object" ? raw : {};
 
-/* =========================================================
-   STORAGE
-========================================================= */
+  return {
+    books: Array.isArray(source.books) ? source.books.map(book => ({
+      id: book.id || createId(),
+      title: String(book.title || "Без названия"),
+      genre: String(book.genre || "Другое"),
+      status: String(book.status || "В процессе"),
+      description: String(book.description || ""),
+      world: String(book.world || ""),
+      plan: String(book.plan || ""),
+      characters: Array.isArray(book.characters) ? book.characters.map(character => ({
+        id: character.id || createId(),
+        name: String(character.name || ""),
+        role: String(character.role || ""),
+        description: String(character.description || "")
+      })) : [],
+      chapters: Array.isArray(book.chapters) ? book.chapters.map(chapter => ({
+        id: chapter.id || createId(),
+        title: String(chapter.title || "Без названия"),
+        text: String(chapter.text || "")
+      })) : [],
+      updatedAt: book.updatedAt || new Date().toISOString()
+    })) : [],
 
-function loadData(){
+    artistIdeas: Array.isArray(source.artistIdeas) ? source.artistIdeas.map(idea => ({
+      id: idea.id || createId(),
+      prompt: String(idea.prompt || ""),
+      style: String(idea.style || "Фэнтези"),
+      format: String(idea.format || "Портрет"),
+      createdAt: idea.createdAt || new Date().toISOString()
+    })) : [],
 
-  try{
+    memory: typeof source.memory === "string" ? source.memory : "",
+    mascotName: String(source.mascotName || "Зефирка")
+  };
+}
 
+function loadData() {
+  try {
     const saved = localStorage.getItem(STORAGE_KEY);
-
-    if(saved){
-
-      const parsed = JSON.parse(saved);
-
-      data = {
-        ...data,
-        ...parsed,
-        profile:{
-          ...data.profile,
-          ...(parsed.profile || {})
-        },
-        friend:{
-          ...data.friend,
-          ...(parsed.friend || {})
-        },
-        books:Array.isArray(parsed.books) ? parsed.books : [],
-        activity:Array.isArray(parsed.activity) ? parsed.activity : []
-      };
-
-      data.books = data.books.map(normalizeBook);
-    }
-
-  }catch(error){
-
-    console.error("Ошибка загрузки данных:",error);
-
+    return saved ? normalizeData(JSON.parse(saved)) : structuredClone(defaultData);
+  } catch (error) {
+    return structuredClone(defaultData);
   }
-
-  ensureDemoCompatibility();
 }
 
+let data = loadData();
+let currentBookId = null;
+let currentWorkspace = "about";
 
-function saveData(){
-
-  try{
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(data)
-    );
-
-  }catch(error){
-
-    console.error("Ошибка сохранения:",error);
-    showToast("Не удалось сохранить данные");
-
+function saveData() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (error) {
+    toast("Не удалось сохранить данные. Возможно, память браузера заполнена.");
   }
-
 }
 
-
-function normalizeBook(book){
-
-  return {
-
-    id:book.id || ("book_" + Date.now() + "_" + Math.random().toString(16).slice(2)),
-
-    title:book.title || "Без названия",
-
-    genre:book.genre || "Не указан",
-
-    description:book.description || "",
-
-    notes:book.notes || "",
-
-    world:book.world || "",
-
-    plan:book.plan || "",
-
-    createdAt:book.createdAt || new Date().toISOString(),
-
-    updatedAt:book.updatedAt || new Date().toISOString(),
-
-    status:book.status || "В процессе",
-
-    characters:Array.isArray(book.characters)
-      ? book.characters.map(normalizeCharacter)
-      : [],
-
-    chapters:Array.isArray(book.chapters)
-      ? book.chapters
-      : []
-
-  };
-
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[character]);
 }
 
-
-function normalizeCharacter(character){
-
-  return {
-
-    id:character.id || ("char_" + Date.now() + "_" + Math.random().toString(16).slice(2)),
-
-    name:character.name || "Новый персонаж",
-
-    role:character.role || "",
-
-    age:character.age || "",
-
-    appearance:character.appearance || "",
-
-    personality:character.personality || "",
-
-    biography:character.biography || "",
-
-    relationships:character.relationships || "",
-
-    notes:character.notes || "",
-
-    createdAt:character.createdAt || new Date().toISOString()
-
-  };
-
-}
-
-
-function ensureDemoCompatibility(){
-
-  /*
-    Важно:
-    старые книги НЕ создаются заново и НЕ удаляются.
-    Если пользователь уже создавал данные, они остаются.
-  */
-
-  if(!Array.isArray(data.books)){
-    data.books=[];
-  }
-
-  if(!Array.isArray(data.activity)){
-    data.activity=[];
-  }
-
-}
-
-
-/* =========================================================
-   ACTIVITY
-========================================================= */
-
-function addActivity(text){
-
-  data.activity.unshift({
-
-    id:"activity_" + Date.now(),
-
-    text,
-
-    date:new Date().toISOString()
-
+function showPage(name) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.toggle("active", page.id === "page-" + name);
   });
 
-  data.activity=data.activity.slice(0,40);
-
-  saveData();
-
-}
-
-
-function formatDate(date){
-
-  try{
-
-    const d=new Date(date);
-
-    return d.toLocaleDateString("ru-RU",{
-      day:"2-digit",
-      month:"2-digit",
-      year:"numeric"
-    });
-
-  }catch{
-
-    return "";
-
-  }
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showToast(message){
-
-  const toast=document.getElementById("toast");
-
-  toast.textContent=message;
-
-  toast.classList.add("show");
-
-  clearTimeout(window.toastTimer);
-
-  window.toastTimer=setTimeout(()=>{
-
-    toast.classList.remove("show");
-
-  },2600);
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function goTo(page){
-
-  document.querySelectorAll(".page").forEach(p=>{
-    p.classList.remove("active");
+  document.querySelectorAll(".nav button").forEach(button => {
+    button.classList.toggle("active", button.dataset.page === name);
   });
-
-  const target=document.getElementById("page-"+page);
-
-  if(target){
-    target.classList.add("active");
-  }
-
-  document.querySelectorAll(".nav-item").forEach(item=>{
-
-    item.classList.toggle(
-      "active",
-      item.dataset.page===page
-    );
-
-  });
-
-  if(page==="home") renderHome();
-
-  if(page==="writer") renderWriter();
-
-  if(page==="novels") renderNovels();
-
-  if(page==="projects") renderProjects();
-
-  if(page==="characters") renderCharactersPage();
-
-  if(page==="activity") renderActivity();
-
-  if(page==="memory") renderMemory();
-
-  if(page==="settings") renderSettings();
-
-  if(page==="friend") renderFriend();
 
   document.getElementById("sidebar").classList.remove("open");
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+  if (name === "home") renderHome();
+  if (name === "writer") renderWriter();
+  if (name === "projects") renderProjects();
+  if (name === "artist") renderArtistIdeas();
+  if (name === "memory") {
+    document.getElementById("memoryText").value = data.memory;
+  }
 }
 
+function toast(message) {
+  const element = document.getElementById("toast");
+  element.textContent = message;
+  element.classList.add("show");
 
-/* navigation buttons */
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => element.classList.remove("show"), 2600);
+}
 
-document.querySelectorAll(".nav-item").forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    goTo(button.dataset.page);
-
-  });
-
+document.querySelectorAll(".nav button").forEach(button => {
+  button.addEventListener("click", () => showPage(button.dataset.page));
 });
 
+document.querySelectorAll("[data-goto]").forEach(button => {
+  button.addEventListener("click", () => showPage(button.dataset.goto));
+});
 
-/* mobile menu */
-
-document.getElementById("mobileMenu").addEventListener("click",()=>{
-
+document.getElementById("menuToggle").addEventListener("click", () => {
   document.getElementById("sidebar").classList.toggle("open");
-
 });
 
+/* Главная */
 
-/* =========================================================
-   HOME
-========================================================= */
+function renderHome() {
+  document.getElementById("statBooks").textContent = data.books.length;
 
-function renderHome(){
+  document.getElementById("statChapters").textContent =
+    data.books.reduce((total, book) => total + book.chapters.length, 0);
 
-  document.getElementById("statBooks").textContent=data.books.length;
+  document.getElementById("statIdeas").textContent = data.artistIdeas.length;
 
-  document.getElementById("statCharacters").textContent=
-    data.books.reduce((sum,b)=>sum+b.characters.length,0);
+  document.getElementById("sideMascotName").textContent = data.mascotName;
 
-  document.getElementById("statChapters").textContent=
-    data.books.reduce((sum,b)=>sum+b.chapters.length,0);
+  const root = document.getElementById("recentBooks");
 
-  document.getElementById("statProjects").textContent=data.books.length;
-
-  const list=document.getElementById("continueList");
-
-  if(!data.books.length){
-
-    list.innerHTML=`
-
-      <div class="empty" style="padding:25px">
-
-        <div class="empty-icon">✦</div>
-
-        <strong>Здесь пока пусто</strong>
-
-        <span>Создай первую книгу и она появится здесь.</span>
-
-        <br>
-
-        <button
-          class="btn btn-primary"
-          style="margin-top:12px"
-          onclick="createBookForm()"
-        >
-          Создать книгу
-        </button>
-
-      </div>
-
-    `;
-
-  }else{
-
-    list.innerHTML=data.books
-      .slice()
-      .sort((a,b)=>new Date(b.updatedAt)-new Date(a.updatedAt))
-      .slice(0,4)
-      .map(book=>`
-
-        <div class="continue-item"
-             onclick="openBook('${book.id}')">
-
-          <div class="continue-icon">📖</div>
-
-          <div>
-
-            <strong>${escapeHTML(book.title)}</strong>
-
-            <span>
-              ${escapeHTML(book.genre)}
-              · ${book.chapters.length} глав
-            </span>
-
-          </div>
-
-        </div>
-
-      `).join("");
-
-  }
-
-
-  const activity=document.getElementById("homeActivity");
-
-  if(!data.activity.length){
-
-    activity.innerHTML=`
-
-      <div style="color:var(--muted2);font-size:11px">
-        Пока здесь ничего нет.
-      </div>
-
-    `;
-
-  }else{
-
-    activity.innerHTML=data.activity
-      .slice(0,5)
-      .map(item=>`
-
-        <div class="activity-item">
-
-          <div class="activity-dot"></div>
-
-          <div>
-
-            <strong>${escapeHTML(item.text)}</strong>
-
-            <span>${formatDate(item.date)}</span>
-
-          </div>
-
-        </div>
-
-      `).join("");
-
-  }
-
-}
-
-
-/* =========================================================
-   CREATE BOOK
-========================================================= */
-
-function createBookForm(){
-
-  goTo("writer");
-
-  const area=document.getElementById("bookCreateArea");
-
-  area.innerHTML=`
-
-    <div class="form-card" style="margin-bottom:20px">
-
-      <h2 style="margin:0 0 7px;font-size:19px">
-        Создание новой книги
-      </h2>
-
-      <p style="margin:0 0 20px;color:var(--muted2);font-size:12px">
-        Давай создадим основу для твоей истории.
-      </p>
-
-      <div class="field">
-
-        <label>Название книги</label>
-
-        <input
-          id="newBookTitle"
-          placeholder="Например: Рассвет"
-        >
-
-      </div>
-
-      <div class="field">
-
-        <label>Жанр</label>
-
-        <select id="newBookGenre">
-
-          <option>Фэнтези</option>
-          <option>Романтика</option>
-          <option>Современный роман</option>
-          <option>Фантастика</option>
-          <option>Триллер</option>
-          <option>Детектив</option>
-          <option>Приключения</option>
-          <option>Драма</option>
-          <option>Другое</option>
-
-        </select>
-
-      </div>
-
-      <div class="field">
-
-        <label>О чём книга?</label>
-
-        <textarea
-          id="newBookDescription"
-          placeholder="Коротко опиши основную идею..."
-        ></textarea>
-
-      </div>
-
-      <div class="form-actions">
-
-        <button
-          class="btn btn-primary"
-          onclick="createBook()"
-        >
-          Создать книгу
-        </button>
-
-        <button
-          class="btn"
-          onclick="cancelBookForm()"
-        >
-          Отмена
-        </button>
-
-      </div>
-
-    </div>
-
-  `;
-
-  document.getElementById("newBookTitle").focus();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-function cancelBookForm(){
-
-  document.getElementById("bookCreateArea").innerHTML="";
-
-}
-
-
-function createBook(){
-
-  const title=document.getElementById("newBookTitle").value.trim();
-
-  const genre=document.getElementById("newBookGenre").value;
-
-  const description=document
-    .getElementById("newBookDescription")
-    .value
-    .trim();
-
-  if(!title){
-
-    showToast("Напиши название книги");
-
+  if (!data.books.length) {
+    root.innerHTML = '<div class="empty">Здесь пока пусто.<br>Создай свою первую книгу, и она появится здесь.</div>';
     return;
-
   }
 
+  root.innerHTML = data.books.slice(0, 4).map(book => `
+    <article class="book-card">
+      <h3>${escapeHtml(book.title)}</h3>
+      <div class="book-meta">${escapeHtml(book.genre)} · ${book.chapters.length} глав</div>
+      <button class="btn open-book" data-id="${escapeHtml(book.id)}">Продолжить</button>
+    </article>
+  `).join("");
 
-  const now=new Date().toISOString();
+  root.querySelectorAll(".open-book").forEach(button => {
+    button.addEventListener("click", () => openBook(button.dataset.id));
+  });
+}
 
-  const book=normalizeBook({
+/* Создание и список книг */
 
-    id:"book_"+Date.now(),
+document.getElementById("bookForm").addEventListener("submit", event => {
+  event.preventDefault();
 
+  const title = document.getElementById("bookTitle").value.trim();
+
+  if (!title) {
+    toast("Введи название книги.");
+    return;
+  }
+
+  const book = {
+    id: createId(),
     title,
-
-    genre,
-
-    description,
-
-    notes:"",
-
-    world:"",
-
-    plan:"",
-
-    status:"В процессе",
-
-    characters:[],
-
-    chapters:[],
-
-    createdAt:now,
-
-    updatedAt:now
-
-  });
-
-
-  data.books.push(book);
-
-  addActivity("Создан роман «"+title+"»");
-
-  saveData();
-
-  currentBookId=book.id;
-
-  showToast("Книга создана");
-
-  openBook(book.id);
-
-}
-
-
-/* =========================================================
-   WRITER
-========================================================= */
-
-function renderWriter(){
-
-  const workspace=document.getElementById("workspace");
-
-  workspace.style.display="none";
-
-  document.getElementById("writerMain").style.display="block";
-
-  const grid=document.getElementById("writerBooks");
-
-  if(!data.books.length){
-
-    grid.innerHTML=`
-
-      <div class="empty" style="grid-column:1/-1">
-
-        <div class="empty-icon">📖</div>
-
-        <strong>Твоя первая история начинается здесь</strong>
-
-        <span>
-          Создай книгу, чтобы открыть писательскую студию.
-        </span>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  grid.innerHTML=data.books.map(book=>`
-
-    <div class="book-card">
-
-      <div class="book-cover">📖</div>
-
-      <h3>${escapeHTML(book.title)}</h3>
-
-      <p>${escapeHTML(book.description || "Описание пока не добавлено.")}</p>
-
-      <div class="book-meta">
-
-        <span class="tag">${escapeHTML(book.genre)}</span>
-
-        <span class="tag">${book.characters.length} персонажей</span>
-
-        <span class="tag">${book.chapters.length} глав</span>
-
-      </div>
-
-      <div class="book-actions">
-
-        <button
-          class="small-btn"
-          onclick="openBook('${book.id}')"
-        >
-          Открыть
-        </button>
-
-        <button
-          class="small-btn danger"
-          onclick="deleteBook('${book.id}')"
-        >
-          Удалить
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join("");
-
-}
-
-
-/* =========================================================
-   OPEN BOOK WORKSPACE
-========================================================= */
-
-function openBook(id){
-
-  const book=data.books.find(b=>b.id===id);
-
-  if(!book){
-
-    showToast("Книга не найдена");
-
-    return;
-
-  }
-
-  currentBookId=id;
-
-  currentWorkspaceTab="about";
-
-  goTo("writer");
-
-  document.getElementById("writerMain").style.display="none";
-
-  const workspace=document.getElementById("workspace");
-
-  workspace.style.display="block";
-
-  renderWorkspace();
-
-}
-
-
-function getCurrentBook(){
-
-  return data.books.find(
-    b=>b.id===currentBookId
-  );
-
-}
-
-
-function closeWorkspace(){
-
-  currentBookId=null;
-
-  document.getElementById("workspace").style.display="none";
-
-  document.getElementById("writerMain").style.display="block";
-
-  renderWriter();
-
-}
-
-
-function renderWorkspace(){
-
-  const book=getCurrentBook();
-
-  if(!book){
-
-    closeWorkspace();
-
-    return;
-
-  }
-
-  const workspace=document.getElementById("workspace");
-
-  workspace.innerHTML=`
-
-    <div class="workspace-head">
-
-      <button class="back-btn" onclick="closeWorkspace()">‹</button>
-
-      <div>
-
-        <h1>${escapeHTML(book.title)}</h1>
-
-        <p>${escapeHTML(book.genre)} · ${escapeHTML(book.status)}</p>
-
-      </div>
-
-    </div>
-
-
-    <div class="workspace-nav">
-
-      <button
-        class="workspace-tab ${currentWorkspaceTab==="about"?"active":""}"
-        onclick="setWorkspaceTab('about')"
-      >
-        📋 О книге
-      </button>
-
-      <button
-        class="workspace-tab ${currentWorkspaceTab==="characters"?"active":""}"
-        onclick="setWorkspaceTab('characters')"
-      >
-        ♙ Персонажи
-      </button>
-
-      <button
-        class="workspace-tab ${currentWorkspaceTab==="world"?"active":""}"
-        onclick="setWorkspaceTab('world')"
-      >
-        🌍 Мир
-      </button>
-
-      <button
-        class="workspace-tab ${currentWorkspaceTab==="plan"?"active":""}"
-        onclick="setWorkspaceTab('plan')"
-      >
-        📝 План
-      </button>
-
-      <button
-        class="workspace-tab ${currentWorkspaceTab==="chapters"?"active":""}"
-        onclick="setWorkspaceTab('chapters')"
-      >
-        📚 Главы
-      </button>
-
-      <button
-        class="workspace-tab ${currentWorkspaceTab==="ai"?"active":""}"
-        onclick="setWorkspaceTab('ai')"
-      >
-        ✦ AI-помощник
-      </button>
-
-    </div>
-
-
-    <div class="workspace-content" id="workspaceContent"></div>
-
-  `;
-
-  renderWorkspaceContent();
-
-}
-
-
-function setWorkspaceTab(tab){
-
-  currentWorkspaceTab=tab;
-
-  renderWorkspace();
-
-}
-
-
-function renderWorkspaceContent(){
-
-  const book=getCurrentBook();
-
-  const content=document.getElementById("workspaceContent");
-
-  if(!book || !content) return;
-
-
-  /* ABOUT */
-
-  if(currentWorkspaceTab==="about"){
-
-    content.innerHTML=`
-
-      <div class="info-grid">
-
-        <div class="info-box">
-
-          <label>Название</label>
-
-          <strong>${escapeHTML(book.title)}</strong>
-
-        </div>
-
-        <div class="info-box">
-
-          <label>Жанр</label>
-
-          <strong>${escapeHTML(book.genre)}</strong>
-
-        </div>
-
-        <div class="info-box">
-
-          <label>Статус</label>
-
-          <strong>${escapeHTML(book.status)}</strong>
-
-        </div>
-
-        <div class="info-box">
-
-          <label>Глав</label>
-
-          <strong>${book.chapters.length}</strong>
-
-        </div>
-
-      </div>
-
-
-      <div class="panel" style="margin-top:14px">
-
-        <div class="field">
-
-          <label>О книге</label>
-
-          <textarea
-            id="bookDescriptionEdit"
-          >${escapeHTML(book.description)}</textarea>
-
-        </div>
-
-        <div class="field">
-
-          <label>Заметки</label>
-
-          <textarea
-            id="bookNotesEdit"
-            placeholder="Идеи, мысли, важные детали..."
-          >${escapeHTML(book.notes)}</textarea>
-
-        </div>
-
-        <button class="btn btn-primary" onclick="saveBookInfo()">
-          Сохранить
-        </button>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* CHARACTERS */
-
-  if(currentWorkspaceTab==="characters"){
-
-    content.innerHTML=`
-
-      <div class="toolbar">
-
-        <button
-          class="btn btn-primary"
-          onclick="addCharacterForm()"
-        >
-          ＋ Добавить персонажа
-        </button>
-
-      </div>
-
-      <div id="characterWorkspaceList"></div>
-
-    `;
-
-    renderCharacterWorkspaceList();
-
-  }
-
-
-  /* WORLD */
-
-  if(currentWorkspaceTab==="world"){
-
-    content.innerHTML=`
-
-      <div class="panel">
-
-        <div class="field">
-
-          <label>Мир истории</label>
-
-          <textarea
-            id="bookWorld"
-            style="min-height:320px"
-            placeholder="Опиши мир, страны, города, правила, магию, социальные классы и всё, что важно..."
-          >${escapeHTML(book.world)}</textarea>
-
-        </div>
-
-        <button class="btn btn-primary" onclick="saveWorld()">
-          Сохранить мир
-        </button>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* PLAN */
-
-  if(currentWorkspaceTab==="plan"){
-
-    content.innerHTML=`
-
-      <div class="panel">
-
-        <div class="field">
-
-          <label>План истории</label>
-
-          <textarea
-            id="bookPlan"
-            style="min-height:380px"
-            placeholder="Записывай сюжет, арки, события и идеи глав..."
-          >${escapeHTML(book.plan)}</textarea>
-
-        </div>
-
-        <button class="btn btn-primary" onclick="savePlan()">
-          Сохранить план
-        </button>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* CHAPTERS */
-
-  if(currentWorkspaceTab==="chapters"){
-
-    content.innerHTML=`
-
-      <div class="toolbar">
-
-        <button
-          class="btn btn-primary"
-          onclick="addChapter()"
-        >
-          ＋ Добавить главу
-        </button>
-
-      </div>
-
-      <div id="chaptersList"></div>
-
-    `;
-
-    renderChapters();
-
-  }
-
-
-  /* AI */
-
-  if(currentWorkspaceTab==="ai"){
-
-    content.innerHTML=`
-
-      <div class="panel">
-
-        <h3 style="margin-top:0">
-          ✦ AI-помощник книги
-        </h3>
-
-        <p style="color:var(--muted);font-size:12px;line-height:1.6">
-          Здесь позже можно подключить полноценную AI-модель,
-          которая будет знать структуру именно этой книги:
-          персонажей, мир, план и главы.
-        </p>
-
-        <div class="empty" style="margin-top:18px">
-
-          <div class="empty-icon">✦</div>
-
-          <strong>Творческий помощник готовится</strong>
-
-          <span>
-            Интерфейс уже подготовлен для подключения AI.
-          </span>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-/* =========================================================
-   BOOK INFO
-========================================================= */
-
-function saveBookInfo(){
-
-  const book=getCurrentBook();
-
-  if(!book) return;
-
-  book.description=document
-    .getElementById("bookDescriptionEdit")
-    .value;
-
-  book.notes=document
-    .getElementById("bookNotesEdit")
-    .value;
-
-  book.updatedAt=new Date().toISOString();
-
-  saveData();
-
-  addActivity("Обновлена информация романа «"+book.title+"»");
-
-  showToast("Изменения сохранены");
-
-}
-
-
-/* WORLD */
-
-function saveWorld(){
-
-  const book=getCurrentBook();
-
-  if(!book) return;
-
-  book.world=document
-    .getElementById("bookWorld")
-    .value;
-
-  book.updatedAt=new Date().toISOString();
-
-  saveData();
-
-  showToast("Мир книги сохранён");
-
-}
-
-
-/* PLAN */
-
-function savePlan(){
-
-  const book=getCurrentBook();
-
-  if(!book) return;
-
-  book.plan=document
-    .getElementById("bookPlan")
-    .value;
-
-  book.updatedAt=new Date().toISOString();
-
-  saveData();
-
-  showToast("План сохранён");
-
-}
-
-
-/* =========================================================
-   CHARACTERS
-========================================================= */
-
-function addCharacterForm(){
-
-  const content=document.getElementById("workspaceContent");
-
-  content.innerHTML=`
-
-    <div class="form-card">
-
-      <h2 style="margin:0 0 20px;font-size:19px">
-        Новый персонаж
-      </h2>
-
-      <div class="field">
-        <label>Имя персонажа</label>
-        <input id="charName" placeholder="Например, Рэйчел Холл">
-      </div>
-
-      <div class="field">
-        <label>Роль</label>
-        <input id="charRole" placeholder="Главная героиня">
-      </div>
-
-      <div class="field">
-        <label>Возраст</label>
-        <input id="charAge" placeholder="18">
-      </div>
-
-      <div class="field">
-        <label>Внешность</label>
-        <textarea id="charAppearance"></textarea>
-      </div>
-
-      <div class="field">
-        <label>Характер</label>
-        <textarea id="charPersonality"></textarea>
-      </div>
-
-      <div class="field">
-        <label>Биография</label>
-        <textarea id="charBiography"></textarea>
-      </div>
-
-      <div class="field">
-        <label>Отношения</label>
-        <textarea id="charRelationships"></textarea>
-      </div>
-
-      <div class="field">
-        <label>Заметки</label>
-        <textarea id="charNotes"></textarea>
-      </div>
-
-      <div class="form-actions">
-
-        <button class="btn btn-primary" onclick="saveCharacter()">
-          Создать персонажа
-        </button>
-
-        <button class="btn" onclick="setWorkspaceTab('characters')">
-          Отмена
-        </button>
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-function saveCharacter(){
-
-  const book=getCurrentBook();
-
-  if(!book) return;
-
-  const name=document
-    .getElementById("charName")
-    .value
-    .trim();
-
-  if(!name){
-
-    showToast("Напиши имя персонажа");
-
-    return;
-
-  }
-
-
-  const character=normalizeCharacter({
-
-    id:"char_"+Date.now(),
-
-    name,
-
-    role:document.getElementById("charRole").value,
-
-    age:document.getElementById("charAge").value,
-
-    appearance:document.getElementById("charAppearance").value,
-
-    personality:document.getElementById("charPersonality").value,
-
-    biography:document.getElementById("charBiography").value,
-
-    relationships:document.getElementById("charRelationships").value,
-
-    notes:document.getElementById("charNotes").value
-
-  });
-
-
-  book.characters.push(character);
-
-  book.updatedAt=new Date().toISOString();
-
-  saveData();
-
-  addActivity(
-    "Добавлен персонаж «"+name+"» в роман «"+book.title+"»"
-  );
-
-  showToast("Персонаж создан");
-
-  setWorkspaceTab("characters");
-
-}
-
-
-function renderCharacterWorkspaceList(){
-
-  const book=getCurrentBook();
-
-  const list=document.getElementById("characterWorkspaceList");
-
-  if(!book || !list) return;
-
-
-  if(!book.characters.length){
-
-    list.innerHTML=`
-
-      <div class="empty">
-
-        <div class="empty-icon">♙</div>
-
-        <strong>Персонажей пока нет</strong>
-
-        <span>
-          Создай первого героя этой истории.
-        </span>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML=`
-
-    <div class="character-grid">
-
-      ${book.characters.map(c=>`
-
-        <div class="character-card">
-
-          <div class="character-avatar">
-            ${escapeHTML((c.name||"?").charAt(0).toUpperCase())}
-          </div>
-
-          <h3>${escapeHTML(c.name)}</h3>
-
-          <p>
-            ${escapeHTML(c.role || "Роль пока не указана")}
-          </p>
-
-          <div class="book-actions">
-
-            <button
-              class="small-btn"
-              onclick="editCharacter('${c.id}')"
-            >
-              Открыть
-            </button>
-
-            <button
-              class="small-btn danger"
-              onclick="deleteCharacter('${c.id}')"
-            >
-              Удалить
-            </button>
-
-          </div>
-
-        </div>
-
-      `).join("")}
-
-    </div>
-
-  `;
-
-}
-
-
-function editCharacter(id){
-
-  const book=getCurrentBook();
-
-  if(!book) return;
-
-  const c=book.characters.find(x=>x.id===id);
-
-  if(!c) return;
-
-
-  document.getElementById("workspaceContent").innerHTML=`
-
-    <div class="form-card">
-
-      <h2 style="margin:0 0 20px;font-size:19px">
-        ${escapeHTML(c.name)}
-      </h2>
-
-      <div class="field">
-        <label>Имя персонажа</label>
-        <input id="editCharName" value="${escapeAttr(c.name)}">
-      </div>
-
-      <div class="field">
-        <label>Роль</label>
-        <input id="editCharRole" value="${escapeAttr(c.role)}">
-      </div>
-
-      <div class="field">
-        <label>Возраст</label>
-        <input id="editCharAge" value="${escapeAttr(c.age)}">
-      </div>
-
-      <div class="field">
-        <label>Внешность</label>
-        <textarea id="editCharAppearance">${escapeHTML(c.appearance)}</textarea>
-      </div>
-
-      <div class="field">
-        <label>Характер</label>
-        <textarea id="editCharPersonality">${escapeHTML(c.personality)}</textarea>
-      </div>
-
-      <div class="field">
-        <label>Биография</label>
-        <textarea id="editCharBiography">${escapeHTML(c.biography)}</textarea>
-      </div>
-
-      <div class="field">
-        <label>Отношения</label>
-        <textarea id="editCharRelationships">${escapeHTML(c.relationships)}</textarea>
-      </div>
-
-      <div class="field">
-        <label>Заметки</label>
-        <textarea id="editCharNotes">${escapeHTML(c.notes)}</textarea>
-      </div>
-
-      <div class="form-actions">
-
-        <button
-          class="btn btn-primary"
-          onclick="updateCharacter('${c.id}')"
-        >
-          Сохранить
-        </button>
-
-        <button
-          class="btn"
-          onclick="setWorkspaceTab('characters')"
-        >
-          Назад
-        </button>
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-function updateCharacter(id){
-
-  const book=getCurrentBook();
-
-  if(!book) return;
-
-  const c=book.characters.find(x=>x.id===id);
-
-  if(!c) return;
-
-  c.name=document.getElementById("editCharName").value;
-
-  c.role=document.getElementById("editCharRole").value;
-
-  c.age=document.getElementById("editCharAge").value;
-
-  c.appearance=document.getElementById("editCharAppearance").value;
-
-  c.personality=document.getElementById("editCharPersonality").value;
-
-  c.biography=document.getElementById("editCharBiography").value;
-
-  c.relationships=document.getElementById("editCharRelationships").value;
-
-  c.notes=document.getElementById("editCharNotes").value;
-
-  book.updatedAt=new Date().toISOString();
-
-  saveData();
-
-  addActivity("Обновлён персонаж «"+c.name+"»");
-
-  showToast("Персонаж сохранён");
-
-  setWorkspaceTab("characters");
-
-}
-
-
-function deleteCharacter(id){
-
-  const book=getCurrentBook();
-
-  if(!book) return;
-
-  const character=book.characters.find(c=>c.id===id);
-
-  if(!character) return;
-
-  if(!confirm("Удалить персонажа «"+character.name+"»?")) return;
-
-  book.characters=book.characters.filter(c=>c.id!==id);
-
-  book.updatedAt=new Date().toISOString();
-
-  saveData();
-
-  addActivity("Удалён персонаж «"+character.name+"»");
-
-  showToast("Персонаж удалён");
-
-  setWorkspaceTab("characters");
-
-}
-
-
-/* =========================================================
-   GLOBAL CHARACTERS
-========================================================= */
-
-function chooseCharacterBook(){
-
-  if(!data.books.length){
-
-    showToast("Сначала создай книгу");
-
-    setTimeout(()=>createBookForm(),300);
-
-    return;
-
-  }
-
-  if(data.books.length===1){
-
-    currentBookId=data.books[0].id;
-
-    goTo("writer");
-
-    document.getElementById("writerMain").style.display="none";
-
-    document.getElementById("workspace").style.display="block";
-
-    currentWorkspaceTab="characters";
-
-    renderWorkspace();
-
-    setTimeout(()=>addCharacterForm(),50);
-
-    return;
-
-  }
-
-  const names=data.books
-    .map((b,i)=>(i+1)+". "+b.title)
-    .join("\n");
-
-  const answer=prompt(
-    "В какой книге создать персонажа?\n\n"+names
-  );
-
-  const index=parseInt(answer)-1;
-
-  if(!isNaN(index) && data.books[index]){
-
-    currentBookId=data.books[index].id;
-
-    goTo("writer");
-
-    document.getElementById("writerMain").style.display="none";
-
-    document.getElementById("workspace").style.display="block";
-
-    currentWorkspaceTab="characters";
-
-    renderWorkspace();
-
-    setTimeout(()=>addCharacterForm(),50);
-
-  }
-
-}
-
-
-function renderCharactersPage(){
-
-  const content=document.getElementById("charactersContent");
-
-  const all=[];
-
-  data.books.forEach(book=>{
-
-    book.characters.forEach(character=>{
-
-      all.push({
-        ...character,
-        bookTitle:book.title
-      });
-
-    });
-
-  });
-
-
-  if(!all.length){
-
-    content.innerHTML=`
-
-      <div class="empty">
-
-        <div class="empty-icon">♙</div>
-
-        <strong>Здесь пока нет персонажей</strong>
-
-        <span>
-          Создай книгу, а затем добавь её героев.
-        </span>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  content.innerHTML=`
-
-    <div class="character-grid">
-
-      ${all.map(c=>`
-
-        <div class="character-card">
-
-          <div class="character-avatar">
-            ${escapeHTML(c.name.charAt(0).toUpperCase())}
-          </div>
-
-          <h3>${escapeHTML(c.name)}</h3>
-
-          <p>${escapeHTML(c.role || "Персонаж")}</p>
-
-          <p style="margin-top:7px;color:#777184">
-            📖 ${escapeHTML(c.bookTitle)}
-          </p>
-
-        </div>
-
-      `).join("")}
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================================================
-   CHAPTERS
-========================================================= */
-
-function addChapter(){
-
-  const book=getCurrentBook();
-
-  if(!book) return;
-
-  const number=book.chapters.length+1;
-
-  const title=prompt(
-    "Название главы:",
-    "Глава "+number
-  );
-
-  if(title===null) return;
-
-  book.chapters.push({
-
-    id:"chapter_"+Date.now(),
-
-    number,
-
-    title:title.trim() || "Глава "+number,
-
-    text:"",
-
-    createdAt:new Date().toISOString()
-
-  });
-
-  book.updatedAt=new Date().toISOString();
-
-  saveData();
-
-  addActivity(
-    "Добавлена глава в роман «"+book.title+"»"
-  );
-
-  showToast("Глава добавлена");
-
-  renderWorkspaceContent();
-
-}
-
-
-function renderChapters(){
-
-  const book=getCurrentBook();
-
-  const list=document.getElementById("chaptersList");
-
-  if(!book || !list) return;
-
-
-  if(!book.chapters.length){
-
-    list.innerHTML=`
-
-      <div class="empty">
-
-        <div class="empty-icon">📚</div>
-
-        <strong>Глав пока нет</strong>
-
-        <span>
-          Создай первую главу своей истории.
-        </span>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML=book.chapters.map((chapter,index)=>`
-
-    <div class="panel" style="margin-bottom:10px">
-
-      <div style="display:flex;align-items:center;gap:12px">
-
-        <div class="continue-icon">
-          ${chapter.number}
-        </div>
-
-        <div style="flex:1">
-
-          <input
-            value="${escapeAttr(chapter.title)}"
-            onchange="updateChapterTitle('${chapter.id}',this.value)"
-            style="width:100%;background:transparent;border:0;color:#fff;font-weight:700;outline:none"
-          >
-
-          <div style="color:var(--muted2);font-size:10px;margin-top:5px">
-            ${chapter.text ? "Текст добавлен" : "Текст пока пуст"}
-          </div>
-
-        </div>
-
-        <button
-          class="small-btn danger"
-          onclick="deleteChapter('${chapter.id}')"
-        >
-          Удалить
-        </button>
-
-      </div>
-
-      <textarea
-        style="width:100%;margin-top:13px;min-height:130px;background:#0d0a14;border:1px solid var(--line);border-radius:12px;color:#fff;padding:12px;outline:none"
-        placeholder="Текст главы..."
-        onchange="updateChapterText('${chapter.id}',this.value)"
-      >${escapeHTML(chapter.text)}</textarea>
-
-    </div>
-
-  `).join("");
-
-}
-
-
-function updateChapterTitle(id,value){
-
-  const book=getCurrentBook();
-
-  const chapter=book.chapters.find(c=>c.id===id);
-
-  if(!chapter) return;
-
-  chapter.title=value;
-
-  book.updatedAt=new Date().toISOString();
-
-  saveData();
-
-}
-
-
-function updateChapterText(id,value){
-
-  const book=getCurrentBook();
-
-  const chapter=book.chapters.find(c=>c.id===id);
-
-  if(!chapter) return;
-
-  chapter.text=value;
-
-  book.updatedAt=new Date().toISOString();
-
-  saveData();
-
-}
-
-
-function deleteChapter(id){
-
-  const book=getCurrentBook();
-
-  if(!book) return;
-
-  if(!confirm("Удалить эту главу?")) return;
-
-  book.chapters=book.chapters.filter(c=>c.id!==id);
-
-  book.chapters.forEach((chapter,index)=>{
-    chapter.number=index+1;
-  });
-
-  book.updatedAt=new Date().toISOString();
-
-  saveData();
-
-  showToast("Глава удалена");
-
-  renderWorkspaceContent();
-
-}
-
-
-/* =========================================================
-   DELETE BOOK
-========================================================= */
-
-function deleteBook(id){
-
-  const book=data.books.find(b=>b.id===id);
-
-  if(!book) return;
-
-  if(!confirm(
-    "Удалить роман «"+book.title+"»?\n\nЭто действие нельзя отменить."
-  )) return;
-
-  data.books=data.books.filter(b=>b.id!==id);
-
-  saveData();
-
-  addActivity("Удалён роман «"+book.title+"»");
-
-  showToast("Роман удалён");
-
-  renderWriter();
-
-}
-
-
-/* =========================================================
-   NOVELS
-========================================================= */
-
-function renderNovels(){
-
-  const list=document.getElementById("novelsList");
-
-  if(!data.books.length){
-
-    list.innerHTML=`
-
-      <div class="empty">
-
-        <div class="empty-icon">📖</div>
-
-        <strong>Романов пока нет</strong>
-
-        <span>
-          Создай свою первую книгу.
-        </span>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML=`
-
-    <div class="books-grid">
-
-      ${data.books.map(book=>`
-
-        <div class="book-card">
-
-          <div class="book-cover">📖</div>
-
-          <h3>${escapeHTML(book.title)}</h3>
-
-          <p>${escapeHTML(book.description || "Описание пока не добавлено.")}</p>
-
-          <div class="book-meta">
-
-            <span class="tag">${escapeHTML(book.genre)}</span>
-
-            <span class="tag">${book.characters.length} персонажей</span>
-
-            <span class="tag">${book.chapters.length} глав</span>
-
-          </div>
-
-          <div class="book-actions">
-
-            <button
-              class="small-btn"
-              onclick="openBook('${book.id}')"
-            >
-              Открыть
-            </button>
-
-          </div>
-
-        </div>
-
-      `).join("")}
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================================================
-   PROJECTS
-========================================================= */
-
-function renderProjects(){
-
-  const list=document.getElementById("projectsList");
-
-  if(!data.books.length){
-
-    list.innerHTML=`
-
-      <div class="empty" style="grid-column:1/-1">
-
-        <div class="empty-icon">▣</div>
-
-        <strong>Проекты появятся здесь</strong>
-
-        <span>
-          Пока у тебя нет созданных проектов.
-        </span>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML=data.books.map(book=>`
-
-    <div class="book-card">
-
-      <div class="book-cover">✦</div>
-
-      <h3>${escapeHTML(book.title)}</h3>
-
-      <p>${escapeHTML(book.description || "Творческий проект")}</p>
-
-      <div class="book-meta">
-
-        <span class="tag">${escapeHTML(book.genre)}</span>
-
-        <span class="tag">${escapeHTML(book.status)}</span>
-
-      </div>
-
-      <div class="book-actions">
-
-        <button
-          class="small-btn"
-          onclick="openBook('${book.id}')"
-        >
-          Открыть проект
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join("");
-
-}
-
-
-/* =========================================================
-   ACTIVITY
-========================================================= */
-
-function renderActivity(){
-
-  const list=document.getElementById("activityFull");
-
-  if(!data.activity.length){
-
-    list.innerHTML=`
-
-      <div class="empty">
-
-        <div class="empty-icon">◷</div>
-
-        <strong>Активности пока нет</strong>
-
-        <span>
-          Здесь появится история твоих действий.
-        </span>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML=data.activity.map(item=>`
-
-    <div class="activity-item">
-
-      <div class="activity-dot"></div>
-
-      <div>
-
-        <strong>${escapeHTML(item.text)}</strong>
-
-        <span>${formatDate(item.date)}</span>
-
-      </div>
-
-    </div>
-
-  `).join("");
-
-}
-
-
-/* =========================================================
-   MEMORY
-========================================================= */
-
-function renderMemory(){
-
-  document.getElementById("memoryText").value=
-    data.memory || "";
-
-}
-
-
-function saveMemory(){
-
-  data.memory=document
-    .getElementById("memoryText")
-    .value;
-
-  saveData();
-
-  addActivity("Обновлена память QwerZing");
-
-  showToast("Память сохранена");
-
-}
-
-
-/* =========================================================
-   FRIEND
-========================================================= */
-
-function renderFriend(){
-
-  document.getElementById("friendName").value=
-    data.friend.name || "";
-
-  document.getElementById("friendType").value=
-    data.friend.type || "Друг";
-
-  document.getElementById("friendPersonality").value=
-    data.friend.personality || "";
-
-  document.getElementById("friendStyle").value=
-    data.friend.style || "";
-
-}
-
-
-function saveFriend(){
-
-  data.friend.name=
-    document.getElementById("friendName").value;
-
-  data.friend.type=
-    document.getElementById("friendType").value;
-
-  data.friend.personality=
-    document.getElementById("friendPersonality").value;
-
-  data.friend.style=
-    document.getElementById("friendStyle").value;
-
-  saveData();
-
-  addActivity(
-    "Сохранён AI-друг"+
-    (data.friend.name ? " «"+data.friend.name+"»" : "")
-  );
-
-  showToast("Профиль друга сохранён");
-
-}
-
-
-function clearFriend(){
-
-  data.friend={
-    name:"",
-    type:"Друг",
-    personality:"",
-    style:""
+    genre: document.getElementById("bookGenre").value,
+    status: document.getElementById("bookStatus").value,
+    description: document.getElementById("bookDescription").value.trim(),
+    world: "",
+    plan: "",
+    characters: [],
+    chapters: [],
+    updatedAt: new Date().toISOString()
   };
 
+  data.books.unshift(book);
   saveData();
 
-  renderFriend();
+  document.getElementById("bookForm").reset();
 
-  showToast("Поля очищены");
+  openBook(book.id);
+  toast("Книга создана!");
+});
 
+function bookCard(book) {
+  return `
+    <article class="book-card">
+      <h3>${escapeHtml(book.title)}</h3>
+      <div class="book-meta">
+        ${escapeHtml(book.genre)} · ${escapeHtml(book.status)}<br>
+        Глав: ${book.chapters.length} · Персонажей: ${book.characters.length}
+      </div>
+      <p class="muted">${escapeHtml(book.description || "Описание пока не добавлено.")}</p>
+      <div class="book-actions">
+        <button class="small-btn open-book" data-id="${escapeHtml(book.id)}">Открыть</button>
+        <button class="small-btn delete-book" data-id="${escapeHtml(book.id)}">Удалить</button>
+      </div>
+    </article>
+  `;
 }
 
+function bindBookButtons(root) {
+  root.querySelectorAll(".open-book").forEach(button => {
+    button.addEventListener("click", () => openBook(button.dataset.id));
+  });
 
-/* =========================================================
-   ARTIST
-========================================================= */
+  root.querySelectorAll(".delete-book").forEach(button => {
+    button.addEventListener("click", () => {
+      const book = data.books.find(item => item.id === button.dataset.id);
+      if (!book) return;
 
-function artistDemo(){
+      if (!confirm("Удалить книгу «" + book.title + "» и её материалы?")) return;
 
-  const prompt=document
-    .getElementById("artistPrompt")
-    .value
-    .trim();
+      data.books = data.books.filter(item => item.id !== button.dataset.id);
+      saveData();
+      renderWriter();
+      renderHome();
+      renderProjects();
+      toast("Книга удалена.");
+    });
+  });
+}
 
-  const style=document
-    .getElementById("artistStyle")
-    .value;
+function renderWriter() {
+  const root = document.getElementById("writerBooks");
 
-  const result=document.getElementById("artistResult");
+  root.innerHTML = data.books.length
+    ? data.books.map(bookCard).join("")
+    : '<div class="empty">Книг пока нет. Создай первую историю выше.</div>';
 
-  if(!prompt){
+  bindBookButtons(root);
+}
 
-    showToast("Сначала опиши, что хочешь создать");
+function renderProjects() {
+  const booksRoot = document.getElementById("projectBooks");
 
+  booksRoot.innerHTML = data.books.length
+    ? data.books.map(bookCard).join("")
+    : '<div class="empty">Здесь появятся твои книги.</div>';
+
+  bindBookButtons(booksRoot);
+
+  const ideasRoot = document.getElementById("projectIdeas");
+
+  ideasRoot.innerHTML = data.artistIdeas.length
+    ? `<p>Сохранено идей: ${data.artistIdeas.length}</p>
+       <button class="btn" data-goto="artist">Открыть идеи художника</button>`
+    : '<div class="empty">Пока нет идей для изображений.</div>';
+
+  const jump = ideasRoot.querySelector("[data-goto]");
+  if (jump) jump.addEventListener("click", () => showPage("artist"));
+}
+
+/* Рабочее пространство книги */
+
+function openBook(id) {
+  currentBookId = id;
+  currentWorkspace = "about";
+  renderBook();
+  showPage("book");
+}
+
+function getCurrentBook() {
+  return data.books.find(book => book.id === currentBookId);
+}
+
+function renderBook() {
+  const book = getCurrentBook();
+
+  if (!book) {
+    showPage("writer");
     return;
-
   }
 
+  document.getElementById("workspaceTitle").textContent = book.title;
+  document.getElementById("workspaceMeta").textContent =
+    book.genre + " · " + book.status;
 
-  result.innerHTML=`
+  document.querySelectorAll("[data-workspace]").forEach(button => {
+    button.classList.toggle("active", button.dataset.workspace === currentWorkspace);
+  });
 
-    <div class="quote">
+  const root = document.getElementById("workspaceContent");
 
-      <strong style="font-size:13px">
-        ✦ Идея подготовлена
-      </strong>
+  if (currentWorkspace === "about") renderBookAbout(root, book);
+  if (currentWorkspace === "characters") renderCharacters(root, book);
+  if (currentWorkspace === "world") renderWorld(root, book);
+  if (currentWorkspace === "plan") renderPlan(root, book);
+  if (currentWorkspace === "chapters") renderChapters(root, book);
+}
 
-      <p style="margin-top:9px">
-        Стиль: ${escapeHTML(style)}<br><br>
-        ${escapeHTML(prompt)}
-      </p>
+document.querySelectorAll("[data-workspace]").forEach(button => {
+  button.addEventListener("click", () => {
+    currentWorkspace = button.dataset.workspace;
+    renderBook();
+  });
+});
 
-      <div style="margin-top:13px;color:#9f91b0;font-size:10px">
-        Интерфейс художника уже готов.
-        Сам генератор изображения можно подключить следующим этапом.
+function renderBookAbout(root, book) {
+  root.innerHTML = `
+    <h2>О книге</h2>
+    <form class="form" id="aboutForm">
+      <label for="editTitle">Название</label>
+      <input id="editTitle" value="${escapeHtml(book.title)}" required>
+
+      <div class="form-row">
+        <div class="form">
+          <label for="editGenre">Жанр</label>
+          <select id="editGenre">
+            ${["Фэнтези","Романтика","Современный роман","Детектив","Фантастика","Ужасы","Приключения","Другое"].map(genre =>
+              `<option ${book.genre === genre ? "selected" : ""}>${genre}</option>`
+            ).join("")}
+          </select>
+        </div>
+        <div class="form">
+          <label for="editStatus">Статус</label>
+          <select id="editStatus">
+            ${["Идея","В процессе","Завершена"].map(status =>
+              `<option ${book.status === status ? "selected" : ""}>${status}</option>`
+            ).join("")}
+          </select>
+        </div>
       </div>
 
-    </div>
+      <label for="editDescription">Описание сюжета</label>
+      <textarea id="editDescription">${escapeHtml(book.description)}</textarea>
 
+      <button class="btn primary" type="submit">Сохранить изменения</button>
+    </form>
   `;
 
+  document.getElementById("aboutForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    book.title = document.getElementById("editTitle").value.trim();
+    book.genre = document.getElementById("editGenre").value;
+    book.status = document.getElementById("editStatus").value;
+    book.description = document.getElementById("editDescription").value;
+    book.updatedAt = new Date().toISOString();
+
+    saveData();
+    renderBook();
+    renderHome();
+    toast("Изменения сохранены.");
+  });
 }
 
+function renderCharacters(root, book) {
+  root.innerHTML = `
+    <h2>Персонажи</h2>
+    <form class="form" id="characterForm">
+      <label for="characterName">Имя персонажа</label>
+      <input id="characterName" placeholder="Имя героя" required>
 
-/* =========================================================
-   SETTINGS
-========================================================= */
+      <label for="characterRole">Роль в истории</label>
+      <input id="characterRole" placeholder="Главная героиня, антагонист...">
 
-function renderSettings(){
+      <label for="characterDescription">Описание персонажа</label>
+      <textarea id="characterDescription" placeholder="Внешность, характер, прошлое, цели..."></textarea>
 
-  document.getElementById("profileName").value=
-    data.profile.name || "София";
+      <button class="btn primary" type="submit">＋ Добавить персонажа</button>
+    </form>
 
-}
+    <div style="margin-top:20px" id="characterList"></div>
+  `;
 
+  const list = document.getElementById("characterList");
 
-function saveProfile(){
+  function refreshCharacters() {
+    list.innerHTML = book.characters.length
+      ? book.characters.map(character => `
+          <div class="character-card">
+            <h3>${escapeHtml(character.name)}</h3>
+            <p class="muted">${escapeHtml(character.role || "Роль не указана")}</p>
+            <p>${escapeHtml(character.description || "Описание не добавлено.")}</p>
+            <button class="small-btn remove-character" data-id="${escapeHtml(character.id)}">Удалить</button>
+          </div>
+        `).join("")
+      : '<div class="empty">Персонажей пока нет.</div>';
 
-  const name=document
-    .getElementById("profileName")
-    .value
-    .trim();
-
-  if(name){
-
-    data.profile.name=name;
-
+    list.querySelectorAll(".remove-character").forEach(button => {
+      button.addEventListener("click", () => {
+        book.characters = book.characters.filter(character => character.id !== button.dataset.id);
+        saveData();
+        refreshCharacters();
+        renderHome();
+        toast("Персонаж удалён.");
+      });
+    });
   }
 
-  saveData();
+  document.getElementById("characterForm").addEventListener("submit", event => {
+    event.preventDefault();
 
-  document.querySelector(".profile-mini strong").textContent=
-    data.profile.name;
+    book.characters.push({
+      id: createId(),
+      name: document.getElementById("characterName").value.trim(),
+      role: document.getElementById("characterRole").value.trim(),
+      description: document.getElementById("characterDescription").value.trim()
+    });
 
-  addActivity("Обновлено имя профиля");
+    saveData();
+    event.target.reset();
+    refreshCharacters();
+    renderHome();
+    toast("Персонаж добавлен.");
+  });
 
-  showToast("Профиль сохранён");
-
+  refreshCharacters();
 }
 
+function renderWorld(root, book) {
+  root.innerHTML = `
+    <h2>Мир истории</h2>
+    <p class="muted">Записывай устройство мира, страны, города, правила магии, историю и другие детали.</p>
+    <form class="form" id="worldForm">
+      <label for="worldText">Описание мира</label>
+      <textarea id="worldText" style="min-height:300px" placeholder="Каким устроен мир твоей книги?">${escapeHtml(book.world)}</textarea>
+      <button class="btn primary" type="submit">Сохранить мир</button>
+    </form>
+  `;
 
-/* =========================================================
-   EXPORT / IMPORT
-========================================================= */
-
-function exportData(){
-
-  saveData();
-
-  const json=JSON.stringify(
-    data,
-    null,
-    2
-  );
-
-  const blob=new Blob(
-    [json],
-    {type:"application/json"}
-  );
-
-  const url=URL.createObjectURL(blob);
-
-  const a=document.createElement("a");
-
-  a.href=url;
-
-  a.download=
-    "QwerZing_backup_"+new Date().toISOString().slice(0,10)+".json";
-
-  document.body.appendChild(a);
-
-  a.click();
-
-  a.remove();
-
-  URL.revokeObjectURL(url);
-
-  showToast("Резервная копия создана");
-
+  document.getElementById("worldForm").addEventListener("submit", event => {
+    event.preventDefault();
+    book.world = document.getElementById("worldText").value;
+    saveData();
+    toast("Описание мира сохранено.");
+  });
 }
 
+function renderPlan(root, book) {
+  root.innerHTML = `
+    <h2>План книги</h2>
+    <p class="muted">Собирай основные события, сюжетные повороты и развитие персонажей.</p>
+    <form class="form" id="planForm">
+      <label for="planText">План истории</label>
+      <textarea id="planText" style="min-height:350px" placeholder="Начало, завязка, конфликты, кульминация, финал...">${escapeHtml(book.plan)}</textarea>
+      <button class="btn primary" type="submit">Сохранить план</button>
+    </form>
+  `;
 
-function importData(event){
+  document.getElementById("planForm").addEventListener("submit", event => {
+    event.preventDefault();
+    book.plan = document.getElementById("planText").value;
+    saveData();
+    toast("План сохранён.");
+  });
+}
 
-  const file=event.target.files[0];
+function renderChapters(root, book) {
+  root.innerHTML = `
+    <div class="section-head">
+      <h2>Главы</h2>
+      <button class="btn primary" id="newChapter">＋ Новая глава</button>
+    </div>
+    <div id="chapterList"></div>
+    <div id="chapterEditor"></div>
+  `;
 
-  if(!file) return;
+  const list = document.getElementById("chapterList");
 
-  const reader=new FileReader();
+  function refreshChapters() {
+    list.innerHTML = book.chapters.length
+      ? book.chapters.map((chapter, index) => `
+          <div class="character-card">
+            <h3>${index + 1}. ${escapeHtml(chapter.title)}</h3>
+            <p class="muted">${escapeHtml(chapter.text.slice(0, 220) || "Глава пока пуста.")}${chapter.text.length > 220 ? "..." : ""}</p>
+            <button class="small-btn edit-chapter" data-id="${escapeHtml(chapter.id)}">Открыть</button>
+            <button class="small-btn remove-chapter" data-id="${escapeHtml(chapter.id)}">Удалить</button>
+          </div>
+        `).join("")
+      : '<div class="empty">Глав пока нет. Создай первую главу своей книги.</div>';
 
-  reader.onload=function(e){
+    list.querySelectorAll(".edit-chapter").forEach(button => {
+      button.addEventListener("click", () => editChapter(button.dataset.id));
+    });
 
-    try{
+    list.querySelectorAll(".remove-chapter").forEach(button => {
+      button.addEventListener("click", () => {
+        if (!confirm("Удалить эту главу?")) return;
+        book.chapters = book.chapters.filter(chapter => chapter.id !== button.dataset.id);
+        saveData();
+        refreshChapters();
+        renderHome();
+        toast("Глава удалена.");
+      });
+    });
+  }
 
-      const imported=JSON.parse(e.target.result);
+  function editChapter(id = null) {
+    const existing = id ? book.chapters.find(chapter => chapter.id === id) : null;
 
-      if(!imported || typeof imported!=="object"){
+    const chapter = existing || {
+      id: createId(),
+      title: "Глава " + (book.chapters.length + 1),
+      text: ""
+    };
 
-        throw new Error("invalid");
+    const editor = document.getElementById("chapterEditor");
 
-      }
+    editor.innerHTML = `
+      <div class="panel">
+        <h2>${existing ? "Редактирование главы" : "Новая глава"}</h2>
+        <form class="form" id="chapterForm">
+          <label for="chapterTitle">Название главы</label>
+          <input id="chapterTitle" value="${escapeHtml(chapter.title)}" required>
 
-      /*
-        Не заменяем данные молча.
-        Перед импортом спрашиваем пользователя.
-      */
+          <label for="chapterText">Текст главы</label>
+          <textarea id="chapterText" style="min-height:400px" placeholder="Начни писать свою историю...">${escapeHtml(chapter.text)}</textarea>
 
-      if(!confirm(
-        "Загрузить эту резервную копию?\n\nТекущие данные будут заменены данными из файла."
-      )){
+          <div class="hero-actions">
+            <button class="btn primary" type="submit">Сохранить главу</button>
+            <button class="btn" type="button" id="cancelChapter">Отмена</button>
+          </div>
+        </form>
+      </div>
+    `;
 
-        event.target.value="";
+    document.getElementById("chapterForm").addEventListener("submit", event => {
+      event.preventDefault();
 
-        return;
+      chapter.title = document.getElementById("chapterTitle").value.trim() || "Без названия";
+      chapter.text = document.getElementById("chapterText").value;
 
-      }
+      if (!existing) book.chapters.push(chapter);
 
-      data={
-
-        ...data,
-
-        ...imported,
-
-        profile:{
-          ...data.profile,
-          ...(imported.profile || {})
-        },
-
-        friend:{
-          ...data.friend,
-          ...(imported.friend || {})
-        },
-
-        books:Array.isArray(imported.books)
-          ? imported.books.map(normalizeBook)
-          : data.books,
-
-        activity:Array.isArray(imported.activity)
-          ? imported.activity
-          : data.activity
-
-      };
-
+      book.updatedAt = new Date().toISOString();
       saveData();
+      refreshChapters();
+      renderHome();
 
-      showToast("Резервная копия загружена");
+      editor.innerHTML = "";
+      toast("Глава сохранена.");
+    });
 
-      setTimeout(()=>{
-        location.reload();
-      },600);
+    document.getElementById("cancelChapter").addEventListener("click", () => {
+      editor.innerHTML = "";
+    });
 
-    }catch(error){
+    editor.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
-      showToast("Не удалось прочитать файл");
+  document.getElementById("newChapter").addEventListener("click", () => editChapter());
 
+  refreshChapters();
+}
+
+/* AI-чат: демонстрационный режим */
+
+document.getElementById("chatForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const input = document.getElementById("chatInput");
+  const message = input.value.trim();
+
+  if (!message) return;
+
+  addChatMessage(message, "user");
+  input.value = "";
+
+  setTimeout(() => {
+    addChatMessage(
+      "Я пока работаю в демонстрационном режиме и не подключён к настоящей нейросети. Но ты можешь сохранить эту мысль в разделе «Память» или использовать её для своей книги.",
+      "ai"
+    );
+  }, 350);
+});
+
+function addChatMessage(text, type) {
+  const root = document.getElementById("chatMessages");
+  const message = document.createElement("div");
+
+  message.className = "message " + type;
+  message.textContent = text;
+  root.appendChild(message);
+  root.scrollTop = root.scrollHeight;
+}
+
+/* Имя спутника */
+
+document.getElementById("mascotForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const name = document.getElementById("mascotNameInput").value.trim();
+
+  if (!name) {
+    toast("Введи имя.");
+    return;
+  }
+
+  data.mascotName = name;
+  saveData();
+  updateMascotName();
+  toast("Имя сохранено!");
+});
+
+function updateMascotName() {
+  document.getElementById("sideMascotName").textContent = data.mascotName;
+  document.getElementById("friendGreeting").textContent = data.mascotName + " рядом!";
+  document.getElementById("mascotNameInput").value = data.mascotName;
+}
+
+/* Идеи художника */
+
+document.getElementById("artistForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const prompt = document.getElementById("artistPrompt").value.trim();
+
+  if (!prompt) {
+    toast("Сначала опиши изображение.");
+    return;
+  }
+
+  data.artistIdeas.unshift({
+    id: createId(),
+    prompt,
+    style: document.getElementById("artistStyle").value,
+    format: document.getElementById("artistFormat").value,
+    createdAt: new Date().toISOString()
+  });
+
+  saveData();
+  event.target.reset();
+  renderArtistIdeas();
+  renderHome();
+  renderProjects();
+  toast("Идея сохранена.");
+});
+
+function renderArtistIdeas() {
+  const root = document.getElementById("artistIdeas");
+
+  if (!data.artistIdeas.length) {
+    root.innerHTML = '<div class="empty">Идей пока нет. Добавь описание выше.</div>';
+    return;
+  }
+
+  root.innerHTML = data.artistIdeas.map(idea => `
+    <article class="character-card">
+      <h3>${escapeHtml(idea.style)} · ${escapeHtml(idea.format)}</h3>
+      <p>${escapeHtml(idea.prompt)}</p>
+      <button class="small-btn delete-idea" data-id="${escapeHtml(idea.id)}">Удалить идею</button>
+    </article>
+  `).join("");
+
+  root.querySelectorAll(".delete-idea").forEach(button => {
+    button.addEventListener("click", () => {
+      data.artistIdeas = data.artistIdeas.filter(idea => idea.id !== button.dataset.id);
+      saveData();
+      renderArtistIdeas();
+      renderHome();
+      renderProjects();
+      toast("Идея удалена.");
+    });
+  });
+}
+
+/* Память */
+
+document.getElementById("memoryForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  data.memory = document.getElementById("memoryText").value;
+  saveData();
+  toast("Заметки сохранены.");
+});
+
+/* Резервное копирование */
+
+document.getElementById("exportBtn").addEventListener("click", () => {
+  const blob = new Blob(
+    [JSON.stringify(data, null, 2)],
+    { type: "application/json;charset=utf-8" }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = "qwerzing-backup.json";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  toast("Резервная копия скачана.");
+});
+
+document.getElementById("importBtn").addEventListener("click", () => {
+  document.getElementById("importFile").click();
+});
+
+document.getElementById("importFile").addEventListener("change", event => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    try {
+      const imported = JSON.parse(reader.result);
+
+      if (!imported || typeof imported !== "object") {
+        throw new Error("Некорректный файл");
+      }
+
+      if (!confirm("Заменить текущие данные данными из резервной копии? Перед продолжением желательно скачать текущую копию.")) {
+        event.target.value = "";
+        return;
+      }
+
+      data = normalizeData(imported);
+      saveData();
+      renderHome();
+      renderWriter();
+      renderProjects();
+      renderArtistIdeas();
+      updateMascotName();
+
+      document.getElementById("memoryText").value = data.memory;
+      toast("Данные восстановлены.");
+    } catch (error) {
+      toast("Не удалось прочитать резервную копию.");
     }
 
+    event.target.value = "";
   };
 
   reader.readAsText(file);
+});
 
-}
+/* Очистка данных */
 
-
-function showStorageInfo(){
-
-  const saved=localStorage.getItem(STORAGE_KEY);
-
-  if(saved){
-
-    const size=Math.round(
-      saved.length/1024
-    );
-
-    alert(
-      "Данные QwerZing найдены.\n\n"+
-      "Романов: "+data.books.length+"\n"+
-      "Персонажей: "+
-      data.books.reduce((s,b)=>s+b.characters.length,0)+"\n"+
-      "Глав: "+
-      data.books.reduce((s,b)=>s+b.chapters.length,0)+"\n"+
-      "Размер сохранения: примерно "+size+" КБ."
-    );
-
-  }else{
-
-    alert(
-      "Сохранённых данных пока нет."
-    );
-
+document.getElementById("clearBtn").addEventListener("click", () => {
+  if (!confirm("Удалить все книги, главы, идеи и заметки, сохранённые в этом браузере? Это действие нельзя отменить без резервной копии.")) {
+    return;
   }
 
-}
+  data = structuredClone(defaultData);
+  saveData();
 
+  renderHome();
+  renderWriter();
+  renderProjects();
+  renderArtistIdeas();
+  updateMascotName();
 
-/* =========================================================
-   SEARCH
-========================================================= */
+  document.getElementById("memoryText").value = "";
 
-document.getElementById("globalSearch")
-  .addEventListener("input",function(){
+  toast("Локальные данные очищены.");
+});
 
-    const query=this.value.trim().toLowerCase();
+/* Поиск */
 
-    if(!query) return;
+document.getElementById("searchInput").addEventListener("keydown", event => {
+  if (event.key !== "Enter") return;
 
-    const book=data.books.find(book=>
-      book.title.toLowerCase().includes(query) ||
-      book.genre.toLowerCase().includes(query)
-    );
+  const query = event.target.value.trim().toLowerCase();
+  if (!query) return;
 
-    if(book){
+  const foundBook = data.books.find(book =>
+    book.title.toLowerCase().includes(query) ||
+    book.description.toLowerCase().includes(query)
+  );
 
-      if(confirm(
-        "Найден роман «"+book.title+"».\nОткрыть его?"
-      )){
-
-        openBook(book.id);
-
-      }
-
-    }
-
-  });
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function escapeHTML(value){
-
-  if(value===null || value===undefined){
-    return "";
+  if (foundBook) {
+    openBook(foundBook.id);
+    return;
   }
 
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  const pages = [
+    ["главная", "home"],
+    ["чат", "chat"],
+    ["писатель", "writer"],
+    ["книг", "writer"],
+    ["проект", "projects"],
+    ["друг", "friend"],
+    ["худож", "artist"],
+    ["память", "memory"],
+    ["настрой", "settings"]
+  ];
 
-}
+  const foundPage = pages.find(([word]) => word.includes(query));
 
+  if (foundPage) {
+    showPage(foundPage[1]);
+  } else {
+    toast("Ничего не найдено.");
+  }
+});
 
-function escapeAttr(value){
+/* Запуск */
 
-  return escapeHTML(value)
-    .replace(/\n/g,"&#10;");
-
-}
-
-
-/* =========================================================
-   CHAT DEMO
-========================================================= */
-
-function sendChat(){
-
-  const input=document.getElementById("chatInput");
-
-  const text=input.value.trim();
-
-  if(!text) return;
-
-  const messages=document.getElementById("chatMessages");
-
-  messages.innerHTML+=`
-
-    <div class="message user">
-      ${escapeHTML(text)}
-    </div>
-
-  `;
-
-  input.value="";
-
-  setTimeout(()=>{
-
-    let answer=
-      "Интересная идея. Расскажи немного подробнее, и мы сможем развить её вместе.";
-
-    if(
-      text.toLowerCase().includes("книг") ||
-      text.toLowerCase().includes("роман")
-    ){
-
-      answer=
-        "Для книги можно начать с основы: идея, герои, мир, конфликт и главная эмоциональная линия.";
-
-    }
-
-    if(
-      text.toLowerCase().includes("персонаж")
-    ){
-
-      answer=
-        "Давай соберём персонажа как настоящего человека: характер, внешность, прошлое, желания, страхи и отношения.";
-
-    }
-
-    messages.innerHTML+=`
-
-      <div class="message ai">
-        ${escapeHTML(answer)}
-      </div>
-
-    `;
-
-    messages.scrollTop=messages.scrollHeight;
-
-  },450);
-
-}
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-loadData();
-
-document.querySelector(".profile-mini strong").textContent=
-  data.profile.name || "София";
-
+document.getElementById("memoryText").value = data.memory;
+updateMascotName();
 renderHome();
+renderWriter();
+renderProjects();
+renderArtistIdeas();
 
 </script>
-
 </body>
 </html>
